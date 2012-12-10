@@ -1,0 +1,11 @@
+[user]
+	name = Łukasz Pietrek
+	email = lpietrek@gmail.com
+[color]
+    status = auto
+    branch = auto
+    ui = auto
+
+[alias]
+    aa = add --all
+
