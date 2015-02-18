@@ -1,23 +1,54 @@
+#!/usr/bin/env bash
+# 
+# Shell aliases customization
+#
+# © 2012-2015 Łukasz Pietrek
+# https://www.debian.org/legal/licenses/mit
+#
+# TODO: this file need better names :]
 
-alias reload-conky="killall -SIGUSR1 conky"
-alias set-file-mod="find . -type d -print | xargs chmod 664"
-alias set-directory-mod="find . -type d -print | xargs chmod 775"
+
+main_bash_alias () {
+  put_colors_into_my_world
+  searching_teaks
+  system_behavior
+  quick_navigation
+}
 
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
+put_colors_into_my_world () {
+  if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
-fi
+  fi
+}
 
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+searching_teaks () {
+  alias ll='ls -alF'
+  alias la='ls -A'
+  alias l='ls -CF'
+}
+
+
+system_behavior () {
+  alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+}
+
+
+quick_navigation () {
+  alias ..='cd ..'
+  alias ...='cd ../../'
+  alias ....='cd ../../../'
+  alias .....='cd ../../../../'
+  alias ......='cd ../../../../../'
+}
+
+
+main_bash_alias
