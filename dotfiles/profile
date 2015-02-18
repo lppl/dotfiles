@@ -32,3 +32,6 @@ register_custom_executables () {
     PATH="$HOME/bin:$PATH"
   fi
 }
+
+
+main_profile
