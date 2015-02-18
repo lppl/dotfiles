@@ -1,0 +1,4 @@
+
+alias reload-conky="killall -SIGUSR1 conky"
+alias set-file-mod="find . -type d -print | xargs chmod 664"
+alias set-directory-mod="find . -type d -print | xargs chmod 775"
