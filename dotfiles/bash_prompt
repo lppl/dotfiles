@@ -164,9 +164,9 @@ unset -f main_bash_prompt
 unset -f i_can_use_color_prompt
 unset -f use_color_prompt
 unset -f use_basic_prompt
-unset -f ps1_color_prompt
-unset -f ps1_basic_prompt
-unset -f i_am_root
-unset -f get_debian_chroot
+# unset -f ps1_color_prompt
+# unset -f ps1_basic_prompt
+# unset -f i_am_root
+# unset -f get_debian_chroot
 unset -f declare_format_variables_for_ps1_prompt
 unset -f declare_color_variables_for_ps1_prompt
