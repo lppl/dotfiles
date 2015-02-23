@@ -35,3 +35,9 @@ register_custom_executables () {
 
 
 main_profile
+
+
+unset -f main_profile
+unset -f set_files_properties
+unset -f run_bashrc
+unset -f register_custom_executables

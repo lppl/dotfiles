@@ -57,3 +57,11 @@ other_shortcuts () {
 
 
 main_bash_alias
+
+
+unset -f main_bash_alias
+unset -f put_colors_into_my_world
+unset -f searching_teaks
+unset -f system_behavior
+unset -f quick_navigation
+unset -f other_shortcuts

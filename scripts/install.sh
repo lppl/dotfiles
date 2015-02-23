@@ -39,3 +39,10 @@ link_dotfile () {
 
 
 main
+
+
+unset -f main
+unset -f install_some_basic_apps
+unset -f i_am_root
+unset -f link_dotfiles
+unset -f link_dotfile

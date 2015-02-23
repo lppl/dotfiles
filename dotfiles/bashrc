@@ -78,3 +78,14 @@ load_local_settings () {
 
 
 run_if_interactive
+
+
+unset -f run_if_interactive
+unset -f main_bashrc
+unset -f set_shell_variables
+unset -f modify_bash_behavior
+unset -f configure_prompt
+unset -f set_aliases
+unset -f enable_programmable_completion_features
+unset -f set_and_export_shell_variables
+unset -f load_local_settings
