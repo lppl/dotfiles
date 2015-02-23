@@ -13,6 +13,7 @@ main_bash_alias () {
   searching_teaks
   system_behavior
   quick_navigation
+  other_shortcuts
 }
 
 
@@ -48,6 +49,10 @@ quick_navigation () {
   alias ....='cd ../../../'
   alias .....='cd ../../../../'
   alias ......='cd ../../../../../'
+}
+
+other_shortcuts () {
+  alias br="source ~/.bashrc"
 }
 
 
