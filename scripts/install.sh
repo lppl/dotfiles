@@ -3,10 +3,7 @@
 
 main () {
 	local dotfiles_source_path=$(readlink  -e $(dirname $(dirname $BASH_SOURCE)))/dotfiles
-	local dotfiles_target_path="~"
-	if i_am_root; then 
-		local dotfiles_target_path="/root"
-	fi
+	local dotfiles_target_path=`eval echo ~`
 	link_dotfiles $dotfiles_source_path $dotfiles_target_path
 	source ~/.profile
 }
