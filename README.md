@@ -8,3 +8,6 @@ linux account dotfiles
 
 # Setup just fish shell
 ```make fish```
+
+# Link dotfiles
+```make dotfiles```
