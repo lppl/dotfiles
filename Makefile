@@ -9,3 +9,5 @@ stuff:
 
 fish:
 	bash ./scripts/setup_fish.sh
+node:
+	bash ./scripts/setup_node.sh
