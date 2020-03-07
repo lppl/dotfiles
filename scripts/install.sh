@@ -8,8 +8,9 @@ main () {
 install_some_basic_apps () {
   sudo apt-get update -y
   sudo apt-get upgrade -y
-  sudo apt-get install git git-flow git-svn subversion \
+  sudo apt-get install -y git git-flow git-svn subversion \
                        vim vim-nox \
+		       curl \
                        openvpn
 
 }
