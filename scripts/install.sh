@@ -10,7 +10,8 @@ install_some_basic_apps () {
   sudo apt-get upgrade -y
   sudo apt-get install -y git git-flow git-svn subversion \
                        vim vim-nox \
-		       curl \
+                       tmux \
+		               curl \
                        openvpn
 
 }
