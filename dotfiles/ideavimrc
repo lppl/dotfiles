@@ -1,3 +1,13 @@
+
+let mapleader='\'
+let maplocalleader = '\'
+
 set surround
 set easymotion
 set multiple-cursors
+
+nnoremap ; :
+vnoremap ; :
+
+command! W w
+command! Q q
