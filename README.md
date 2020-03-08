@@ -10,4 +10,4 @@ linux account dotfiles
 ```make fish```
 
 # Link dotfiles
-```make dotfiles```
+```make link```
