@@ -11,6 +11,7 @@ install_some_basic_apps () {
   sudo apt-get install -y git git-flow git-svn subversion \
                        vim vim-nox \
                        tmux \
+                       xclip \
 		               curl \
                        openvpn
 
