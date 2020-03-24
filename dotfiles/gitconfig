@@ -5,6 +5,9 @@
 [color]
 	ui = auto
 
+[core]
+    excludesfile = ~/.gitignore_global
+
 [alias]
 	con = checkout -b
 	co = checkout
