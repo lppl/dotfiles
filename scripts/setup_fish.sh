@@ -10,7 +10,6 @@ main () {
 	FISH=`which fish`
 	sudo chsh -s $FISH $USER 
 	curl -L https://get.oh-my.fish | fish
-	echo "fish_vi_key_bindings" >> ~/.config/fish/conf.d/conf.fish
 }
 
 main
