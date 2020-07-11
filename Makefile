@@ -12,3 +12,6 @@ node:
 
 link:
 	bash ./scripts/link_dotfiles.sh
+
+rsync:
+	rsync -av ./configfiles/* ~/.config
