@@ -1,5 +1,5 @@
 
-install: stuff fish link vim
+install: stuff rsync fish link vim
 
 stuff:
 	bash ./scripts/install.sh
