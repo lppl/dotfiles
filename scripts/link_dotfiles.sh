@@ -9,17 +9,15 @@ main () {
 link_dotfiles () {
   local source_path=$1
   local target_path=$2
-  find $source_path -type f | while read file; do link_dotfile $file $target_path; done
+  find $source_path -maxdepth 1 -mindepth 1 | while read file; do link_dotfile $file $target_path; done
 }
 
 link_dotfile () {
   local source_path=$1
   local target_path=$(readlink  -e $2)
   local file=$(basename $source_path)
-  cp -fs "$source_path" "$target_path/.$file"
+  rm -rf "$target_path/.$file"
+  ln -s "$source_path" "$target_path/.$file"
 }
 
 main
-
-unset -f link_dotfiles
-unset -f link_dotfile

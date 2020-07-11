@@ -1,5 +1,5 @@
 
-install: stuff fish link
+install: stuff fish link vim
 
 stuff:
 	bash ./scripts/install.sh
@@ -15,3 +15,6 @@ link:
 
 rsync:
 	rsync -av ./configfiles/* ~/.config
+
+vim:
+	bash ./scripts/setup_vim.sh
