@@ -5,15 +5,16 @@ main () {
 }
 
 install_some_basic_apps () {
-  sudo apt-get update -y
-  sudo apt-get upgrade -y
-  sudo apt-get install -y git git-flow git-svn subversion \
-                       python3-pip \
-                       vim vim-nox \
-                       tmux \
-                       xclip \
-		               curl \
-                       openvpn
+  sudo apt update -y
+  sudo apt upgrade -y
+  sudo apt install -y git git-flow git-svn subversion \
+                      python3-pip \
+                      vim vim-nox \
+                      tmux \
+                      xclip \
+		              curl \
+                      dconf-editor \
+                      openvpn
 
 }
 

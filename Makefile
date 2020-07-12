@@ -21,3 +21,17 @@ vim:
 
 powerline:
 	bash ./scripts/setup_powerline.sh
+
+
+setup_directories:
+	mkdir -p ${HOME}/user/Desktop
+	mkdir -p ${HOME}/user/Downloads
+	mkdir -p ${HOME}/user/Templates
+	mkdir -p ${HOME}/user/Public
+	mkdir -p ${HOME}/user/Documents
+	mkdir -p ${HOME}/user/Music
+	mkdir -p ${HOME}/user/Pictures
+	mkdir -p ${HOME}/user/Videos
+	mkdir -p ${HOME}/user/Pictures/00__Screenshots
+	xdg-user-dirs-update
+	gsettings set org.gnome.gnome-screenshot auto-save-directory "file:///home/${USER}/user/Pictures/00__Screenshots/"
