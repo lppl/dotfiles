@@ -1,10 +1,12 @@
 dotfiles
 ========
 
-linux account dotfiles
+Linux account dotfiles.
+
+Developed on and tested for Ubuntu.
 
 # Loose all hell up
-```make install``
+```make install```
 
 # Setup just fish shell
 ```make fish```
