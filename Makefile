@@ -1,5 +1,5 @@
 
-install: stuff rsync fish link vim
+install: stuff powerline rsync fish link vim
 
 stuff:
 	bash ./scripts/install.sh
@@ -18,3 +18,6 @@ rsync:
 
 vim:
 	bash ./scripts/setup_vim.sh
+
+powerline:
+	bash ./scripts/setup_powerline.sh
