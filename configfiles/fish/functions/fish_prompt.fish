@@ -1,0 +1,1 @@
+/home/lppl/.local/share/omf/themes/lambda-zero/fish_prompt.fish
