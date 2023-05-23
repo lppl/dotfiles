@@ -1,0 +1,13 @@
+- name: Run docker container
+  hosts: localhost
+
+  tasks:
+    - name: Build image 
+      shell: |
+        docker \
+        --tag=dotfiles:latest
+        .
+    - name: Log into image
+      shell: |
+        docker -ti -u dotfiles dotfiles:latest /bin/bash
+

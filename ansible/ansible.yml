@@ -1,0 +1,60 @@
+- hosts: localhost
+  pre_tasks: 
+    - name: Update apt cache
+      apt: 
+        update_cache: true
+  tasks:
+    - name: Install 
+      become: true
+      tags: 
+        - essentials
+      apt:
+        name:
+          - stow 
+          - bat
+          - fzf
+          - kitty
+          - tmux
+          - tldr
+          - curl 
+        update_cache: true
+    - name: Install window manager
+      become: true
+      shell: |
+        /usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2023.02.18_all.deb keyring.deb SHA256:a511ac5f10cd811f8a4ca44d665f2fa1add7a9f09bef238cdfad8461f5239cc4
+        sudo apt install ./keyring.deb
+        echo "deb http://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
+        sudo apt update -y
+        sudo apt install -y i3
+      tags: [i3]
+    - name: Install i3-themes
+      shell: |
+        git clone https://github.com/unix121/i3wm-themer
+        cd i3wm-themer/
+        sudo pip install -r requirements.txt
+        ./install_ubuntu.sh
+      tags: [i3-theme]
+    - name: Install kitty themes
+      shell: |
+        mkdir -p ~/.config/kitty
+        git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
+        ln -s ~/.config/kitty/kitty-themes/themes/
+    - name: Install fish
+      shell: |
+        sudo apt-add-repository ppa:fish-shell/release-3
+        sudo apt-get update
+        sudo apt-get install -y fish
+        USER=`whoami`
+        FISH=`which fish`
+        sudo chsh -s $FISH $USER
+      tags: 
+        - fish
+    - name: Install fisher
+      shell: |
+        curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source 
+
+        fisher install jorgebucaran/fisher
+        fisher install PatrickF1/fzf.fish
+      tags:
+        - fisher
+        
