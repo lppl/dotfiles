@@ -104,8 +104,8 @@ require('lazy').setup({
       -- See `:help gitsigns.txt`
       signs = {
         add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
+        change = { text = '±' },
+        delete = { text = '-' },
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
