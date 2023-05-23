@@ -1,13 +1,50 @@
+" search for actions: :actionlist <patter>
 
-let mapleader='\'
-let maplocalleader = '\'
+set number                        " line numbers
 
-set surround
-set easymotion
+set hlsearch                      " highlight search occurrences
+set ignorecase                    " ignore case in search patterns
+set smartcase                     " no ignore case when pattern is uppercase
+set incsearch                     " show search results while typing
+set wrapscan                      " searches wrap around the end of the file
+
+set gdefault                      " substitute all occurrences in line per default
+set history=10000                 " keep x lines of command line history
+set scrolloff=5 sidescrolloff=10  " keep some lines before and after the cursor visible
+set clipboard=unnamedplus,unnamed,ideaput " integrate with system clipboard
+
+
 set multiple-cursors
+set commentary
+set surround                      " emulate vim-surround plugin
+set ideajoin
+set ideastatusicon=disabled
 
-nnoremap ; :
-vnoremap ; :
 
-command! W w
-command! Q q
+" set <leader> to <space>
+let mapleader = " "
+
+" edit ideavim config
+nnoremap <leader>vv :e ~/.ideavimrc<CR>
+nnoremap <leader>vr :action IdeaVim.ReloadVimRc.reload<CR>
+
+
+nnoremap <leader>la :action GotoAction<CR>
+nnoremap <leader>lf :action GotoFile<CR>
+nnoremap <leader>le :action RecentFiles<CR>
+nnoremap <leader>ls :action ShowSettings<CR>
+
+nmap <leader>ri :action Inline<CR>
+nmap <leader>rr :action RenameElement<CR>
+nmap <leader>rev :action IntroduceVariable<CR>
+vmap <leader>rev :action IntroduceVariable<CR>
+nmap <leader>rem :action ExtractMethod<CR>
+vmap <leader>rem :action ExtractMethod<CR>
+nmap <leader>rm :action Move<CR>
+nmap <leader>ro :action OptimizeImports<CR>
+nmap <leader>rg :action Generate<CR>
+
+
+nmap <leader>ec :action ChooseRunConfiguration<CR>
+nmap <leader>ee :action RunToolbarEditConfigurationAction<CR>
+nmap <leader>et :action RerunTests<CR>
