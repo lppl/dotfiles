@@ -51,10 +51,12 @@
         - fish
     - name: Install fisher
       shell: |
-        curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source 
+        curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | fish 
 
         fisher install jorgebucaran/fisher
         fisher install PatrickF1/fzf.fish
+      args:
+        executable: /usr/bin/fish
       tags:
         - fisher
         
