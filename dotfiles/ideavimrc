@@ -14,6 +14,10 @@ set scrolloff=5 sidescrolloff=10  " keep some lines before and after the cursor 
 set clipboard=unnamedplus,unnamed,ideaput " integrate with system clipboard
 
 
+set visualbell
+set noerrorbells
+
+
 set multiple-cursors
 set commentary
 set surround                      " emulate vim-surround plugin
@@ -27,24 +31,41 @@ let mapleader = " "
 " edit ideavim config
 nnoremap <leader>vv :e ~/.ideavimrc<CR>
 nnoremap <leader>vr :action IdeaVim.ReloadVimRc.reload<CR>
+nnoremap <leader>va :action VimActions<CR>
 
 
-nnoremap <leader>la :action GotoAction<CR>
-nnoremap <leader>lf :action GotoFile<CR>
-nnoremap <leader>le :action RecentFiles<CR>
-nnoremap <leader>ls :action ShowSettings<CR>
+"  - Getting
+nnoremap <leader>fa :action GotoAction<CR>
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fe :action RecentFiles<CR>
+nnoremap <leader>fs :action ShowSettings<CR>
+nnoremap <leader>fp :action WelcomeScreen.Plugins<CR>
 
+"  - Code discovery
+nnoremap <leader>qq :action QuickJavaDoc<CR>
+nnoremap <leader>go :action GotoDeclarationOnly<CR>
+
+"  - Code manipulation
+nmap <leader>rt :action Refactorings.QuickListPopupAction<CR>
 nmap <leader>ri :action Inline<CR>
 nmap <leader>rr :action RenameElement<CR>
 nmap <leader>rev :action IntroduceVariable<CR>
-vmap <leader>rev :action IntroduceVariable<CR>
 nmap <leader>rem :action ExtractMethod<CR>
-vmap <leader>rem :action ExtractMethod<CR>
+nmap <leader>rei :action IntroduceVariable<CR>
 nmap <leader>rm :action Move<CR>
 nmap <leader>ro :action OptimizeImports<CR>
 nmap <leader>rg :action Generate<CR>
+nmap <leader>gi :action Generate.Missing.Members.TypeScript<CR>
+nmap <leader>rg :action Generate<CR>
+nmap <leader>rs :action EditorSelectWord<CR>
 
+nmap <leader>rc @:<CR>
 
-nmap <leader>ec :action ChooseRunConfiguration<CR>
-nmap <leader>ee :action RunToolbarEditConfigurationAction<CR>
+nmap <leader>cl :close<CR>
+
+"  - Running code
+nmap <leader>ee :action ChooseRunConfiguration<CR>
+nmap <leader>ec :action RunToolbarEditConfigurationAction<CR>
+nmap <leader>er :action Rerun<CR>
 nmap <leader>et :action RerunTests<CR>
+
