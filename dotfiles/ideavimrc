@@ -39,11 +39,18 @@ nnoremap <leader>fa :action GotoAction<CR>
 nnoremap <leader>ff :action GotoFile<CR>
 nnoremap <leader>fe :action RecentFiles<CR>
 nnoremap <leader>fs :action ShowSettings<CR>
-nnoremap <leader>fp :action WelcomeScreen.Plugins<CR>
+nnoremap <leader>fp :action ActivateProblemsViewToolWindow<CR>
 
 "  - Code discovery
 nnoremap <leader>qq :action QuickJavaDoc<CR>
 nnoremap <leader>go :action GotoDeclarationOnly<CR>
+
+"  - Git shortcuts
+nnoremap <leader>gg :action VcsGroups<CR>
+nnoremap <leader>gb :action Git.Branches<CR>
+nnoremap <leader>gp :action Vcs.Push<CR>
+nnoremap <leader>gf :action Git.Fetch<CR>
+nnoremap <leader>gu :action Git.Fetch<CR>
 
 "  - Code manipulation
 nmap <leader>rt :action Refactorings.QuickListPopupAction<CR>
@@ -66,6 +73,7 @@ nmap <leader>cl :close<CR>
 "  - Running code
 nmap <leader>ee :action ChooseRunConfiguration<CR>
 nmap <leader>ec :action RunToolbarEditConfigurationAction<CR>
+nmap <leader>ey :action RunAnything<CR>
 nmap <leader>er :action Rerun<CR>
 nmap <leader>et :action RerunTests<CR>
 
