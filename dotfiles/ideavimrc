@@ -29,17 +29,25 @@ set ideastatusicon=disabled
 let mapleader = " "
 
 " edit ideavim config
-nnoremap <leader>vv :e ~/.ideavimrc<CR>
-nnoremap <leader>vr :action IdeaVim.ReloadVimRc.reload<CR>
+nnoremap <leader>ve :e ~/.ideavimrc<CR>
+nnoremap <leader>vv :action IdeaVim.ReloadVimRc.reload<CR>
 nnoremap <leader>va :action VimActions<CR>
+nnoremap <leader>vt :action VimFindActionIdAction<CR>
 
+" editor actions
+nnoremap <leader>ss :action SaveAll<CR>
+nnoremap <leader>sa :action SaveAs<CR>
 
 "  - Getting
 nnoremap <leader>fa :action GotoAction<CR>
+nnoremap <leader>fy :action GotoSymbol<CR>
 nnoremap <leader>ff :action GotoFile<CR>
 nnoremap <leader>fe :action RecentFiles<CR>
 nnoremap <leader>fs :action ShowSettings<CR>
 nnoremap <leader>fp :action ActivateProblemsViewToolWindow<CR>
+nnoremap <leader>ft :action ActivateTerminalToolWindow<CR>
+
+nnoremap <leader>ww :action SaveAll<CR>
 
 "  - Code discovery
 nnoremap <leader>qq :action QuickJavaDoc<CR>
@@ -50,7 +58,7 @@ nnoremap <leader>gg :action VcsGroups<CR>
 nnoremap <leader>gb :action Git.Branches<CR>
 nnoremap <leader>gp :action Vcs.Push<CR>
 nnoremap <leader>gf :action Git.Fetch<CR>
-nnoremap <leader>gu :action Git.Fetch<CR>
+nnoremap <leader>gu :action Git.Pull<CR>
 
 "  - Code manipulation
 nmap <leader>rt :action Refactorings.QuickListPopupAction<CR>
@@ -65,10 +73,13 @@ nmap <leader>rg :action Generate<CR>
 nmap <leader>gi :action Generate.Missing.Members.TypeScript<CR>
 nmap <leader>rg :action Generate<CR>
 nmap <leader>rs :action EditorSelectWord<CR>
+nmap <leader>rf :action ReformatCode<CR>
 
 nmap <leader>rc @:<CR>
 
 nmap <leader>cl :close<CR>
+nmap <leader>co :action CloseAllEditorsButActive<CR>
+nmap <leader>cc :action CloseAllEditorsButActive<CR>
 
 "  - Running code
 nmap <leader>ee :action ChooseRunConfiguration<CR>
