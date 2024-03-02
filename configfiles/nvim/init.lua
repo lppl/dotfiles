@@ -42,7 +42,6 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
-  
 
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
