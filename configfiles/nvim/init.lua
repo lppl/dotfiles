@@ -127,7 +127,6 @@ require('lazy').setup({
   } ,
   -- Multicursor support
   'mg979/vim-visual-multi',
-  'ThePrimagean/git-worktree.nvim',
   require("lppl.navigation"),
   { "camgraff/telescope-tmux.nvim" }
 }, {})
