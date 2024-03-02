@@ -16,10 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 
-  -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
-
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
@@ -47,19 +43,6 @@ require('lazy').setup({
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '±' },
-        delete = { text = '-' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
 
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -112,6 +95,7 @@ require('lazy').setup({
   } ,
   -- Multicursor support
   'mg979/vim-visual-multi',
+  require("lppl.git"),
   require("lppl.navigation"),
   { "camgraff/telescope-tmux.nvim" }
 }, {})
