@@ -55,7 +55,7 @@ return {
     config = function ()
       local harpoon = require("harpoon")
 
-      harpoon:setup()
+      harpoon:setup({})
 
       local conf = require("telescope.config").values
       local function toggle_telescope(harpoon_files)
@@ -72,7 +72,7 @@ return {
           previewer = conf.file_previewer({}),
           sorter = conf.generic_sorter({}),
         }):find()
-     end
+      end
 
       vim.keymap.set("n", "<leader>ma", function() harpoon:list():append() end, { desc = "Harpoon [M]ark [A]ppend" })
       vim.keymap.set("n", "<leader>mr", function() harpoon:list():remove() end, { desc = "Harpoon [M]ark [R]emove" })
@@ -84,44 +84,49 @@ return {
       vim.keymap.set("n", "<C-A-2>", function() harpoon:list():select(3) end)
       vim.keymap.set("n", "<C-A-3>", function() harpoon:list():select(4) end)
 
-      -- -- Toggle previous & next buffers stored within Harpoon list
+      -- Toggle previous & next buffers stored within Harpoon list
       vim.keymap.set("n", "<C-A-Left>", function() harpoon:list():prev() end)
       vim.keymap.set("n", "<C-A-Right>", function() harpoon:list():next() end)
 
-      -- -- Toggle previous & next buffers nvim buffers 
+      -- Toggle previous & next buffers nvim buffers 
       vim.keymap.set("n", "<C-A-S-Left>", ":bn<cr>")
       vim.keymap.set("n", "<C-A-S-Right>", ":bp<cr>")
     end
   },
-  { 'ThePrimagean/git-worktree.nvim'}
+  {
+    'ThePrimagean/git-worktree.nvim',
+    config = function ()
+      local Worktree = require("git-worktree")
+      Worktree.on_tree_change(function(op, metadata)
+        if op == Worktree.Operations.Switch then
+          print("Switched from " .. metadata.prev_path .. " to " .. metadata.path)
+        end
+      end)
+
+      require("telescope").load_extension("git_worktree")
+      vim.keymap.set("n", "gwc", require('telescope').extensions.git_worktree.create_git_worktree, { desc = "[G]it [W]orktree [C]reate" })
+      vim.keymap.set("n", "gww", require('telescope').extensions.git_worktree.git_worktree, { desc = "[G]it [W]orktree [W]worktree" })
+    end
+  },
+  {
+    'christoomey/vim-tmux-navigator',
+    lazy = false,
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      -- "TmuxNavigatePrevious",
+    },
+    keys = {
+      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+      -- { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    }
+  },
+  {
+    "camgraff/telescope-tmux.nvim",
+  }
 }
-
-
--- -- op = Operations.Switch, Operations.Create, Operations.Delete
--- -- metadata = table of useful values (structure dependent on op)
--- --      Switch
--- --          path = path you switched to
--- --          prev_path = previous worktree path
--- --      Create
--- --          path = path where worktree created
--- --          branch = branch name
--- --          upstream = upstream remote name
--- --      Delete
--- --          path = path where worktree deleted
---
--- local Worktree = require("git-worktree")
--- Worktree.on_tree_change(function(op, metadata)
---   if op == Worktree.Operations.Switch then
---     print("Switched from " .. metadata.prev_path .. " to " .. metadata.path)
---   end
--- end)
---
--- require("telescope").load_extension("git_worktree")
--- vim.keymap.set("n", "gwc", require('telescope').extensions.git_worktree.create_git_worktree, { desc = "[G]it [W]orktree [C]reate" })
--- vim.keymap.set("n", "gww", require('telescope').extensions.git_worktree.git_worktree, { desc = "[G]it [W]orktree [W]worktree" })
--- -- vim.keymap.set("n", "gws", require('telescope').extensions.git_worktree.switch_git_worktree)
--- -- vim.keymap.set("n", "gwd", require('telescope').extensions.git_worktree.delete_git_worktree)
--- vim.keymap.set({"n", "v"}, "<A-1>", ":NvimTreeToggle<cr>", { desc = "Toggle File Explorer" })
--- vim.keymap.set({"i"}, "<A-1>", "<Esc>:NvimTreeToggle<cr>", { desc = "Toggle File Explorer" })
---
---

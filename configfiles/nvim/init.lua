@@ -80,7 +80,6 @@ require('lazy').setup({
 
   { 'rose-pine/neovim', as = 'rose-pine' },
   { 'folke/tokyonight.nvim' },
-  { 'christoomey/vim-tmux-navigator', lazy = false },
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
@@ -90,13 +89,14 @@ require('lazy').setup({
     },
     config = function()
       require("nvim-tree").setup {}
+      vim.keymap.set({"n", "v"}, "<A-1>", ":NvimTreeToggle<cr>", { desc = "Toggle File Explorer" })
+      vim.keymap.set({"i"}, "<A-1>", "<Esc>:NvimTreeToggle<cr>", { desc = "Toggle File Explorer" })
     end,
   } ,
   -- Multicursor support
   'mg979/vim-visual-multi',
   require("lppl.git"),
   require("lppl.navigation"),
-  { "camgraff/telescope-tmux.nvim" }
 }, {})
 
 -- [[ Setting optio ]]
@@ -141,7 +141,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Theme setup
-vim.cmd("set background=light")
+vim.cmd("set background=dark")
 vim.cmd('colorscheme tokyonight-moon')
 
 -- [[ Basic Keymaps ]]
@@ -407,17 +407,3 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-
-
-local M = {}
-
-M.general = {
-  n = {
-    ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
-    ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
-    ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
-    ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
-  }
-}
-
-
