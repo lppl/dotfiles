@@ -77,22 +77,9 @@ require('lazy').setup({
     },
     build = ":TSUpdate",
   },
-
   { 'rose-pine/neovim', as = 'rose-pine' },
   { 'folke/tokyonight.nvim' },
-  {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("nvim-tree").setup {}
-      vim.keymap.set({"n", "v"}, "<A-1>", ":NvimTreeToggle<cr>", { desc = "Toggle File Explorer" })
-      vim.keymap.set({"i"}, "<A-1>", "<Esc>:NvimTreeToggle<cr>", { desc = "Toggle File Explorer" })
-    end,
-  } ,
+  require('lppl.nvim-tree') ,
   -- Multicursor support
   'mg979/vim-visual-multi',
   require("lppl.git"),
@@ -158,8 +145,9 @@ vim.keymap.set({ 'n', 'v' }, ';', ':', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 's', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'ss', ':w<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'sq', ':wq<cr>', { silent  = true })
-vim.keymap.set({ 'n', 'v' }, '<C-q>', ':q!<cr>', { silent = true })
-vim.keymap.set({ 'n', 'v' }, '<C-w>', ':wq<cr>', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-A-q>', ':q!<cr>', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-q>', ':bd!<cr>', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-w>', ':w<cr>:bd<cr>', { silent = true })
 
 
 -- [[ Highlight on yank ]]
@@ -241,28 +229,8 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- optionally enable 24-bit colour
+-- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
-
--- OR setup with some options
-require("nvim-tree").setup({
-  sort = {
-    sorter = "case_sensitive",
-  },
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
