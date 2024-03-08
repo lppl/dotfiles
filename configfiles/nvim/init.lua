@@ -58,6 +58,7 @@ require('lazy').setup({
 
   require('lppl.treesitter'),
   { 'rose-pine/neovim', as = 'rose-pine' },
+  { 'polirritmico/monokai-nightasty.nvim' },
   { 'folke/tokyonight.nvim' },
   require('lppl.nvim-tree') ,
   -- Multicursor support
@@ -109,7 +110,7 @@ vim.o.termguicolors = true
 
 -- Theme setup
 vim.cmd("set background=dark")
-vim.cmd('colorscheme tokyonight-moon')
+vim.cmd('colorscheme monokai-nightasty')
 
 -- [[ Basic Keymaps ]]
 

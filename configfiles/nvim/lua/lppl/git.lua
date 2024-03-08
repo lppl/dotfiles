@@ -2,6 +2,7 @@ return {
   {
     'tpope/vim-fugitive',
     config = function ()
+      vim.keymap.set('n', '<leader>gg', ':DiffviewOpen<cr>', { desc = 'Diffview Open' })
       vim.keymap.set('n', '<leader>gk', ':Git commit<cr>', { desc = '[G]it [C]ommit' })
       vim.keymap.set('n', '<leader>ga', ':Git add %:p<cr>', { desc = '[G]it [A]add current file' })
       vim.keymap.set('n', '<leader>gb', ':Git blame<cr>', { desc = '[G]it [B]lame' })
@@ -11,6 +12,7 @@ return {
     end
   },
   'tpope/vim-rhubarb',
+  'sindrets/diffview.nvim',
   {
     'lewis6991/gitsigns.nvim',
     opts = {
