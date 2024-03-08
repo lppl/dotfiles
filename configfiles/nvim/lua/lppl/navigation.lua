@@ -1,21 +1,25 @@
-vim.keymap.set("n", "<A-h>", ':wincmd h<cr>', { desc = "Focus split to the left" })
-vim.keymap.set("n", "<A-l>", ':wincmd l<cr>', { desc = "Focus split to the right" })
-vim.keymap.set("n", "<A-j>", ':wincmd j<cr>', { desc = "Focus bottom split" })
-vim.keymap.set("n", "<A-k>", ':wincmd k<cr>', { desc = "Focus up split" })
+vim.keymap.set({ "n", "v" }, "<M-0>", ':only<cr>', { desc = "Close other windows" })
+vim.keymap.set({ "i" }, "<M-0>", '<esc>:only<cr>i', { desc = "Close other windows" })
 
-vim.keymap.set("n", "<A-C-h>", '<C-w><', { desc = "Decrease window height" })
-vim.keymap.set("n", "<A-C-l>", '<C-w>>', { desc = "Increase window height" })
-vim.keymap.set("n", "<A-C-j>", ':resize -1<cr>', { desc = "Decrease window height" })
-vim.keymap.set("n", "<A-C-k>", ':resize +1<cr>', { desc = "Increase window height" })
+vim.keymap.set({ "n", "v" }, "<A-h>", ':wincmd h<cr>', { desc = "Focus split to the left" })
+vim.keymap.set({ "n", "v" }, "<A-h>", ':wincmd h<cr>', { desc = "Focus split to the left" })
+vim.keymap.set({ "n", "v" }, "<A-l>", ':wincmd l<cr>', { desc = "Focus split to the right" })
+vim.keymap.set({ "n", "v" }, "<A-j>", ':wincmd j<cr>', { desc = "Focus bottom split" })
+vim.keymap.set({ "n", "v" }, "<A-k>", ':wincmd k<cr>', { desc = "Focus up split" })
 
-vim.keymap.set("n", "<A-C-i>", '<C-w>=', { desc = "Equalize windows width and height" })
+vim.keymap.set({ "n", "v" }, "<A-C-h>", '<C-w><', { desc = "Decrease window height" })
+vim.keymap.set({ "n", "v" }, "<A-C-l>", '<C-w>>', { desc = "Increase window height" })
+vim.keymap.set({ "n", "v" }, "<A-C-j>", ':resize -1<cr>', { desc = "Decrease window height" })
+vim.keymap.set({ "n", "v" }, "<A-C-k>", ':resize +1<cr>', { desc = "Increase window height" })
+
+vim.keymap.set({ "n", "v" }, "<A-C-i>", '<C-w>=', { desc = "Equalize windows width and height" })
 
 -- works "good enough" with two colunmn layout
 -- then 100% is a width of single buffer without gutter  
-vim.keymap.set("n", "<A-C-y>", ':vert res 30%<cr>', { desc = "Minimize current window width" })
-vim.keymap.set("n", "<A-C-u>", ':vert res 130%<cr>', { desc = "Maximize current window width" })
-vim.keymap.set("n", "<A-C-o>", ':res 130%<cr>', { desc = "Maximize current window height" })
-vim.keymap.set("n", "<A-C-p>", ':res 5<cr>', { desc = "Minimize current window height" })
+vim.keymap.set({ "n", "v" }, "<A-C-y>", ':vert res 30%<cr>', { desc = "Minimize current window width" })
+vim.keymap.set({ "n", "v" }, "<A-C-u>", ':vert res 130%<cr>', { desc = "Maximize current window width" })
+vim.keymap.set({ "n", "v" }, "<A-C-o>", ':res 130%<cr>', { desc = "Maximize current window height" })
+vim.keymap.set({ "n", "v" }, "<A-C-p>", ':res 5<cr>', { desc = "Minimize current window height" })
 
 return {
   {

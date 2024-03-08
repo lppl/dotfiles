@@ -29,7 +29,7 @@ return {
         dotfiles = true,
       },
     })
-    vim.keymap.set({"n", "v"}, "<A-1>", ":NvimTreeToggle<cr>", { desc = "Toggle File Explorer" })
-    vim.keymap.set({"i"}, "<A-1>", "<Esc>:NvimTreeToggle<cr>", { desc = "Toggle File Explorer" })
+    vim.keymap.set({"n", "v"}, "<M-1>", ":NvimTreeFocus<cr>", { desc = "Nvimtree Focus" })
+    vim.keymap.set({"i"}, "<M-1>", "<esc>:NvimTreeFocus<cr>", { desc = "Nvimtree Focus" })
   end,
 }
