@@ -21,15 +21,17 @@ require('lazy').setup({
 
   require('lppl.lsp'),
 
-  { -- Autocompletion
+  {
+    -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
 
-  { -- Set lualine as statusline
+  {
+    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -42,7 +44,8 @@ require('lazy').setup({
     },
   },
 
-  { -- Add indentation guides even on blank lines
+  {
+    -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
@@ -57,14 +60,15 @@ require('lazy').setup({
 
 
   require('lppl.treesitter'),
-  { 'rose-pine/neovim', as = 'rose-pine' },
+  { 'rose-pine/neovim',                   as = 'rose-pine' },
   { 'polirritmico/monokai-nightasty.nvim' },
   { 'folke/tokyonight.nvim' },
-  require('lppl.nvim-tree') ,
+  require('lppl.nvim-tree'),
   -- Multicursor support
   'mg979/vim-visual-multi',
   require("lppl.git"),
   require("lppl.navigation"),
+  require("lppl.format"),
 }, {})
 
 -- [[ Setting optio ]]
@@ -125,8 +129,8 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set({ 'n', 'v' }, ';', ':', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 's', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'ss', ':w<cr>', { silent = true })
-vim.keymap.set({ 'n', 'v' }, 'sq', ':wq<cr>', { silent  = true })
-vim.keymap.set({ 'n', 'v' }, '<C-A-q>', ':q!<cr>', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'sq', ':wq<cr>', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-A-q>', ':qall!<cr>:q<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-q>', ':bd!<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-w>', ':w<cr>:bd<cr>', { silent = true })
 
