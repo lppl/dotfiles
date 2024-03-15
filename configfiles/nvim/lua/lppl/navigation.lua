@@ -15,7 +15,7 @@ vim.keymap.set({ "n", "v" }, "<A-C-k>", ':resize +1<cr>', { desc = "Increase win
 vim.keymap.set({ "n", "v" }, "<A-C-i>", '<C-w>=', { desc = "Equalize windows width and height" })
 
 -- works "good enough" with two colunmn layout
--- then 100% is a width of single buffer without gutter  
+-- then 100% is a width of single buffer without gutter
 vim.keymap.set({ "n", "v" }, "<A-C-y>", ':vert res 30%<cr>', { desc = "Minimize current window width" })
 vim.keymap.set({ "n", "v" }, "<A-C-u>", ':vert res 130%<cr>', { desc = "Maximize current window width" })
 vim.keymap.set({ "n", "v" }, "<A-C-o>", ':res 130%<cr>', { desc = "Maximize current window height" })
@@ -26,7 +26,7 @@ return {
     'nvim-telescope/telescope.nvim',
     version = '*',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function ()
+    config = function()
       require('telescope').setup {
         defaults = {
           mappings = {
@@ -59,7 +59,6 @@ return {
       vim.keymap.set('n', 'sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', 'sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', 'sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-
     end
   },
   {
@@ -75,7 +74,7 @@ return {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function ()
+    config = function()
       local harpoon = require("harpoon")
 
       harpoon:setup({})
@@ -111,14 +110,14 @@ return {
       vim.keymap.set("n", "<C-A-Left>", function() harpoon:list():prev() end)
       vim.keymap.set("n", "<C-A-Right>", function() harpoon:list():next() end)
 
-      -- Toggle previous & next buffers nvim buffers 
+      -- Toggle previous & next buffers nvim buffers
       vim.keymap.set("n", "<C-A-S-Left>", ":bn<cr>")
       vim.keymap.set("n", "<C-A-S-Right>", ":bp<cr>")
     end
   },
   {
     'ThePrimagean/git-worktree.nvim',
-    config = function ()
+    config = function()
       local Worktree = require("git-worktree")
       Worktree.on_tree_change(function(op, metadata)
         if op == Worktree.Operations.Switch then
@@ -127,8 +126,10 @@ return {
       end)
 
       require("telescope").load_extension("git_worktree")
-      vim.keymap.set("n", "gwc", require('telescope').extensions.git_worktree.create_git_worktree, { desc = "[G]it [W]orktree [C]reate" })
-      vim.keymap.set("n", "gww", require('telescope').extensions.git_worktree.git_worktree, { desc = "[G]it [W]orktree [W]worktree" })
+      vim.keymap.set("n", "gwc", require('telescope').extensions.git_worktree.create_git_worktree,
+        { desc = "[G]it [W]orktree [C]reate" })
+      vim.keymap.set("n", "gww", require('telescope').extensions.git_worktree.git_worktree,
+        { desc = "[G]it [W]orktree [W]worktree" })
     end
   },
   {
