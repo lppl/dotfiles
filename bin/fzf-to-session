@@ -1,11 +1,22 @@
-#!/usr/bin/env bash
+#/usr/bin/env bash
 
-session=$(find ~/apps ~/utils ~/kata ~/user -mindepth 1 -maxdepth 1 -type d | fzf)
+session=$(find \
+  ~/ \
+  ~/courses \
+  ~/apps \
+  ~/utils \
+  ~/kata \
+  ~/user \
+  ~/docs \
+  -mindepth 1 \
+  -maxdepth 1 \
+  -type d \
+  -not -name ".*" | fzf)
 session_name=$(basename "$session" | tr . _)
 
 echo "session: $session_name"
 
-if ! tmux has-session -t "$session_name" 2> /dev/null; then 
+if ! tmux has-session -t "$session_name" 2> /dev/null; then
   tmux new-session -s "$session_name" -c "$session" -d
 fi
 
