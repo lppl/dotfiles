@@ -12,12 +12,18 @@ session=$(find \
   -maxdepth 1 \
   -type d \
   -not -name ".*" | fzf)
-session_name=$(basename "$session" | tr . _)
 
-if [[ $session_name ]]; then
+switch_to() {
+  session_name=$(basename "$1" | tr . _)
   echo "session: $session_name"
   if ! tmux has-session -t "$session_name" 2> /dev/null; then
     tmux new-session -s "$session_name" -c "$session" -d
   fi
   tmux switch-client -t "$session_name"
+}
+
+if test "" != "$session"; then
+  switch_to "$session"
+else
+  echo "No session selected"
 fi
