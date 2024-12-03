@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+project=$(find \
+  ~/apps \
+  -mindepth 3 \
+  -maxdepth 3 \
+  -name ".git" | xargs dirname | fzf --preview="git -C {} config --get remote.origin.url;echo '';git -C {} status")
+
+switch_to() {
+  session=$1
+  origin=$(git -C $session config --get remote.origin.url)
+  echo $origin
+  if test -n "$origin";
+  then
+    base=$(basename $origin | sed s/.git$//g)
+    branch=$(git -C $session symbolic-ref --short HEAD | tr ./ _:)
+    session_name="${base}___$branch"
+  else
+    session_name=$(echo "$session" | cut -d/ -f5- | tr . _ | sed s%/%___%g )
+  fi
+  echo "Session: $session"
+  echo "Name: $session_name"
+
+  if ! tmux has-session -t "$session_name" 2> /dev/null;
+  then
+    tmux new-session -s "$session_name" -c "$session" -d
+  fi
+  tmux switch-client -t "$session_name"
+}
+
+if test "" == "$project";
+then
+  echo "No project found."
+else
+  switch_to $project
+fi
