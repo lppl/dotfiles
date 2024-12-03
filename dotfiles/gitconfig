@@ -34,11 +34,10 @@
 	# Remove all merged branches
 	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
 
-	# Make ignored file
-	acknowledge = "update-index --no-assume-unchanged"
-	ignore = "update-index --assume-unchanged"
-	# List
+	# Ignore files 
 	ignored = !git ls-files -v | grep "^[[:lower:]]"
+	ignored-add = "update-index --no-assume-unchanged"
+	ignored-rem = "update-index --assume-unchanged"
 
 	nfm = "merge --no-ff"
 
