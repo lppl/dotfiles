@@ -12,7 +12,7 @@ install_some_basic_apps () {
                       vim vim-nox \
                       tmux \
                       xclip \
-		              curl \
+		                  curl \
                       dconf-editor \
                       openvpn
 

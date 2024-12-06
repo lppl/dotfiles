@@ -72,6 +72,13 @@ require('lazy').setup({
   require("lppl.git"),
   require("lppl.navigation"),
   require("lppl.format"),
+  {
+    "olrtg/nvim-emmet",
+    config = function()
+      vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
+      vim.keymap.set({ "n", "v" }, 'se', require('nvim-emmet').wrap_with_abbreviation)
+    end,
+  },
 }, {})
 
 -- [[ Setting optio ]]
@@ -136,6 +143,8 @@ vim.keymap.set({ 'n', 'v' }, 'sq', ':wq<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-A-q>', ':qall!<cr>:q<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-q>', ':bd!<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-w>', ':w<cr>:bd<cr>', { silent = true })
+vim.keymap.set({ 'v' }, '<C-/>', ':norm gc', { silent = true })
+vim.keymap.set({ 'n' }, '<C-/>', ':norm gcc', { silent = true })
 
 
 -- [[ Highlight on yank ]]
