@@ -35,3 +35,17 @@ setup_directories:
 	mkdir -p ${HOME}/user/Pictures/00__Screenshots
 	xdg-user-dirs-update
 	gsettings set org.gnome.gnome-screenshot auto-save-directory "file:///home/${USER}/user/Pictures/00__Screenshots/"
+
+build:
+	docker build -t dotfiles .
+
+stop:
+	docker stop dotfiles-runner
+
+remove:
+	docker rm dotfiles-runner
+
+start:
+	docker run -it --name dotfiles-runner dotfiles:latest
+
+full: build stop remove start 

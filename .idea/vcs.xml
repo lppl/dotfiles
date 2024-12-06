@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ansible/i3wm-themer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/configfiles/tmux/plugins/tmux" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/configfiles/tmux/plugins/tmux-mighty-scroll" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/configfiles/tmux/plugins/tmux-sensible" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/configfiles/tmux/plugins/tmux-yank" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/configfiles/tmux/plugins/tokyo-night-tmux" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/configfiles/tmux/plugins/tpm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/configfiles/tmux/plugins/tpm/lib/tmux-test" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/configfiles/tmux/plugins/treemux" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/configfiles/tmux/plugins/vim-tmux-navigator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/i3wm-themer" vcs="Git" />
+  </component>
+</project>
