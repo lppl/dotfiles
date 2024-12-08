@@ -6,11 +6,14 @@ main() {
   echo $DEV_ENV_DIR
   pushd $DEV_ENV_DIR > /dev/null
 
+  commit-dir env/.config/fish
   commit-dir env/.config/nvim
+  commit-dir env/.config/tmux
   commit-dir env/.config
   commit-dir env/.local
-  commit-dir foobar
   commit-dir 
+
+  git push
 
   popd > /dev/null
 }
@@ -23,7 +26,6 @@ commit-dir () {
   log "dev-update $name at $dir"
   git add $dir
   git commit $dir -m "dev-update: $name"
-  git push
 }
 
 commit-file () {
@@ -34,8 +36,8 @@ commit-file () {
   log "dev-update $name at $dir"
   git add $file
   git commit $file -m "dev-update: $path"
-  git push
 }
+
 
 
 main
