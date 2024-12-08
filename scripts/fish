@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-apt-add-repository ppa:fish-shell/release-3
-apt-get update
-apt-get install -y fish
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt-get update
+sudo apt-get install -y fish
 USER=`whoami`
 FISH=`which fish`
-chsh -s $FISH $USER
+sudo chsh -s $FISH $USER
