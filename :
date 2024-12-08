@@ -1,0 +1,12 @@
+set -g default-terminal "tmux-256color"
+set -s escape-time 0
+set -g base-index 1
+
+
+set-window-option -g mode-keys vi
+bind -T copy-mode-vi 'v' send-keys -X begin-selection
+bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "xclip -i -selection clipboard"
+
+bind-key r source-file $HOME/.config/tmux/tmux.conf \; display-message "$HOME/.config/tmux/tmux.conf reloaded"
+
+bind C-b display-popup -E -w 80% -h 80% fzf-to-session
