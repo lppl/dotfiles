@@ -28,23 +28,12 @@ commit-dir () {
 
   pushd $dir > /dev/null
 
-  log "dev-update $name at $dir"
+  echo "[DEV-UPDATE] $name at $dir"
   git add .
   git commit . -m "dev-update: $name"
 
   popd > /dev/null
 }
-
-commit-file () {
-  local path=$1
-  local file=$(cd $DEV_ENV_DIR/$path && pwd)
-  local name=$(basename $file)
-
-  log "dev-update $name at $dir"
-  git add $file
-  git commit $file -m "dev-update: $path"
-}
-
 
 
 main
