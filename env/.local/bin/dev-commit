@@ -25,7 +25,7 @@ commit-dir () {
   local dir=$(cd $DEV_ENV_DIR/$path && pwd)
   local name=$(basename $dir)
 
-  echo "[DEV-UPDATE] $name at $dir"
+  echo "[DEV-UPDATE] $name at $path"
   pushd $dir > /dev/null
 
   git add .
