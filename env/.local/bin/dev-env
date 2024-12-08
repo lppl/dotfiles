@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-source "${BASH_SOURCE[0]}/.dev-api"
+source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
 
 
 main () {

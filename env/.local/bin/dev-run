@@ -1,10 +1,29 @@
 #!/usr/bin/env bash
 
-source "${BASH_SOURCE[0]}/.dev-api"
+source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
 
 
-script_dir=$DEV_ENV_DIR
-filter=$1
+script_dir=$DEV_ENV_DIR/scripts
+filter=$(get_arg)
+scripts=$(find $script_dir/ -maxdepth 1 -mindepth 1 -executable -type f)
 
+log "SCRIPT DIR: \"$script_dir\"; FILTER: \"$filter\";"
 
-log "$script_dir with filter: $filter"
+for script in $scripts; do
+  name=$(basename $script)
+  if [[ $filter == "" ]]; then 
+    log "run \"$name\""
+    if is_hot; then
+       `$script`
+    fi
+  else 
+    if [[ $name == $filter ]]; then 
+      log "run \"$name\""
+      if is_hot; then
+         `$script`
+      fi
+    else
+      log "bypass \"$name\""
+    fi
+  fi
+done

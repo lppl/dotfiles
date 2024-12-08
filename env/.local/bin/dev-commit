@@ -6,11 +6,14 @@ main() {
   echo $DEV_ENV_DIR
   pushd $DEV_ENV_DIR > /dev/null
 
+  commit-dir scripts
   commit-dir env/.config/fish
   commit-dir env/.config/nvim
   commit-dir env/.config/tmux
   commit-dir env/.config
+  commit-dir env/.local/bin
   commit-dir env/.local
+  commit-dir env
   commit-dir 
 
   git push

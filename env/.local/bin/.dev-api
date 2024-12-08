@@ -11,19 +11,20 @@ log() {
 
 
 is_dry() {
-	if [[ $mode = "DRY" ]]; then 
-		return 1
-	else
+  log $mode
+	if [[ $mode == "DRY" ]]; then 
 		return 0
+	else
+		return 1
 	fi
 }
 
 
 is_hot() {
-	if [[ $mode = "HOT" ]]; then 
-		return 1
-	else
+	if [[ $mode == "HOT" ]]; then 
 		return 0
+	else
+		return 1
 	fi
 }
 
@@ -38,6 +39,28 @@ has_param() {
         fi
     done
     return 1
+}
+
+get_arg() {
+    for arg in $params; do
+        if [[ $arg != --* ]]; then
+            echo "$arg"
+            return 0
+        fi
+    done
+    return 0
+}
+
+get_args() {
+    local foobar=()
+    for arg in $params; do
+        if [[ $arg != --* ]]; then
+            foobar+=($arg)
+            return 0
+        fi
+    done
+    echo params
+    return 0
 }
 
 if [ -z "$DEV_ENV_DIR" ]; then
