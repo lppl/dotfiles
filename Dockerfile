@@ -5,13 +5,14 @@ FROM ubuntu:24.04 AS dotfiles-playground
 RUN apt update -y
 RUN apt upgrade -y
 RUN apt install -y curl git software-properties-common ansible
+RUN apt install -y vim
 # ======================================================= #
 
 # Setup user ============================================ #
-RUN useradd -m lppl
-RUN usermod -aG sudo lppl
-WORKDIR /home/lppl
-COPY . ./utils/dotfiles
-RUN chown -R "lppl:lppl" /home/lppl
-USER lppl
+ENV PATH="/home/ubuntu/dotfiles/env/.local/bin:${PATH}"
+ENV DEV_ENV_HOME="/home/ubuntu/dotfiles"
+
+RUN usermod -a -G sudo  ubuntu
+
+WORKDIR /home/ubuntu
 # ======================================================= #

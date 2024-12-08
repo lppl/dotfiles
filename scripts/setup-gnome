@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Navigation between worksapces
+for workspace in {1..10}; do 
+  keynum=$((workspace - 1))
+  gsettings set "org.gnome.desktop.wm.keybindings" "switch-to-workspace-$workspace" "['<Super>$keynum']" 
+  gsettings set "org.gnome.desktop.wm.keybindings" "move-to-workspace-$workspace" "['<Super><Alt>$keynum']"
+done
+
+# Disable <super>Num from launching application.
+# This is required for smoth workspace navigation.
+gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
+for app in {1..9}; do 
+  gsettings set "org.gnome.shell.keybindings" "switch-to-application-$app" "[]" 
+done

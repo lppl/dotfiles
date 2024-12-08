@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+mkdir -p $HOME/utils
+
+sudo apt -y update
+sudo apt -y install git ripgrep pavucontrol xclip jq tldr shutter python3-pip
+
+
+git clone git@github.com:junegunn/fzf.git $HOME/utils/fzf
+
+$HOME/personal/fzf/install
