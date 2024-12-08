@@ -7,12 +7,14 @@ source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
 main () {
   update_files $DEV_ENV_DIR/env/.config $HOME/.config
   update_files $DEV_ENV_DIR/env/.local $HOME/.local
+  link $DEV_ENV_DIR/env/.config/nvim $HOME/.config/nvim
+  link $DEV_ENV_DIR/env/.config/fish $HOME/.config/fish
 }
 
 
 update_files() {
     log "=============================================="
-    log "copying over files from: $1"
+    log "[COPY]"
     log "  - source: $1"
     log "  - target: $2"
     log ""
@@ -49,6 +51,22 @@ copy() {
     if is_hot; then
         cp $1 $2
     fi
+}
+
+link() {
+    source=$1
+    target=$2
+    log "=============================================="
+    log "[link]: $source as $target"
+    log ""
+    if is_hot; then
+        rm -r $target
+        ln -s $source $target
+    fi
+    popd &> /dev/null
+    log "=============================================="
+    log ""
+    log ""
 }
 
 main
