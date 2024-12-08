@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+hot_run="HOT"
+dry_run="DRY"
+mode=$dry_run
+
+
+log() {
+  echo "[${mode}_RUN]: $1"
+}
+
+
+is_dry() {
+	if [[ $mode = "DRY" ]]; then 
+		return 1
+	else
+		return 0
+	fi
+}
+
+
+is_hot() {
+	if [[ $mode = "HOT" ]]; then 
+		return 1
+	else
+		return 0
+	fi
+}
+
+
+params="$@"
+has_param() {
+    local term="$1"
+    shift
+    for arg in $params; do
+        if [[ $arg == "$term" ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+if [ -z "$DEV_ENV_DIR" ]; then
+    echo "env var \$DEV_ENV_DIR needs to be present"
+    exit 1
+fi
+
+if has_param '--exec'; then 
+  mode="HOT"
+fi

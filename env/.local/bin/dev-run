@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source "${BASH_SOURCE[0]}/.dev-api"
+
+
+script_dir=$DEV_ENV_DIR
+filter=$1
+
+
+log "$script_dir with filter: $filter"

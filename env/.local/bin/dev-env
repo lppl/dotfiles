@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+
+source "${BASH_SOURCE[0]}/.dev-api"
+
+
+main () {
+  update_files $DEV_ENV_DIR/env/.config $HOME/.config
+  update_files $DEV_ENV_DIR/env/.local $HOME/.local
+}
+
+
+update_files() {
+    log "=============================================="
+    log "copying over files from: $1"
+    log "  - source: $1"
+    log "  - target: $2"
+    log ""
+    pushd $1 &> /dev/null
+    (
+        configs=`find . -mindepth 1 -maxdepth 1 -type d`
+        for c in $configs; do
+            directory=${2%/}/${c#./}
+            log "    removing: rm -rf $directory"
+
+            if is_hot; then
+                rm -rf $directory
+            fi
+
+            log "    copying env: cp $c $2"
+            if is_hot; then
+                cp -r ./$c $2
+            fi
+        done
+
+    )
+    popd &> /dev/null
+    log "=============================================="
+    log ""
+    log ""
+}
+
+copy() {
+    log "removing: $2"
+    if is_hot; then
+        rm $2
+    fi
+    log "copying: $1 to $2"
+    if is_hot; then
+        cp $1 $2
+    fi
+}
+
+main
