@@ -3,7 +3,6 @@
 source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
 
 main() {
-  echo $DEV_ENV_DIR
   pushd $DEV_ENV_DIR > /dev/null
 
   commit-dir scripts
@@ -14,7 +13,7 @@ main() {
   commit-dir env/.local/bin
   commit-dir env/.local
   commit-dir env
-  commit-dir 
+  commit-dir "" 
 
   git push
 
@@ -30,7 +29,7 @@ commit-dir () {
 
   echo "[DEV-UPDATE] $name at $dir"
   git add .
-  git commit . -m "dev-update: $name"
+  git commit . -m "[DEV-UPDATE]: $name"
 
   popd > /dev/null
 }
