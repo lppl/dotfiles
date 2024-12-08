@@ -5,6 +5,7 @@ mkdir -p $HOME/utils
 sudo apt -y update
 sudo apt -y install git ripgrep pavucontrol xclip jq tldr shutter python3-pip
 
+snap install zig --classic --beta
 
 git clone git@github.com:junegunn/fzf.git $HOME/utils/fzf
 
