@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 selected=$(find \
+  ~/apps \
   ~/utils \
   ~/utils/dotfiles/env/.config \
   ~/utils/dotfiles/env/.local \
