@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-font_dir="~/.local/share/fonts"
+font_dir="$HOME/.local/share/fonts"
 mkdir -p $font_dir
 
 pushd $font_dir
