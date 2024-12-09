@@ -122,23 +122,6 @@ return {
     end
   },
   {
-    'ThePrimagean/git-worktree.nvim',
-    config = function()
-      local Worktree = require("git-worktree")
-      Worktree.on_tree_change(function(op, metadata)
-        if op == Worktree.Operations.Switch then
-          print("Switched from " .. metadata.prev_path .. " to " .. metadata.path)
-        end
-      end)
-
-      require("telescope").load_extension("git_worktree")
-      vim.keymap.set("n", "gwc", require('telescope').extensions.git_worktree.create_git_worktree,
-        { desc = "[G]it [W]orktree [C]reate" })
-      vim.keymap.set("n", "gww", require('telescope').extensions.git_worktree.git_worktree,
-        { desc = "[G]it [W]orktree [W]worktree" })
-    end
-  },
-  {
     'christoomey/vim-tmux-navigator',
     lazy = false,
     cmd = {
