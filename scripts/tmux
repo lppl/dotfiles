@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+sudo apt install tmux
+
+target=~/.tmux/plugins/tpm
+rm -rf $target
+git clone https://github.com/tmux-plugins/tpm $target
+
+source $target/scripts/install_plugins.sh

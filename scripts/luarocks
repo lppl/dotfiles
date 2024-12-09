@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+sudo apt install -y build-essential libreadline-dev unzip
+
+rm -rf /tmp/luarocks
+mkdir -p /tmp/luarocks
+
+pushd /tmp/luarocks
+
+
+version="5.4.7"
+curl -L -R -O https://www.lua.org/ftp/lua-$version.tar.gz
+tar -zxf lua-$version.tar.gz
+cd lua-$version
+make linux test
+sudo make install
+
+popd
