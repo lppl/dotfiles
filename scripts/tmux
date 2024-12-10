@@ -2,7 +2,7 @@
 
 sudo apt install tmux
 
-target=~/.local/shared/tpm
+target=~/.local/share/tpm
 rm -rf $target
 git clone https://github.com/tmux-plugins/tpm $target
 
