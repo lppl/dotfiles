@@ -5,36 +5,50 @@ source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
 
 
 main () {
-  update_files $DEV_ENV_DIR/env/.config $HOME/.config
-  update_files $DEV_ENV_DIR/env/.local $HOME/.local
-  link $DEV_ENV_DIR/env/.config/nvim $HOME/.config/nvim
-  link $DEV_ENV_DIR/env/.config/fish $HOME/.config/fish
+  update_dirs $DEV_ENV_DIR/env/.config $HOME/.config
+  update_dirs $DEV_ENV_DIR/env/.local/share $HOME/.local/share
+  update_files $DEV_ENV_DIR/env/.local/bin $HOME/.local/bin
+  #link $DEV_ENV_DIR/env/.config/nvim $HOME/.config/nvim
+  #link $DEV_ENV_DIR/env/.config/fish $HOME/.config/fish
 }
 
 
-update_files() {
+update_dirs() {
     log "=============================================="
-    log "[COPY]"
-    log "  - source: $1"
-    log "  - target: $2"
-    log ""
+    log "update_dirs at $2"
+    log "\`rm -rf and cp -r\` for directories:"
     pushd $1 &> /dev/null
     (
         configs=`find . -mindepth 1 -maxdepth 1 -type d`
         for c in $configs; do
             directory=${2%/}/${c#./}
-            log "    removing: rm -rf $directory"
+            log "  - $directory"
 
             if is_hot; then
                 rm -rf $directory
-            fi
-
-            log "    copying env: cp $c $2"
-            if is_hot; then
                 cp -r ./$c $2
             fi
         done
+    )
+    popd &> /dev/null
+    log "=============================================="
+    log ""
+}
 
+update_files() {
+    log "=============================================="
+    log "update_files at $2"
+    log "\`cp --update\` for files:"
+    pushd $1 &> /dev/null
+    (
+        configs=`find . -mindepth 1 -maxdepth 1 -type f`
+        for c in $configs; do
+            target_file=${2%/}/${c#./}
+            log "  - $target_file"
+            if is_hot; then
+                cp --update ./$c $2
+            fi
+        done
     )
     popd &> /dev/null
     log "=============================================="
