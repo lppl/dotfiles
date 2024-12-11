@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+sudo apt install -y git pipx
+pipx install qmk
+
+
+eport QMK_HOME=$HOME/utils/qmk_firmware
+
+if test -d  $HOME/utils/aurora_sweep_keymap; then
+  cd $HOME/utils/aurora_sweep_keymap
+  git pull
+else
+  git clone git@github.com:lppl/aurora_sweep_keymap.git $HOME/utils/aurora_sweep_keymap
+fi
+
+if test -d   $QMK_HOME; then
+  cd $QMK_HOME
+  git pull
+else
+  git clone git@github.com:qmk/qmk_firmware.git $QMK_HOME
+fi
+
+rm -f  $QMK_HOME/keyboards/splitkb/aurora/sweep/keymaps/lppl
+ln -s $HOME/utils/aurora_sweep_keymap  $QMK_HOME/keyboards/splitkb/aurora/sweep/keymaps/lppl
+
+cd $QMK_HOME
+qmk setup
+qmk compile -kb splitkb/aurora/sweep -km lppl
