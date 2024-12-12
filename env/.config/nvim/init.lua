@@ -75,6 +75,12 @@ require('lazy').setup({
       vim.keymap.set({ "n", "v" }, 'se', require('nvim-emmet').wrap_with_abbreviation)
     end,
   },
+  {
+    "smithbm2316/centerpad.nvim",
+    config = function()
+      vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>Centerpad<cr>', { silent = true, noremap = true })
+    end,
+  }
 }, {})
 
 -- [[ Setting optio ]]
