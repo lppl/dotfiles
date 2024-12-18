@@ -3,6 +3,7 @@
 selected=$(find \
   ~/apps \
   ~/utils \
+  ~/kata \
   ~/utils/dotfiles/env/.config \
   ~/utils/dotfiles/env/.local \
   ~/docs \
