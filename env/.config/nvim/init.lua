@@ -1,8 +1,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- TODO: check out stevearc/oil.nvim
-
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -23,6 +21,8 @@ require('lazy').setup({
   'tpope/vim-eunuch',
 
   require('lppl.lsp'),
+
+  require('lppl.oil'),
 
   {
     -- Autocompletion
@@ -80,7 +80,7 @@ require('lazy').setup({
     config = function()
       vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>Centerpad<cr>', { silent = true, noremap = true })
     end,
-  }
+  },
 }, {})
 
 -- [[ Setting optio ]]
