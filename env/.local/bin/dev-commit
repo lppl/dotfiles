@@ -1,38 +1,27 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
-source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
 
-main() {
-  pushd $DEV_ENV_DIR > /dev/null
+set root (git rev-parse --show-toplevel 2> /dev/null)
+set branch (git rev-parse --abbrev-ref HEAD 2> /dev/null)
 
-  commit-dir scripts
-  commit-dir env/.config/fish
-  commit-dir env/.config/nvim
-  commit-dir env/.config/tmux
-  commit-dir env/.config
-  commit-dir env/.local/bin
-  commit-dir env/.local
-  commit-dir env
-  commit-dir "" 
-
-  git push
-
-  popd > /dev/null
-}
-
-commit-dir () {
-  local path=$1
-  local dir=$(cd $DEV_ENV_DIR/$path && pwd)
-  local name=$(basename $dir)
-
-  echo "[DEV-UPDATE] $name at $path"
-  pushd $dir > /dev/null
-
+if test -z "$root"
+  echo "Run dev-commit in a git repository"
+else if test -f "$root/.dev-commit"
+  echo "dev-commit use local file "
+  echo "$root/.dev-commit"
+  # source "$root/.dev-commit"
+else if test -d "$root"
+  echo "dev-commit use default behaviour"
+  set arg "$argv"
+  if test -n $arg
+    set message "[$branch] $arg"
+  else
+    set dirname (basename $root)
+    set message "[$branch] update $dirname"
+  end
+  pushd $root &> /dev/null
   git add .
-  git commit . -m "[DEV-UPDATE]: $name"
-
-  popd > /dev/null
-}
-
-
-main
+  git commit . -m $message
+  git push
+  popd
+end
