@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-git restore $(git ls-files --deleted)
