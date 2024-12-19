@@ -4,20 +4,30 @@
 set root (git rev-parse --show-toplevel 2> /dev/null)
 set branch (git rev-parse --abbrev-ref HEAD 2> /dev/null)
 
+
 if test -z "$root"
   echo "Run dev-commit in a git repository"
-else if test -f "$root/.dev-commit"
-  echo "dev-commit use local file "
-  echo "$root/.dev-commit"
-  # source "$root/.dev-commit"
-else if test -d "$root"
-  echo "dev-commit use default behaviour"
+  exit 1
+end
+
+
+for dev_commit_file in "$root/.dev-commit" "$HOME/.dev-commit"
+  if test -f "$dev_commit_file"
+    echo "using $dev_commit_file"
+    $dev_commit_file
+    exit 0
+  end
+end
+
+
+if test -d "$root"
+  echo "using default behaviour"
   set arg "$argv"
   if test -n $arg
     set message "[$branch] $arg"
   else
     set dirname (basename $root)
-    set message "[$branch] update $dirname"
+    set message "[DEV-UPDATE] update $dirname"
   end
   pushd $root &> /dev/null
   git add .
