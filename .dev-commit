@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
+
+main() {
+  pushd $DEV_ENV_DIR > /dev/null
+
+  commit-dir scripts
+  commit-dir env/.config/fish
+  commit-dir env/.config/nvim
+  commit-dir env/.config/tmux
+  commit-dir env/.config
+  commit-dir env/.local/bin
+  commit-dir env/.local
+  commit-dir env
+  commit-dir ""
+
+  git push
+
+  popd > /dev/null
+}
+
+commit-dir () {
+  local path=$1
+  local dir=$(cd $DEV_ENV_DIR/$path && pwd)
+  local name=$(basename $dir)
+
+  echo "[DEV-UPDATE] $name at $path"
+  pushd $dir > /dev/null
+
+  git add .
+  git commit . -m "[DEV-UPDATE]: $name"
+
+  popd > /dev/null
+}
+
+
+main
