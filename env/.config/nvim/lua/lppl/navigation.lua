@@ -140,22 +140,6 @@ return {
     }
   },
   {
-    "camgraff/telescope-tmux.nvim",
-    setup = function ()
-      local transform_mod = require('telescope.actions.mt').transform_mod
-      local action_state = require('telescope.actions.state')
-      local action_state = require('telescope.actions.state')
-      local custom_actions = transform_mod{
-        delete_window = function(prompt_bufnr)
-          local entry = action_state.get_selected_entry()
-          local window_id = entry.value
-          local window_display = entry.display
-          local confirmation = vim.fn.input("Kill window '" .. window_display .. "'? [Y/n] ")
-          if string.lower(confirmation) ~= 'y' then return end
-          tmux_commands.kill_window(window_id)
-          actions.close(prompt_bufnr)
-        end
-      }
-    end
+    "camgraff/telescope-tmux.nvim"
   }
 }
