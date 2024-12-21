@@ -13,17 +13,19 @@ return {
         formatters.lsp,
       },
       formatter_by_ft    = {
-        css = formatters.lsp,
+        css = formatters.prettierd,
         html = formatters.prettierd,
         javascript = formatters.prettierd,
-        json = formatters.lsp,
+        json = formatters.prettierd,
         lua = formatters.lsp,
         markdown = formatters.prettierd,
         scss = formatters.lsp,
         terraform = formatters.lsp,
         typescript = formatters.prettierd,
         typescriptreact = formatters.prettierd,
-        yaml = formatters.lsp,
+        yaml = formatters.prettierd,
+        jsx = formatters.prettierd,
+        tsx = formatters.prettierd,
       }
     })
   end

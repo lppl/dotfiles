@@ -8,12 +8,12 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 return {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
+  "nvim-tree/nvim-tree.lua",
+  version = "*",
+  lazy = false,
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
   config = function()
     require("nvim-tree").setup({
       sort = {
@@ -29,7 +29,7 @@ return {
         dotfiles = true,
       },
     })
-    vim.keymap.set({"n", "v"}, "<M-1>", ":NvimTreeFocus<cr>", { desc = "Nvimtree Focus" })
-    vim.keymap.set({"i"}, "<M-1>", "<esc>:NvimTreeFocus<cr>", { desc = "Nvimtree Focus" })
+    vim.keymap.set({ "n", "v" }, "<M-1>", ":NvimTreeToggle<cr>", { desc = "Nvimtree Focus" })
+    vim.keymap.set({ "i" }, "<M-1>", "<esc>:NvimTreeToggle<cr>", { desc = "Nvimtree Focus" })
   end,
 }
