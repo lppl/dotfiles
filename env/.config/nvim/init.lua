@@ -26,6 +26,8 @@ require('lazy').setup({
 
   require('lppl.cmp'),
 
+  require('lppl.ai-codecompanion'),
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
 
