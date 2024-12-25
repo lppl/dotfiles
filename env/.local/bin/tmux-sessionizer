@@ -33,7 +33,7 @@ function switch_to -a target
 end
 
 function has_session -a name
-  return (tmux list-sessions | grep -q "^$name:")
+  return (tmux list-sessions | grep -q "$name:")
 end
 
 function hydrate -a target dir
