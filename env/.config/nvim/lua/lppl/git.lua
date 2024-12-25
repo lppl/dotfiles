@@ -4,12 +4,12 @@ return {
     config = function()
       vim.keymap.set('n', '<leader>gg', ':DiffviewOpen<cr>', { desc = 'Diffview Open' })
       vim.keymap.set('n', '<leader>gc', ':DiffviewClose<cr>', { desc = 'Diffview Open' })
-      vim.keymap.set('n', '<leader>gk', ':Git commit<cr>', { desc = '[G]it [C]ommit' })
-      vim.keymap.set('n', '<leader>ga', ':Git add %:p<cr>', { desc = '[G]it [A]add current file' })
-      vim.keymap.set('n', '<leader>gb', ':Git blame<cr>', { desc = '[G]it [B]lame' })
-      vim.keymap.set('n', '<leader>gs', ':Git status<cr>', { desc = '[G]it [S]tatus' })
-      vim.keymap.set('n', '<leader>gpl', ':Git pull<cr>', { desc = '[G]it [P]ul[L]' })
-      vim.keymap.set('n', '<leader>gps', ':Git push<cr>', { desc = '[G]it [P]u[S]h' })
+      vim.keymap.set('n', '<leader>gk', ':Git commit<cr>', { desc = 'Git Commit' })
+      vim.keymap.set('n', '<leader>ga', ':Git add %:p<cr>', { desc = 'Git Aad current file' })
+      vim.keymap.set('n', '<leader>gb', ':Git blame<cr>', { desc = 'Git Blame' })
+      vim.keymap.set('n', '<leader>gs', ':Git status<cr>', { desc = 'Git Status' })
+      vim.keymap.set('n', '<leader>gpull', ':Git pull<cr>', { desc = 'Git PulL' })
+      vim.keymap.set('n', '<leader>gpush', ':Git push<cr>', { desc = 'Git PuSh' })
     end
   },
   'tpope/vim-rhubarb',
