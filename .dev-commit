@@ -9,6 +9,7 @@ main() {
   commit-dir env/.config/fish
   commit-dir env/.config/nvim
   commit-dir env/.config/tmux
+  commit-dir env/.config/kitty
   commit-dir env/.config
   commit-dir env/.local/bin
   commit-dir env/.local
