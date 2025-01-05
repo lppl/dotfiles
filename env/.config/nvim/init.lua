@@ -19,7 +19,6 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   'tpope/vim-eunuch',
-  'github/copilot.vim',
 
   require('lppl.lsp'),
 

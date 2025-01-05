@@ -2,7 +2,6 @@ vim.keymap.set({ "n", "v" }, "<M-0>", ':only<cr>', { desc = "Close other windows
 vim.keymap.set({ "i" }, "<M-0>", '<esc>:only<cr>i', { desc = "Close other windows" })
 
 vim.keymap.set({ "n", "v" }, "<A-h>", ':wincmd h<cr>', { desc = "Focus split to the left" })
-vim.keymap.set({ "n", "v" }, "<A-h>", ':wincmd h<cr>', { desc = "Focus split to the left" })
 vim.keymap.set({ "n", "v" }, "<A-l>", ':wincmd l<cr>', { desc = "Focus split to the right" })
 vim.keymap.set({ "n", "v" }, "<A-j>", ':wincmd j<cr>', { desc = "Focus bottom split" })
 vim.keymap.set({ "n", "v" }, "<A-k>", ':wincmd k<cr>', { desc = "Focus up split" })
@@ -44,27 +43,27 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'media_files')
 
-      vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-      vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '? Find recently opened files' })
+      vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '  Find existing buffers' })
       vim.keymap.set('n', '<leader>/', function()
         require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
           previewer = false,
         })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      end, { desc = '/ Fuzzily search in current buffer' })
 
-      vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
-      vim.keymap.set('n', '<leader>fe', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-      vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp' })
-      vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind current [W]ord' })
-      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
-      vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
+      vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Find Files' })
+      vim.keymap.set('n', '<leader>fe', require('telescope.builtin').buffers, { desc = '  Find existing buffers' })
+      vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Find Help' })
+      vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = 'Find current Word' })
+      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'Find by Grep' })
+      vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = 'Find Diagnostics' })
 
-      vim.keymap.set('n', 'sf', require('telescope.builtin').find_files, { desc = '[S]earch [f]iles' })
-      vim.keymap.set('n', 'sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', 'sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', 'sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', 'sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+      vim.keymap.set('n', 'sf', require('telescope.builtin').find_files, { desc = 'Search files' })
+      vim.keymap.set('n', 'sh', require('telescope.builtin').help_tags, { desc = 'Search Help' })
+      vim.keymap.set('n', 'sw', require('telescope.builtin').grep_string, { desc = 'Search current Word' })
+      vim.keymap.set('n', 'sg', require('telescope.builtin').live_grep, { desc = 'Search by Grep' })
+      vim.keymap.set('n', 'sd', require('telescope.builtin').diagnostics, { desc = 'Search Diagnostics' })
     end
   },
   {
