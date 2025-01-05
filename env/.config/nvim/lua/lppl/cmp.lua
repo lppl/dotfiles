@@ -14,10 +14,11 @@ return {
     },
     setup = function()
       local cmp = require 'cmp'
+      local luasnip = require 'luasnip'
+      luasnip.config.setup {}
 
       cmp.setup({
         snippet = {
-          -- REQUIRED - you must specify a snippet engine
           expand = function(args)
             -- vim.fn["vsnip#anonymous"](args.body)     -- For `vsnip` users.
             require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
@@ -74,11 +75,10 @@ return {
       })
 
       -- Set up lspconfig.
-      -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-      -- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-      --   capabilities = capabilities
-      -- }
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      require('lspconfig')[""].setup {
+        capabilities = capabilities
+      }
     end
   },
 
