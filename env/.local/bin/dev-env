@@ -6,10 +6,9 @@ source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
 
 main () {
   update_dirs $DEV_ENV_DIR/env/.config $HOME/.config
+  update_files $DEV_ENV_DIR/env/.config $HOME/.config
   update_dirs $DEV_ENV_DIR/env/.local/share $HOME/.local/share
   update_files $DEV_ENV_DIR/env/.local/bin $HOME/.local/bin
-  #link $DEV_ENV_DIR/env/.config/nvim $HOME/.config/nvim
-  #link $DEV_ENV_DIR/env/.config/fish $HOME/.config/fish
 }
 
 
