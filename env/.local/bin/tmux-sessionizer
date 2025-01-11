@@ -2,17 +2,35 @@
 
 set dirs ~/utils ~/apps
 
-if test -f $HOME/.tmux-sessionizer-dirs
-  set dirs (cat $HOME/.tmux-sessionizer-dirs)
+function select_session_directory
+  set config_name ".tmux-sessionizer-dirs"
+
+  if test -f $HOME/$config_name
+    set dirs (cat $HOME/$config_name)
+  end
+
+  set dirs_files (find $dirs \
+    -mindepth 2 \
+    -maxdepth 2 \
+    -type f \
+    -name "$config_name")
+
+  for file in $dirs_files
+    set base (dirname $file)
+    for entry in (cat $file)
+      set -a dirs $base/$entry
+    end
+  end
+
+  echo (find \
+    $dirs \
+    -mindepth 1 \
+    -maxdepth 1 \
+    -type d \
+    -not -name ".*" | fzf)
 end
 
-set selected (find \
-  $dirs \
-  -mindepth 1 \
-  -maxdepth 1 \
-  -type d \
-  -not -name ".*" | fzf)
-
+set selected (select_session_directory)
 
 if test -z $selected
   exit 0
