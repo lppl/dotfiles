@@ -1,8 +1,42 @@
 #!/usr/bin/env fish
 
-set dirs ~/utils ~/apps
+function main
+  set session (select_session_directory)
+
+  if test -z $session
+    exit 0
+  end
+
+  set session_id (sanitize_id $session)
+
+  # echo "session_id $session_id"
+  # exit 0
+
+  if test -z $TMUX; and test -z (pgrep tmux)
+    tmux new-session -s $session_id -c $session
+    hydrate $session_id $session
+    exit 0
+  end
+
+  if not has_session $session_id
+    tmux new-session -ds $session_id -c $session
+    hydrate $session_id $session
+  end
+
+  switch_to $session_id
+end
+
+function sanitize_id -a directory
+  pushd $directory > /dev/null
+    set root (dirname (git rev-parse --show-toplevel 2> /dev/null))
+  popd
+  set name (string replace "$root/" "" "$directory" | tr ":., " "____")
+  set hash (echo $directory | sha256sum | string sub --length 6)
+  echo (string join "__" $name  $hash)
+end
 
 function select_session_directory
+  set dirs ~/utils ~/apps
   set config_name ".tmux-sessionizer-dirs"
 
   if test -f $HOME/$config_name
@@ -30,18 +64,6 @@ function select_session_directory
     -not -name ".*" | fzf)
 end
 
-set selected (select_session_directory)
-
-if test -z $selected
-  exit 0
-end
-
-set selected_name (basename "$selected" | tr ":., " "____")
-set hash (echo $selected | sha256sum | string sub --length 6)
-set selected_id (string join "__" $selected_name  $hash)
-set tmux_running (pgrep tmux)
-
-
 function switch_to -a target
   if test -z $TMUX
     tmux attach-session -t $target
@@ -62,15 +84,4 @@ function hydrate -a target dir
   end
 end
 
-if test -z $TMUX; and test -z $tmux_running
-  tmux new-session -s $selected_id -c $selected
-  hydrate $selected_id $selected
-  exit 0
-end
-
-if not has_session $selected_id
-  tmux new-session -ds $selected_id -c $selected
-  hydrate $selected_id $selected
-end
-
-switch_to $selected_id
+main
