@@ -40,7 +40,7 @@ function select_session_directory
     -mindepth 0 \
     -maxdepth 3 \
     -type f \
-    -name ".tmux-sessionizer-dirs" -or -name ".tms-dirs")
+    -name ".tmux-sessionizer-dirs")
 
   set direct_dirs
   set parent_dirs
