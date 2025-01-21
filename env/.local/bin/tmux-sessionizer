@@ -1,16 +1,17 @@
 #!/usr/bin/env fish
 
-function main
-  set session (select_session_directory)
+function main -a session
+  if test -n "$session"; and test -d (realpath $session)
+    set session (realpath $session)
+  else
+    set session (select_session_directory)
+  end
 
   if test -z $session
     exit 0
   end
 
   set session_id (sanitize_id $session)
-
-  # echo "session_id $session_id"
-  # exit 0
 
   if test -z $TMUX; and test -z (pgrep tmux)
     tmux new-session -s $session_id -c $session
@@ -88,4 +89,4 @@ function hydrate -a target dir
   end
 end
 
-main
+main $argv

@@ -3,7 +3,7 @@
 source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
 
 
-script_dir=$DEV_ENV_DIR/scripts
+script_dir=$DEV_ENV_DIR/recipes
 filter=$(get_arg)
 scripts=$(find $script_dir/ -maxdepth 1 -mindepth 1 -executable -type f)
 
@@ -11,13 +11,13 @@ log "SCRIPT DIR: \"$script_dir\"; FILTER: \"$filter\";"
 
 for script in $scripts; do
   name=$(basename $script)
-  if [[ $filter == "" ]]; then 
+  if [[ $filter == "" ]]; then
     log "run \"$name\""
     if is_hot; then
        `$script`
     fi
-  else 
-    if [[ $name == $filter ]]; then 
+  else
+    if [[ $name == $filter ]]; then
       log "run \"$name\""
       if is_hot; then
          `$script`

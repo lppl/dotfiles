@@ -14,7 +14,7 @@ end
 for dev_commit_file in "$root/.dev-commit" "$HOME/.dev-commit"
   if test -f "$dev_commit_file"
     echo "using $dev_commit_file"
-    $dev_commit_file
+    $dev_commit_file "$argv"
     exit 0
   end
 end
@@ -27,7 +27,7 @@ if test -d "$root"
     set message "[$branch] $arg"
   else
     set dirname (basename $root)
-    set message "[DEV-UPDATE] update $dirname"
+    set message "[$branch] $dirname dev update"
   end
   pushd $root &> /dev/null
   git add .
