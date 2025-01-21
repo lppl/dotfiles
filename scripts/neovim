@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+tag="v0.10.3"
+dir="/tmp/neovim"
+
+sudo apt-get install ninja-build gettext cmake curl build-essential
+
+rm -rf $dir
+git clone https://github.com/neovim/neovim --branch "$tag"  $dir
+
+pushd $dir
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+popd
