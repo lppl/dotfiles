@@ -27,6 +27,6 @@ commit-dir "$message" env/.config
 commit-dir "$message" env/.local/bin
 commit-dir "$message" env/.local
 commit-dir "$message" env
-commit-dir "[$branch] $reponame '$argv'" .
+commit-dir (printf "$message" "root") .
 git push
 popd > /dev/null
