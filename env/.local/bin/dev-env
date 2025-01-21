@@ -41,6 +41,7 @@ update_files() {
     pushd $1 &> /dev/null
     (
         configs=`find . -mindepth 1 -maxdepth 1 -type f`
+	mkdir -p $2
         for c in $configs; do
             target_file=${2%/}/${c#./}
             log "  - $target_file"
