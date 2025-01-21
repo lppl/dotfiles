@@ -1,39 +1,32 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
-source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
+set root (git rev-parse --show-toplevel 2> /dev/null)
+set branch (git branch --show-current 2> /dev/null)
+set reponame (basename $root)
 
-main() {
-  pushd $DEV_ENV_DIR > /dev/null
+if test -n "$argv"
+  set message "[$branch] $reponame '$argv' at %s"
+else
+  set message "[$branch] $reponame dev update: %s"
+end
 
-  commit-dir scripts
-  commit-dir env/.config/fish
-  commit-dir env/.config/nvim
-  commit-dir env/.config/tmux
-  commit-dir env/.config/kitty
-  commit-dir env/.config
-  commit-dir env/.local/bin
-  commit-dir env/.local
-  commit-dir env
-  commit-dir ""
-
-  git push
-
-  popd > /dev/null
-}
-
-commit-dir () {
-  local path=$1
-  local dir=$(cd $DEV_ENV_DIR/$path && pwd)
-  local name=$(basename $dir)
-
-  echo "[DEV-UPDATE] $name at $path"
-  pushd $dir > /dev/null
-
+function commit-dir -a message directory
+  pushd $directory &> /dev/null
   git add .
-  git commit . -m "[DEV-UPDATE]: $name"
+  git commit . -m (printf $message $directory)
+  popd
+end
 
-  popd > /dev/null
-}
 
-
-main
+pushd $DEV_ENV_DIR > /dev/null
+commit-dir "$message" env/.config/fish
+commit-dir "$message" env/.config/nvim
+commit-dir "$message" env/.config/tmux
+commit-dir "$message" env/.config/kitty
+commit-dir "$message" env/.config
+commit-dir "$message" env/.local/bin
+commit-dir "$message" env/.local
+commit-dir "$message" env
+commit-dir "[$branch] $reponame '$argv'" .
+git push
+popd > /dev/null

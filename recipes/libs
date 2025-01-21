@@ -3,7 +3,7 @@
 mkdir -p $HOME/utils
 
 sudo apt -y update
-sudo apt -y install git ripgrep pavucontrol xclip jq tldr shutter python3-pip htop
+sudo apt -y install git ripgrep pavucontrol xclip jq tldr shutter python3-pip htop nvm
 
 ## snap install zig --classic --beta
 
