@@ -36,32 +36,36 @@ function sanitize_id -a directory
 end
 
 function select_session_directory
-  set dirs ~/utils ~/apps
-  set config_name ".tmux-sessionizer-dirs"
-
-  if test -f $HOME/$config_name
-    set dirs (cat $HOME/$config_name)
-  end
-
-  set dirs_files (find $dirs \
-    -mindepth 2 \
-    -maxdepth 2 \
+  set dirs_files (find $HOME \
+    -mindepth 0 \
+    -maxdepth 3 \
     -type f \
-    -name "$config_name")
+    -name ".tmux-sessionizer-dirs" -or -name ".tms-dirs")
 
+  set direct_dirs
+  set parent_dirs
   for file in $dirs_files
     set base (dirname $file)
     for entry in (cat $file)
-      set -a dirs $base/$entry
+      set dir $base/$entry
+      if test -d $dir
+        if echo $dir | egrep -q "/\$"
+          set -a parent_dirs $dir
+        else
+          set -a direct_dirs $dir
+        end
+      end
     end
   end
 
-  echo (find \
-    $dirs \
+  set total_dirs $direct_dirs (find \
+    $parent_dirs \
     -mindepth 1 \
     -maxdepth 1 \
     -type d \
-    -not -name ".*" | fzf)
+    -not -name ".*")
+
+  echo (printf "%s\n" $total_dirs | sort | uniq | fzf)
 end
 
 function switch_to -a target
