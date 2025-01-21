@@ -5,10 +5,17 @@ source "$(dirname ${BASH_SOURCE[0]})/.dev-api"
 
 
 main () {
+  user_name=`git config --global user.name`
+  user_email=`git config --global user.email`
+
   update_dirs $DEV_ENV_DIR/env/.config $HOME/.config
   update_files $DEV_ENV_DIR/env/.config $HOME/.config
   update_dirs $DEV_ENV_DIR/env/.local/share $HOME/.local/share
   update_files $DEV_ENV_DIR/env/.local/bin $HOME/.local/bin
+  update_files $DEV_ENV_DIR/env $HOME
+
+  git config --global user.name "$user_name"
+  git config --global user.email "$user_email"
 }
 
 
