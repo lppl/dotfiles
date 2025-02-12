@@ -1,9 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
+
+set -gx TMUX_PLUGIN_MANAGER_PATH "$HOME/.local/share/tpm-plugins"
+set target $HOME/.local/share/tpm
 
 sudo apt install tmux
 
-target=~/.local/share/tpm
 rm -rf $target
 git clone https://github.com/tmux-plugins/tpm $target
 
-source $target/scripts/install_plugins.sh
+bash $target/scripts/install_plugins.sh
