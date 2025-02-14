@@ -7,6 +7,6 @@ sudo apt -y install git ripgrep pavucontrol xclip jq tldr shutter python3-pip ht
 
 ## snap install zig --classic --beta
 
-git clone https://github.com/junegunn/fzf $HOME/utils/fzf
+git clone https://github.com/junegunn/fzf /tmp/fzf
 
-$HOME/utils/fzf/install
+/tmp/fzf/install
