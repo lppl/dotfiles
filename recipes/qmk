@@ -4,7 +4,7 @@ sudo apt install -y git pipx
 pipx install qmk
 
 
-eport QMK_HOME=$HOME/utils/qmk_firmware
+export QMK_HOME=$HOME/utils/qmk_firmware
 
 if test -d  $HOME/utils/aurora_sweep_keymap; then
   cd $HOME/utils/aurora_sweep_keymap
