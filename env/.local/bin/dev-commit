@@ -32,6 +32,12 @@ if test -d "$root"
   pushd $root &> /dev/null
   git add .
   git commit . -m $message
-  git push
+
+  if git remote get-url origin > /dev/null 2>&1
+    git push
+    echo "Remote origin exists."
+  else
+    echo "Remote origin does not exist. I will not push."
+  end
   popd
 end
