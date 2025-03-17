@@ -66,6 +66,7 @@ require('lazy').setup({
   require("lppl.git"),
   require("lppl.navigation"),
   require("lppl.format"),
+  require('lppl.surround'),
   {
     "olrtg/nvim-emmet",
     config = function()
@@ -137,9 +138,9 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 vim.keymap.set({ 'n', 'v' }, ';', ':', { silent = true })
-vim.keymap.set({ 'n', 'v' }, 's', '<Nop>', { silent = true })
-vim.keymap.set({ 'n', 'v' }, 'ss', ':w<cr>', { silent = true })
-vim.keymap.set({ 'n', 'v' }, 'sq', ':wq<cr>', { silent = true })
+-- vim.keymap.set({ 'n', 'v' }, 's', '<Nop>', { silent = true })
+-- vim.keymap.set({ 'n', 'v' }, 'ss', ':w<cr>', { silent = true })
+-- vim.keymap.set({ 'n', 'v' }, 'sq', ':wq<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-A-q>', ':qall!<cr>:q<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-q>', ':bd!<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-w>', ':w<cr>:bd<cr>', { silent = true })
