@@ -3,7 +3,7 @@
 tag="v0.10.3"
 dir="/tmp/neovim"
 
-sudo apt-get install ninja-build gettext cmake curl build-essential
+sudo apt-get install ninja-build gettext cmake curl build-essential ripgrep
 
 rm -rf $dir
 git clone https://github.com/neovim/neovim --branch "$tag" --depth 1 $dir
