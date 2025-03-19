@@ -2,7 +2,7 @@ local nmap = function(keys, func, desc)
   if desc then
     desc = 'AI: ' .. desc
   end
-  vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+  vim.keymap.set('n', keys, func, { desc = desc })
 end
 
 return {
@@ -27,9 +27,23 @@ return {
           },
         },
       },
+      prompt_library = {
+        ["Duck"] = {
+          strategy = "chat",
+          description = "Prompting duck",
+          prompts = {
+            {
+              role = "system",
+              content =
+              "You are an experienced developer. You Be direct. Ask me questions.  Give me short answers. Be honest. Less is more. Write ansers like Uncle Bob or Martin Fowler would. ",
+            },
+          },
+        }
+      }
     })
-    nmap("<leader>cl", "<cmd>CodeCompanionActions<cr>", "Code Companion Actions")
+    nmap("<leader>cl", "<cmd>CodeCompanionActions<cr>", "Action Palette")
     nmap("<leader>cc", "<cmd>CodeCompanionChat<cr>", "Code Companion Chat")
     nmap("<leader>cj", "<cmd>CodeCompanionChat Add<cr>", "Code Companion Add to Chat")
+    nmap("<leader>p", "<cmd>CodeCompanionActions<cr>", "Action Palette")
   end
 }
