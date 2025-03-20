@@ -81,8 +81,9 @@ link() {
     log "[link]: $source as $target"
     log ""
     if is_hot; then
-        rm -r $target
-        ln -s $source $target
+        rm -r `realpath "$target"`
+        echo `realpath "$source"` `realpath "$target"`
+        # ln -s `realpath "$source"` `realpath "$target"`
     fi
     popd &> /dev/null
     log "=============================================="
