@@ -6,7 +6,8 @@ defaultBranch = main
 
 [core]
 excludesfile = ~/.gitignore_global
-editor = vim
+editor = nvim
+pager = diff-so-fancy | less --tabs=4 -RF
 
 [alias]
 con = checkout -b
@@ -45,3 +46,7 @@ nfm = "merge --no-ff"
 clean = git-lfs clean %f
 smudge = git-lfs smudge %f
 required = true
+
+[interactive]
+diffFilter = diff-so-fancy --patch
+
