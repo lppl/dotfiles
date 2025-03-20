@@ -14,6 +14,9 @@ main () {
   update_files $DEV_ENV_DIR/env/.local/bin $HOME/.local/bin
   update_files $DEV_ENV_DIR/env $HOME
 
+  link $DEV_ENV_DIR/env/.config/fish $HOME/.config/fish
+  link $DEV_ENV_DIR/env/.config/nvim $HOME/.config/nvim
+
   git config --global user.name "$user_name"
   git config --global user.email "$user_email"
 }
@@ -48,7 +51,7 @@ update_files() {
     pushd $1 &> /dev/null
     (
         configs=`find . -mindepth 1 -maxdepth 1 -type f`
-	mkdir -p $2
+	      mkdir -p $2
         for c in $configs; do
             target_file=${2%/}/${c#./}
             log "  - $target_file"
@@ -81,9 +84,8 @@ link() {
     log "[link]: $source as $target"
     log ""
     if is_hot; then
-        rm -r `realpath "$target"`
-        echo `realpath "$source"` `realpath "$target"`
-        # ln -s `realpath "$source"` `realpath "$target"`
+        rm -rf $target
+        ln -s $source $target
     fi
     popd &> /dev/null
     log "=============================================="
