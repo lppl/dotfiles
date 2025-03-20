@@ -1,4 +1,5 @@
 jorgebucaran/fisher
-patrickf1/fzf.fish
 jorgebucaran/nvm.fish
-oh-my-fish/theme-bobthefish
+patrickf1/fzf.fish
+ilancosman/tide@v6
+acomagu/fish-async-prompt
