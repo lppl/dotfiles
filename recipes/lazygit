@@ -9,3 +9,6 @@ tar xf lazygit.tar.gz lazygit
 sudo install lazygit -D -t $HOME/.local/bin/
 
 popd 2>&1 > /dev/null
+
+
+apt install git-delta

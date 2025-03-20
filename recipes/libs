@@ -12,3 +12,5 @@ target=$HOME/utils/fzf
 git clone https://github.com/junegunn/fzf $target
 
 . $target/install
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

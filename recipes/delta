@@ -1,0 +1,14 @@
+#!/usr/bin/env fish
+
+
+sudo apt install -y cargo
+
+pushd $HOME/utils/
+
+git clone --depth=1 --branch=0.18.2 https://github.com/dandavison/delta.git
+
+cd delta
+
+cargo build --release
+
+popd
