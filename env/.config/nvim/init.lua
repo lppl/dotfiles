@@ -26,7 +26,9 @@ require('lazy').setup({
 
   require('lppl.cmp'),
 
-  require('lppl.ai-codecompanion'),
+  -- require('lppl.ai-codecompanion'),
+
+  require('lppl.ai-avante'),
 
   require('lppl.snacks'),
 
@@ -61,6 +63,8 @@ require('lazy').setup({
   require('lppl.treesitter'),
   { 'rose-pine/neovim',                   as = 'rose-pine' },
   { 'polirritmico/monokai-nightasty.nvim' },
+  { 'nyoom-engineering/oxocarbon.nvim' },
+  { 'rebelot/kanagawa.nvim' },
   { 'folke/tokyonight.nvim' },
   require('lppl.nvim-tree'),
   -- Multicursor support
@@ -127,7 +131,7 @@ vim.o.termguicolors = true
 
 -- Theme setup
 vim.cmd("set background=dark")
-vim.cmd('colorscheme monokai-nightasty')
+vim.cmd('colorscheme oxocarbon')
 
 -- [[ Basic Keymaps ]]
 
