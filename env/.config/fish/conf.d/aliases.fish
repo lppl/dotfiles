@@ -8,3 +8,5 @@ alias vi 'nvim'
 alias vim 'nvim'
 alias l 'lvim'
 alias e 'nvim'
+
+alias lg 'lazygit'
