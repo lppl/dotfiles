@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+# git:
+#   paging:
+#     paging:
+#       colorArg: always
+#       pager: "delta"
+#       useConfig: false
+#       externalDiffCommand: "delta"
+# gui:
+#   sidePanelWidth: 0.3
+
+git:
+    paging:
+        colorArg: always
+        pager: delta --dark --paging=never --side-by-side
