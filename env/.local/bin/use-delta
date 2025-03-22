@@ -1,0 +1,27 @@
+#!/usr/bin/env fish
+
+yq -i ".git.paging={}" $HOME/.config/lazygit/config.yml
+yq -i '.git.paging.colorArg="always"' $HOME/.config/lazygit/config.yml
+yq -i '.git.paging.pager="delta --dark --paging=never"' $HOME/.config/lazygit/config.yml
+yq -i '.git.paging["syntax-theme"]="Dracula"' $HOME/.config/lazygit/config.yml
+yq -i '.git.paging["side-by-side"]=false' $HOME/.config/lazygit/config.yml
+
+git config --global core.pager delta
+git config --global interactive.diffFilter 'delta --dark --paging=never'
+git config --global delta.navigate false
+git config --global delta.side-by-side false
+
+git config --global color.ui true
+
+git config --global --unset  color.diff-highlight.oldNormal
+git config --global --unset  color.diff-highlight.oldHighlight
+git config --global --unset  color.diff-highlight.newNormal
+git config --global --unset  color.diff-highlight.newHighlight
+
+git config --global --unset  color.diff.meta
+git config --global --unset  color.diff.frag
+git config --global --unset  color.diff.func
+git config --global --unset  color.diff.commit
+git config --global --unset  color.diff.old
+git config --global --unset  color.diff.new
+git config --global --unset  color.diff.whitespace
