@@ -5,7 +5,7 @@
 sudo apt-get install -y gnupg software-properties-common
 
 
-target=/tmp/terraform
+target=$HOME/utils/terraform
 rm -rf $target
 mkdir -p $target
 

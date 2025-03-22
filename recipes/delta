@@ -1,0 +1,14 @@
+#!/usr/bin/env fish
+
+set target "$HOME/utils/delta"
+set branch "0.18.2"
+
+
+sudo apt install -y cargo
+
+git clone --depth=1 --branch=$branch https://github.com/dandavison/delta.git  "$target"
+
+pushd "$target"
+cargo build --release
+ln -s $target/
+popd
