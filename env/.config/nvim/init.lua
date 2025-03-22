@@ -26,7 +26,11 @@ require('lazy').setup({
 
   require('lppl.cmp'),
 
-  require('lppl.ai-codecompanion'),
+  -- require('lppl.ai-codecompanion'),
+
+  require('lppl.ai-avante'),
+
+  require('lppl.snacks'),
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
@@ -59,6 +63,8 @@ require('lazy').setup({
   require('lppl.treesitter'),
   { 'rose-pine/neovim',                   as = 'rose-pine' },
   { 'polirritmico/monokai-nightasty.nvim' },
+  { 'nyoom-engineering/oxocarbon.nvim' },
+  { 'rebelot/kanagawa.nvim' },
   { 'folke/tokyonight.nvim' },
   require('lppl.nvim-tree'),
   -- Multicursor support
@@ -66,6 +72,7 @@ require('lazy').setup({
   require("lppl.git"),
   require("lppl.navigation"),
   require("lppl.format"),
+  require('lppl.surround'),
   {
     "olrtg/nvim-emmet",
     config = function()
@@ -124,7 +131,7 @@ vim.o.termguicolors = true
 
 -- Theme setup
 vim.cmd("set background=dark")
-vim.cmd('colorscheme monokai-nightasty')
+vim.cmd('colorscheme oxocarbon')
 
 -- [[ Basic Keymaps ]]
 
@@ -137,9 +144,9 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 vim.keymap.set({ 'n', 'v' }, ';', ':', { silent = true })
-vim.keymap.set({ 'n', 'v' }, 's', '<Nop>', { silent = true })
-vim.keymap.set({ 'n', 'v' }, 'ss', ':w<cr>', { silent = true })
-vim.keymap.set({ 'n', 'v' }, 'sq', ':wq<cr>', { silent = true })
+-- vim.keymap.set({ 'n', 'v' }, 's', '<Nop>', { silent = true })
+-- vim.keymap.set({ 'n', 'v' }, 'ss', ':w<cr>', { silent = true })
+-- vim.keymap.set({ 'n', 'v' }, 'sq', ':wq<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-A-q>', ':qall!<cr>:q<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-q>', ':bd!<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-w>', ':w<cr>:bd<cr>', { silent = true })

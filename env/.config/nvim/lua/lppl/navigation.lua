@@ -27,10 +27,24 @@ return {
     dependencies = {
       'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-media-files.nvim'
+      'nvim-telescope/telescope-media-files.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
+      },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       require('telescope').setup {
+        extensions = {
+          ['ui-select'] = {
+            require('telescope.themes').get_dropdown(),
+          },
+        },
         defaults = {
           mappings = {
             i = {
@@ -52,18 +66,21 @@ return {
         })
       end, { desc = '/ Fuzzily search in current buffer' })
 
-      vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Find Files' })
-      vim.keymap.set('n', '<leader>fe', require('telescope.builtin').buffers, { desc = '  Find existing buffers' })
-      vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Find Help' })
-      vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = 'Find current Word' })
-      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'Find by Grep' })
-      vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = 'Find Diagnostics' })
+      local builtin = require 'telescope.builtin'
 
-      vim.keymap.set('n', 'sf', require('telescope.builtin').find_files, { desc = 'Search files' })
-      vim.keymap.set('n', 'sh', require('telescope.builtin').help_tags, { desc = 'Search Help' })
-      vim.keymap.set('n', 'sw', require('telescope.builtin').grep_string, { desc = 'Search current Word' })
-      vim.keymap.set('n', 'sg', require('telescope.builtin').live_grep, { desc = 'Search by Grep' })
-      vim.keymap.set('n', 'sd', require('telescope.builtin').diagnostics, { desc = 'Search Diagnostics' })
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find Files' })
+      vim.keymap.set('n', '<leader>fe', builtin.buffers, { desc = '  Find existing buffers' })
+      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
+      vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Find current Word' })
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find by Grep' })
+      vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find Diagnostics' })
+
+      vim.keymap.set('n', 'sf', builtin.find_files, { desc = 'Search files' })
+      vim.keymap.set('n', 'sh', builtin.help_tags, { desc = 'Search Help' })
+      vim.keymap.set('n', 'sw', builtin.grep_string, { desc = 'Search current Word' })
+      vim.keymap.set('n', 'sg', builtin.live_grep, { desc = 'Search by Grep' })
+      vim.keymap.set('n', 'sd', builtin.diagnostics, { desc = 'Search Diagnostics' })
+      vim.keymap.set('n', 'sr', builtin.resume, { desc = '[S]earch [R]esume' })
     end
   },
   {
