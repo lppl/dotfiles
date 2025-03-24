@@ -1,0 +1,12 @@
+#!/usr/bin/env fish
+
+
+set text (ssh-agent -s)
+
+set -x SSH_AUTH_SOCK (echo $text | string match -rg 'SSH_AUTH_SOCK=([^;]+);')
+set -x SSH_AGENT_PID (echo $text | string match -rg 'SSH_AGENT_PID=([^;]+);')
+
+
+echo "New ssh-agent works at:"
+echo "SSH_AGENT_PID: $SSH_AGENT_PID"
+echo "SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
