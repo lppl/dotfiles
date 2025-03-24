@@ -58,6 +58,15 @@ lvim.plugins = {
   },
   { "m4xshen/autoclose.nvim", config = function() require("autoclose").setup() end },
   {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        { path = "snacks.nvim", words = { "Snacks" } },
+      },
+    },
+  },
+  {
     "yetone/avante.nvim",
     event = "VeryLazy",
     version = false, -- Never set this value to "*"! Never!
