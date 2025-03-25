@@ -9,4 +9,7 @@ alias vim 'nvim'
 alias l 'lvim'
 alias e 'nvim'
 
+alias avim 'env NVIM_APPNAME=avim nvim'
+alias a 'avim'
+
 alias lg 'lazygit'
