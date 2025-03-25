@@ -17,6 +17,7 @@ main () {
   link $DEV_ENV_DIR/env/.config/fish $HOME/.config/fish
   link $DEV_ENV_DIR/env/.config/nvim $HOME/.config/nvim
   link $DEV_ENV_DIR/env/.config/lvim $HOME/.config/lvim
+  link $DEV_ENV_DIR/env/.config/avim $HOME/.config/avim
 
   git config --global user.name "$user_name"
   git config --global user.email "$user_email"
