@@ -5,7 +5,7 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
-vim.wo.wrap = false 
+vim.wo.wrap = false
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -37,6 +37,4 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
--- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set({ 'n', 'v' }, ';', ':', { silent = true })
+require "config.keymap"

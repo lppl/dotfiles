@@ -4,6 +4,13 @@ return {
   version = false, -- Never set this value to "*"! Never!
   opts = {
     provider = "copilot",
+    -- provider = "anthropic",
+    -- claude = {
+    --   endpoint = "https://api.anthropic.com",
+    --   model = "claude-3-7-sonnet-20250219",
+    --   temperature = 0,
+    --   max_tokens = 4096,
+    -- },
     auto_suggestions_provider = nil,
     cursor_applying_provider = nil,
     dual_boost = {
@@ -17,7 +24,7 @@ return {
       support_paste_from_clipboard = false,
       minimize_diff = true,                        -- Whether to remove unchanged lines when applying a code block
       enable_token_counting = true,                -- Whether to enable token counting. Default to true.
-      enable_cursor_planning_mode = false,         -- Whether to enable Cursor Planning Mode. Default to false.
+      enable_cursor_planning_mode = true,         -- Whether to enable Cursor Planning Mode. Default to false.
       enable_claude_text_editor_tool_mode = false, -- Whether to enable Claude Text Editor Tool Mode.
     },
     mappings = {
@@ -63,7 +70,7 @@ return {
       ---@type "right" | "left" | "top" | "bottom"
       position = "right", -- the position of the sidebar
       wrap = true,        -- similar to vim.o.wrap
-      width = 30,         -- default % based on available width
+      width = 35,         -- default % based on available width
       sidebar_header = {
         enabled = true,   -- true, false to enable/disable the header
         align = "center", -- left, center, right for title
