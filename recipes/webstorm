@@ -1,0 +1,21 @@
+#!/usr/bin/env fish
+
+
+#sudo apt install openjdk-21-jre openjdk-21-jdk
+
+
+set IJ_VERSION 0.9.9
+set BIN_NAME ij-shared-indexes-tool-cli
+set PACKAGE_NAME $BIN_NAME-$IJ_VERSION
+set codeUrl https://packages.jetbrains.team/maven/p/ij/intellij-shared-indexes/com/jetbrains/intellij/indexing/shared/ij-shared-indexes-tool-cli/$IJ_VERSION/$PACKAGE_NAME.zip
+set destination $HOME/.local/bin/ij-shared-indexes-tool-cli
+
+rm -r $HOME/.local/bin/$BIN_NAME /tmp/ijsi.zip /tmp/$PACKAGE_NAME
+
+
+curl -sL $codeUrl -o /tmp/ijsi.zip
+
+unzip /tmp/ijsi.zip -d /tmp/
+ln -sf /tmp/$PACKAGE_NAME/bin/$BIN_NAME $HOME/.local/bin/$BIN_NAME
+
+$BIN_NAME boost
