@@ -38,3 +38,4 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 require "config.keymap"
+require "config.filetypes.markdown"
