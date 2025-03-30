@@ -1,15 +1,17 @@
 #!/usr/bin/env fish
 
+set side_by_side false
+
 yq -i ".git.paging={}" $HOME/.config/lazygit/config.yml
 yq -i '.git.paging.colorArg="always"' $HOME/.config/lazygit/config.yml
-yq -i '.git.paging.pager="delta --dark --paging=never"' $HOME/.config/lazygit/config.yml
+yq -i '.git.paging.pager="delta --dark"' $HOME/.config/lazygit/config.yml
 yq -i '.git.paging["syntax-theme"]="Dracula"' $HOME/.config/lazygit/config.yml
-yq -i '.git.paging["side-by-side"]=false' $HOME/.config/lazygit/config.yml
+yq -i '.git.paging["side-by-side"]=$side_by_side' $HOME/.config/lazygit/config.yml
 
 git config --global core.pager delta
 git config --global interactive.diffFilter 'delta --dark --paging=never'
 git config --global delta.navigate false
-git config --global delta.side-by-side false
+git config --global delta.side-by-side $side_by_side
 
 git config --global color.ui true
 
