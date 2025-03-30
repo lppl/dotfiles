@@ -1,0 +1,174 @@
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+
+
+set number                        " line numbers
+
+set hlsearch                      " highlight search occurrences
+set ignorecase                    " ignore case in search patterns
+set smartcase                     " no ignore case when pattern is uppercase
+set incsearch                     " show search results while typing
+set wrapscan                      " searches wrap around the end of the file
+
+set gdefault                      " substitute all occurrences in line per default
+set history=10000                 " keep x lines of command line history
+set scrolloff=5 sidescrolloff=10  " keep some lines before and after the cursor visible
+" set clipboard=unnamedplus,unnamed,ideaput " integrate with system clipboard
+set clipboard=unnamedplus,ideaput " integrate with system clipboard
+
+set visualbell
+set noerrorbells
+
+set multiple-cursors
+set surround
+set ideajoin
+set ideastatusicon=disabled
+
+
+" Mini.ai, Expands textobjects definitions
+" [a]round, [i]nside
+" [q]uotes, [b]rackets, [t]ags
+" Install from plug
+Plug 'echasnovski/mini.ai', { 'branch': 'stable' }
+set mini-ai
+
+
+" Expands textobjects definitions
+" Install from marketplace
+" https://github.com/jphalip/ideavim-functiontextobj
+set functiontextobj
+map im <Plug>InnerFunction
+map am <Plug>OuterFunction
+
+" Enables NERDTree key mappings
+" Install from marketplace
+" https://github.com/TheBlob42/idea-which-key
+set which-key
+set notimeout
+set timeoutlen=5000
+set NERDTree
+
+" Enables peekaboo
+" Install from marketplace
+" https://github.com/jphalip/ideavim-peekaboo
+set peekaboo
+
+" https://github.com/tpope/vim-surround/blob/master/doc/surround.txt
+" Install from plug
+Plug 'tpope/vim-surround'
+
+" Commentary plugin
+" Install from plug
+" https://github.com/tpope/vim-commentary/blob/master/doc/commentary.txt
+Plug 'tpope/vim-commentary'
+set commentary
+
+
+" An always-on highlight for a unique character in every word on a line to help you use f, F and family.
+" Install from marketplace
+" https://github.com/unblevable/quick-scope
+set quickscope
+
+
+" Two-in-one command that replaces text covered by a motion with the contents of a register
+" Install from plug
+" https://github.com/JetBrains/ideavim/blob/master/doc/IdeaVim%20Plugins.md#replacewithregister-adds-two-in-one-command-that-replaces-text-with-the-contents-of-a-register
+" https://github.com/vim-scripts/ReplaceWithRegister
+" usage: [count]["x]gr{motion}
+Plug 'vim-scripts/ReplaceWithRegister'
+set ReplaceWithRegister
+
+
+" Navigation
+nmap <c-h> <c-w><left>
+nmap <c-j> <c-w><down>
+nmap <c-k> <c-w><top>
+nmap <c-l> <c-w><right>
+nmap <c-_> :action SplitHorizontally<CR>
+nmap <C-Bar> :action SplitVertically<CR>
+nmap <leader>x :action Unsplit<CR>
+
+let mapleader = " "
+
+
+" n - normal mode
+" i - insert mode
+" x - visual mode
+" v - visual and select modes
+" a - all modes
+sethandler <c-a> a:vim
+sethandler <c-x> a:vim
+sethandler <c-/> a:vim
+
+" edit ideavim config
+nnoremap <leader>ve :e ~/.ideavimrc<CR>
+nnoremap <leader>vv :action IdeaVim.ReloadVimRc.reload<CR>
+nnoremap <leader>va :action VimActions<CR>
+nnoremap <leader>vt :action VimFindActionIdAction<CR>
+
+"  - Getting
+nnoremap <leader><leader> :action GotoFile<CR>
+nnoremap <leader>sa :action GotoAction<CR>
+nnoremap <leader>ss :action ShowSettings<CR>
+nnoremap <leader>sy :action GotoSymbol<CR>
+nnoremap <leader>se :action RecentFiles<CR>
+nnoremap <leader>so :action Switcher<CR>
+nnoremap <leader>ss :action ShowSettings<CR>
+nnoremap <leader>sb :action ShowBookmarks<CR>
+
+nmap <leader>su :action FindUsagesMenuGroup<CR>
+nmap <leader>sp :action WelcomeScreen.Plugins<CR>
+nmap <leader>sg :action FindInPath<CR>
+nmap <leader>sk :action WelcomeScreen.Keymap<CR>
+
+nnoremap <leader>ww :action SaveAll<CR>
+
+nnoremap <leader>fp :action ActivateProblemsViewToolWindow<CR>
+nnoremap <c-/> :action ActivateTerminalToolWindow<CR>
+
+"  - Code discovery
+nnoremap <leader>qq :action QuickJavaDoc<CR>
+nnoremap <leader>go :action GotoDeclarationOnly<CR>
+nnoremap go :action GotoDeclarationOnly<CR>
+
+"  - Git shortcuts
+nnoremap <leader>gg :action VcsGroups<CR>
+nnoremap <leader>gb :action Git.Branches<CR>
+nnoremap <leader>gp :action Vcs.Push<CR>
+nnoremap <leader>gf :action Git.Fetch<CR>
+nnoremap <leader>gu :action Git.Pull<CR>
+
+"  - Code manipulation
+nmap <leader>rt :action Refactorings.QuickListPopupAction<CR>
+nmap <leader>ri :action Inline<CR>
+nmap <leader>rr :action RenameElement<CR>
+nmap <leader>rev :action IntroduceVariable<CR>
+nmap <leader>rem :action ExtractMethod<CR>
+nmap <leader>rei :action IntroduceVariable<CR>
+nmap <leader>rm :action Move<CR>
+nmap <leader>ro :action OptimizeImports<CR>
+nmap <leader>rg :action Generate<CR>
+nmap <leader>gi :action Generate.Missing.Members.TypeScript<CR>
+nmap <leader>rg :action Generate<CR>
+nmap <leader>rs :action EditorSelectWord<CR>
+nmap <leader>rf :action ReformatCode<CR>
+
+nmap <leader>rc @:<CR>
+
+nmap <leader>cl :close<CR>
+nmap <leader>co :action CloseAllEditorsButActive<CR>
+nmap <leader>cc :action CloseAllEditorsButActive<CR>
+
+"  - Running code
+nmap <leader>ee :action ChooseRunConfiguration<CR>
+nmap <leader>ec :action RunToolbarEditConfigurationAction<CR>
+nmap <leader>ey :action RunAnything<CR>
+nmap <leader>er :action Rerun<CR>
+nmap <leader>et :action RerunTests<CR>
