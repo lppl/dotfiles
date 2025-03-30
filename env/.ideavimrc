@@ -29,7 +29,7 @@ set noerrorbells
 set multiple-cursors
 set surround
 set ideajoin
-set ideastatusicon=disabled
+set ideastatusicon=enabled
 
 
 " Mini.ai, Expands textobjects definitions
@@ -44,8 +44,6 @@ set mini-ai
 " Install from marketplace
 " https://github.com/jphalip/ideavim-functiontextobj
 set functiontextobj
-map im <Plug>InnerFunction
-map am <Plug>OuterFunction
 
 " Enables NERDTree key mappings
 " Install from marketplace
@@ -85,14 +83,26 @@ set quickscope
 Plug 'vim-scripts/ReplaceWithRegister'
 set ReplaceWithRegister
 
+" Harpooner - navigate between frequently used files
+" Install from Marketplace
+" https://github.com/erotourtes/Harpooner
+nmap <leader>hh <action>(HarpoonerToggleQuickMenu)
+nmap <leader>ha :action HarpoonerToggleFile<cr>
+nmap <leader>hj <action>(HarpoonerNextFileAction)
+nmap <leader>hk <action>(HarpoonerPreviousFileAction)
+
+nmap <leader>jj <action>(HarpoonerOpenFile0)
+nmap <leader>jk <action>(HarpoonerOpenFile1)
+nmap <leader>jl <action>(HarpoonerOpenFile2)
+nmap <leader>j; <action>(HarpoonerOpenFile3)
 
 " Navigation
 nmap <c-h> <c-w><left>
 nmap <c-j> <c-w><down>
 nmap <c-k> <c-w><top>
 nmap <c-l> <c-w><right>
-nmap <c-_> :action SplitHorizontally<CR>
-nmap <C-Bar> :action SplitVertically<CR>
+nmap <leader>_ :action SplitHorizontally<CR>
+nmap <leader><Bar> :action SplitVertically<CR>
 nmap <leader>x :action Unsplit<CR>
 
 let mapleader = " "
@@ -105,13 +115,18 @@ let mapleader = " "
 " a - all modes
 sethandler <c-a> a:vim
 sethandler <c-x> a:vim
-sethandler <c-/> a:vim
+sethandler <c-k> a:vim
+sethandler <c-/> a:ide
 
 " edit ideavim config
 nnoremap <leader>ve :e ~/.ideavimrc<CR>
 nnoremap <leader>vv :action IdeaVim.ReloadVimRc.reload<CR>
 nnoremap <leader>va :action VimActions<CR>
 nnoremap <leader>vt :action VimFindActionIdAction<CR>
+
+"
+nmap <leader>z :action ToggleZenMode<CR>
+nmap <leader>z :action ToggleDistractionFreeMode<CR>
 
 "  - Getting
 nnoremap <leader><leader> :action GotoFile<CR>
@@ -172,3 +187,8 @@ nmap <leader>ec :action RunToolbarEditConfigurationAction<CR>
 nmap <leader>ey :action RunAnything<CR>
 nmap <leader>er :action Rerun<CR>
 nmap <leader>et :action RerunTests<CR>
+
+
+"
+vmap J <action>(MoveLineDown)
+vmap K <action>(MoveLineUp)
