@@ -82,11 +82,12 @@ function has_session -a name
 end
 
 function hydrate -a target dir
-  if test -f $dir/.tmux-sessionizer
-    tmux send-keys -t  $target "source $dir/.tmux-sessionizer" c-M
-  else if test -f $HOME/.tmux-sessionizer
-    tmux send-keys -t  $target "source $HOME/.tmux-sessionizer" c-M
+  for script in ".tmux-sessionizer" ".tms" ".tms/init"
+    if test -f $dir/$script
+      tmux send-keys -t  $target "source $dir/$script" c-M
+    end
   end
+  tmux send-keys -t  $target "source $HOME/.tmux-sessionizer" c-M
 end
 
 main $argv
