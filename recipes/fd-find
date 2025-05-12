@@ -1,0 +1,13 @@
+#!/usr/bin/env fish
+
+set target $HOME/utils/fd-find
+
+git clone https://github.com/sharkdp/fd $target
+
+pushd $target
+
+cargo build
+cargo test
+cargo install --path .
+
+popd
