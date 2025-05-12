@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -23,7 +24,7 @@ return {
     words = { enabled = true },
     styles = {
       notification = {
-        -- wo = { wrap = true } -- Wrap notifications
+        wo = { wrap = true } -- Wrap notifications
       }
     }
   },
@@ -117,6 +118,7 @@ return {
         -- Create some toggle mappings
         Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
         Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<a-w>")
         Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
         Snacks.toggle.diagnostics():map("<leader>ud")
         Snacks.toggle.line_number():map("<leader>ul")

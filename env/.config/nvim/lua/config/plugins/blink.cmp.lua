@@ -1,6 +1,6 @@
 return {
-  'saghen/blink.cmp',
-  dependencies = { "giuxtaposition/blink-cmp-copilot" },
+  'Saghen/blink.cmp',
+  dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
   version = '*',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -11,23 +11,12 @@ return {
       nerd_font_variant = 'mono'
     },
 
+    snippets = { preset = 'luasnip' },
+
     completion = { documentation = { auto_show = false } },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
-      providers = {
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          kind = "Copilot",
-          score_offset = 100,
-          async = true,
-        },
-      },
-    },
-
-    fuzzy = {
-      implementation = "lua",
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
   },
   opts_extend = { "sources.default" },

@@ -37,5 +37,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+vim.o.linebreak = true
+vim.o.showbreak = "> "
+
 require "config.keymap"
 require "config.filetypes.markdown"
+require "config.user"
