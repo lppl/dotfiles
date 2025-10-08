@@ -1,16 +1,30 @@
-function _tide_item_vi_mode
-    test "$fish_key_bindings" != fish_default_key_bindings && switch $fish_bind_mode
-        case default
-            tide_vi_mode_bg_color=$tide_vi_mode_bg_color_default tide_vi_mode_color=$tide_vi_mode_color_default \
-                _tide_print_item vi_mode $tide_vi_mode_icon_default
+function _tide_item_character
+    set -q add_prefix || echo -ns ' '
+
+    if not test "$fish_key_bindings" = fish_default_key_bindings
+        switch $fish_bind_mode
         case insert
-            tide_vi_mode_bg_color=$tide_vi_mode_bg_color_insert tide_vi_mode_color=$tide_vi_mode_color_insert \
-                _tide_print_item vi_mode $tide_vi_mode_icon_insert
+            set _vi_mode_color green
+            set _vi_mode_character $tide_character_icon
+        case default
+            set _vi_mode_color yellow
+            set _vi_mode_character $tide_character_vi_icon_default
         case replace replace_one
-            tide_vi_mode_bg_color=$tide_vi_mode_bg_color_replace tide_vi_mode_color=$tide_vi_mode_color_replace \
-                _tide_print_item vi_mode $tide_vi_mode_icon_replace
+            set _vi_mode_color magenta
+            set _vi_mode_character $tide_character_vi_icon_replace
         case visual
-            tide_vi_mode_bg_color=$tide_vi_mode_bg_color_visual tide_vi_mode_color=$tide_vi_mode_color_visual \
-                _tide_print_item vi_mode $tide_vi_mode_icon_visual
+            set _vi_mode_color blue
+            set _vi_mode_character $tide_character_vi_icon_visual
+        end
+        set_color $_vi_mode_color
+        echo -ns [$_vi_mode_character]
+    end
+
+    if test $_tide_status != 0
+        set_color $tide_character_color_failure
+        echo -ns "!!!"
+    else
+        set_color $tide_character_color
+        echo -ns " \$ "
     end
 end
