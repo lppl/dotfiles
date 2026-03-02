@@ -5,5 +5,7 @@ font_dir="$HOME/.local/share/fonts"
 mkdir -p $font_dir
 
 pushd $font_dir
+curl -fLO https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFontMono-Regular.ttf
 curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DroidSansMono/DroidSansMNerdFont-Regular.otf
+
 popd
