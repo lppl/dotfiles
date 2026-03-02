@@ -8,6 +8,9 @@ config.font =  wezterm.font_with_fallback {
 	-- { family = 'IosevkaRootiestV2 Nerd Font', weight="Medium", stretch="SemiCondensed" },
 	-- { family = 'IosevkaRootiestV2 Nerd Font', weight = 'Regular' },
 	{ family = 'RecMonoCasual Nerd Font Mono', weight = 'Regular' },
+	-- { family = 'DroidSansM Nerd Font', weight = 'Regular' },
+	{ family = '0xProto Nerd Font Propo', weight = 'Regular' },
+	-- { family = 'JetBrainsMono Nerd Font Mono', weight = 'Regular' },
 }
 config.line_height = 1
 config.font_size = 18
