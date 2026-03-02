@@ -1,0 +1,139 @@
+set $mod Mod4
+set $meta Mod1
+
+set $Super Mod4
+set $Alt Mod1
+
+exec --no-startup-id tmux kill-server
+exec --no-startup-id i3-ws-to-primary
+bindsym F13 exec --no-startup-id i3-ws-to-primary
+
+set $WS_0 "0: Stuffff_____"
+set $WS_1 "1: Dev_________"
+set $WS_2 "2: Dev_Browser_"
+set $WS_3 "3: Dev_Data____"
+set $WS_4 "4: DevTools____"
+set $WS_5 "5: ____________"
+set $WS_6 "6: ____________"
+set $WS_7 "7: Comms_______"
+set $WS_8 "8: Comms_______"
+set $WS_9 "9: ____________"
+
+exec_always --no-startup-id fish -c 'set -U WS_0 $WS_0'
+exec_always --no-startup-id fish -c 'set -U WS_1 $WS_1'
+exec_always --no-startup-id fish -c 'set -U WS_2 $WS_2'
+exec_always --no-startup-id fish -c 'set -U WS_3 $WS_3'
+exec_always --no-startup-id fish -c 'set -U WS_4 $WS_4'
+exec_always --no-startup-id fish -c 'set -U WS_5 $WS_5'
+exec_always --no-startup-id fish -c 'set -U WS_6 $WS_6'
+exec_always --no-startup-id fish -c 'set -U WS_7 $WS_7'
+exec_always --no-startup-id fish -c 'set -U WS_8 $WS_8'
+exec_always --no-startup-id fish -c 'set -U WS_9 $WS_9'
+
+
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
+
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Use Mouse+$Super to drag floating windows to their wanted position
+floating_modifier $Super
+
+# move tiling windows via drag & drop by left-clicking into the title bar,
+# or left-clicking anywhere into the window while holding the floating modifier.
+# tiling_drag modifier titlebar
+
+
+# kill focused window
+bindsym $Super+Shift+q kill
+
+bindsym $Super+p exec --no-startup-id "fuzzel"
+
+bindsym $Super+h focus left
+bindsym $Super+j focus down
+bindsym $Super+k focus up
+bindsym $Super+l focus right
+
+bindsym $Super+Shift+h move left
+bindsym $Super+Shift+j move down
+bindsym $Super+Shift+k move up
+bindsym $Super+Shift+l move right
+
+bindsym $Super+Return split h
+bindsym $Super+Shift+Return split v
+bindsym $Super+f fullscreen toggle
+
+bindsym $Super+s layout stacking
+bindsym $Super+w layout tabbed
+bindsym $Super+e layout toggle split
+
+bindsym $Super+$Alt+space floating toggle
+bindsym $Super+space focus mode_toggle
+
+bindsym $Super+$Alt+Ctrl+e exit
+
+# focus the parent container
+bindsym $Super+a focus parent
+
+# focus the child container
+#bindsym $Super+d focus child
+
+# reload the configuration file
+bindsym $Super+c reload
+bindsym $Super+Shift+r restart
+bindsym $Super+$Alt+l exec --no-startup-id i3lock
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command i3status
+}
+
+bindsym $Alt+ctrl+Escape exec pkill i3-nagbar
+
+
+set $outlook_instance "crx__faolnafnngnfdaknnbpnkhgohbobgegn"
+set $ms_teams_instance "crx__cifhbcnohmdccbgoicgdjpfamggdegmo"
+
+for_window [instance=$ms_teams_instance] move container to workspace $WS_7
+for_window [instance=$outlook_instance] move container to workspace $WS_7
+
+bindsym $Super+z floating enable, resize set 1600 px 95 ppt, move position center
+
+bindsym $Super+$Alt+g exec --no-startup-id kitty --class=tms  fish -c 'tms'
+
+for_window [class="^tms$"] floating enable, resize set 1600 px 95 ppt, move position center
+
+# bindsym $Super+m exec i3-input -F 'mark %s' -P 'Mark: '
+# bindsym $Super+g exec i3-input -F '[con_mark="%s"] focus' -P 'Goto: '
+# bindsym $Super+$Alt+m exec --no-startup-id kitty --class=project-selector fish -c i3-fzf-mark
+
+bindsym $Super+$Alt+0 [instance=$ms_teams_instance title="Activity"] focus
+bindsym $Super+$Alt+1 [instance=$ms_teams_instance title="Chat"] focus
+bindsym $Super+$Alt+2 [instance=$ms_teams_instance title="Calendar"] focus
+
+bindsym $Super+$Alt+k [title="^(tms|fish|kitty)" workspace="__focused__" class="(kitty|project-selector)"] focus
+bindsym $Super+$Alt+j [workspace="__focused__" class="(?i)jetbrains-webstorm"] focus
+
+bindsym $Super+$Alt+i [title="^DevTools" workspace="__focused__" class="(?i)chromium"] focus
+bindsym $Super+$Alt+u [title="^(?!DevTools)localhost" workspace="__focused__" class="(?i)chromium"] focus
+bindsym $Super+$Alt+o [title="^(?!DevTools)" workspace="__focused__" class="(?i)chromium"] focus
+
+include enabled.d/*.conf
