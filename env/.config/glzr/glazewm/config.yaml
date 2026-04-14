@@ -143,10 +143,10 @@ workspaces:
     display_name: "6: Storybook"
     bind_to_monitor: 1
   - name: 7
-    display_name: "7: Comms FX"
+    display_name: "7: Comms"
     bind_to_monitor: 1
   - name: 8
-    display_name: "8: Comms Epam"
+    display_name: "8: Comms"
     bind_to_monitor: 1
   - name: 9
     display_name: "9: Epam management"
@@ -187,12 +187,12 @@ window_rules:
 
   - commands: ['move --workspace 3']
     match:
-      - window_title: { regex: "- Kingfisher - Microsoft" }
+      - window_title: { regex: "- Bar - Microsoft" }
         window_process: { equals: "msedge" }
 
   - commands: ['move --workspace 8']
     match:
-      - window_title: { regex: "- EPAM - Microsoft" }
+      - window_title: { regex: "- Foo - Microsoft" }
         window_process: { equals: "msedge" }
 
 
