@@ -65,18 +65,18 @@ window_effects:
     # Remove the title bar from the window's frame. Note that this can
     # cause rendering issues for some applications.
     hide_title_bar:
-      enabled: true
+      enabled: false
 
     # Change the corner style of the window's frame.
     # ** Exclusive to Windows 11 due to API limitations.
     corner_style:
-      enabled: false
+      enabled: true
       # Allowed values: 'square', 'rounded', 'small_rounded'.
       style: "square"
 
     # Change the transparency of the window.
     transparency:
-      enabled: false
+      enabled: true
       # Can be something like '95%' or '0.95' for slightly transparent windows.
       # '0' or '0%' is fully transparent (and, by consequence, unfocusable).
       opacity: "100%"
@@ -88,7 +88,7 @@ window_effects:
       color: "#000000"
       # color: "#a1a1a1"
     hide_title_bar:
-      enabled: true
+      enabled: false
     corner_style:
       enabled: false
       style: "square"
@@ -99,7 +99,7 @@ window_effects:
 window_behavior:
   # New windows are created in this state whenever possible.
   # Allowed values: 'tiling', 'floating'.
-  initial_state: "tiling"
+  initial_state: "floating"
 
   # Sets the default options for when a new window is created. This also
   # changes the defaults for when the state change commands, like
@@ -131,23 +131,25 @@ workspaces:
     display_name: "2: Dev Browser"
     bind_to_monitor: 0
   - name: 3
-    display_name: "3: Jira Browsers"
+    display_name: "3: Tickets"
     bind_to_monitor: 0
   - name: 4
     display_name: "4: WebStorm"
     bind_to_monitor: 0
   - name: 5
+    display_name: "5: DevTools"
     bind_to_monitor: 1
   - name: 6
+    display_name: "6: Storybook"
     bind_to_monitor: 1
   - name: 7
-    display_name: "7: Comms"
+    display_name: "7: Comms FX"
     bind_to_monitor: 1
   - name: 8
-    display_name: "8: Comms"
+    display_name: "8: Comms Epam"
     bind_to_monitor: 1
   - name: 9
-    display_name: "9: Ma"
+    display_name: "9: Epam management"
     bind_to_monitor: 1
 
 window_rules:
@@ -167,14 +169,45 @@ window_rules:
         window_title: { regex: ".*? - Peek" }
       - window_process: { equals: "Lively" }
         window_class: { regex: "HwndWrapper" }
-  - commands: ["set-floating"]
-    match:
-      - window_process: { equals: "SystemSettings" }
 
-  - match:
-      - window_process: { equals: "ms-teams.exe" }
-    commands: 
-      - move --workspace 7
+  - commands: ['move --workspace 0']
+    match:
+      - window_title: { regex: "- Osobisty - Microsoft" }
+        window_process: { equals: "msedge" }
+
+  - commands: ['move --workspace 1']
+    match:
+      - window_process: { equals: "WindowsTerminal" }
+      - window_process: { equals: "wezterm-gui" }
+
+  - commands: ['move --workspace 2']
+    match:
+      - window_title: { regex: "- Dev Station - Microsoft" }
+        window_process: { equals: "msedge" }
+
+  - commands: ['move --workspace 3']
+    match:
+      - window_title: { regex: "- Kingfisher - Microsoft" }
+        window_process: { equals: "msedge" }
+
+  - commands: ['move --workspace 8']
+    match:
+      - window_title: { regex: "- EPAM - Microsoft" }
+        window_process: { equals: "msedge" }
+
+
+  - commands: ['move --workspace 7']
+    match:
+      - window_process: { equals: "ms-teams" }
+
+  - commands: ['set-tiling']
+    match:
+      - window_process: { equals: "msedge" }
+      - window_process: { equals: "WindowsTerminal" }
+      - window_process: { equals: "wezterm-gui" }
+      - window_process: { equals: "Code" }
+      - window_process: { equals: "ms-teams" }
+        window_title: { not_regex: "pinned window" }
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
@@ -232,11 +265,11 @@ keybindings:
 
   # Change the focused window to be fullscreen.
   - commands: ["toggle-fullscreen"]
-    bindings: ["LWin+f"]
+    bindings: ["LWIN+f"]
 
   # Minimize focused window.
-  - commands: ["toggle-minimized"]
-    bindings: ["LWin+m"]
+  # - commands: ["toggle-minimized"]
+  #   bindings: ["LWin+m"]
 
   # Close focused window.
   - commands: ["close"]
