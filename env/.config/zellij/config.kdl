@@ -157,8 +157,10 @@ keybinds clear-defaults=true {
         bind "Alt ]" { NextSwapLayout; }
         bind "Alt g" { ToggleFloatingPanes; }
         bind "Alt f"{ ToggleFocusFullscreen; SwitchToMode "normal"; }
-        bind "Alt i" { GoToPreviousTab; }
-        bind "Alt o" { GoToNextTab; }
+        bind "Ctrl PageUp" { GoToPreviousTab; }
+        bind "Ctrl PageDown" { GoToNextTab; }
+        bind "Ctrl Shift PageUp" { MoveTab "left"; }
+        bind "Ctrl Shift PageDown" { MoveTab "right"; }
         bind "Alt h" { MoveFocus "left"; }
         bind "Alt j" { MoveFocus "down"; }
         bind "Alt k" { MoveFocus "up"; }
@@ -167,10 +169,8 @@ keybinds clear-defaults=true {
         bind "Alt J" { MovePane "down"; }
         bind "Alt K" { MovePane "up"; }
         bind "Alt L" { MovePane "right"; }
-        bind "Alt n" { NewPane; }
-
-        bind "Alt I" { MoveTab "left"; }
-        bind "Alt O" { MoveTab "right"; }
+        bind "Alt n" { NewPane "stacked"; SwitchToMode "normal"; }
+        bind "Alt N" { NewPane "right"; SwitchToMode "normal"; }
 
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
@@ -180,6 +180,7 @@ keybinds clear-defaults=true {
         bind "Alt 8" { GoToTab 2; SwitchToMode "normal"; }
         bind "Alt 9" { GoToTab 3; SwitchToMode "normal"; }
 
+        bind "F7" { EditScrollback; SwitchToMode "normal"; }
     }
     shared_except "locked" "move" {
         bind "Alt m" { SwitchToMode "move"; }
@@ -291,6 +292,7 @@ web_client {
 // Default: default
 //
 // theme "dracula"
+theme "kanagawa"
 
 // Choose the base input mode of zellij.
 // Default: normal
@@ -300,7 +302,7 @@ web_client {
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
 //
-// default_shell "fish"
+default_shell "fish"
 
 // Choose the path to override cwd that zellij will use for opening new panes
 //
@@ -309,12 +311,12 @@ web_client {
 // The name of the default layout to load on startup
 // Default: "default"
 //
-// default_layout "compact"
+default_layout "default"
 
 // The folder in which Zellij will look for layouts
 // (Requires restart)
 //
-// layout_dir "/tmp"
+layout_dir "/home/lukasz_pietrek/.config/zellij/layouts/"
 
 // The folder in which Zellij will look for themes
 // (Requires restart)
@@ -335,7 +337,7 @@ web_client {
 //   - true (default, enabled)
 //   - false
 //
- pane_frames true 
+pane_frames true
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
@@ -398,7 +400,7 @@ web_client {
 // otherwise this will error if such a session exists.
 // Default: <RANDOM>
 //
-session_name "Default Session"
+session_name "glob"
 
 // When `session_name` is provided, attaches to that session
 // if it is already running or creates it otherwise.
@@ -418,7 +420,7 @@ attach_to_session true
 //   - true (default)
 //   - false
 //
-// session_serialization false
+session_serialization true
 
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
