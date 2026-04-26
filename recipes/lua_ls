@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+
+dir=$HOME/utils/lsp/lua_ls
+
+rm -rf $dir
+mkdir -p $dir
+
+lua_ls_version="3.18.2"
+git clone --depth=1 --branch=$lua_ls_version https://github.com/LuaLS/lua-language-server $dir
+
+
+pushd $dir
+  bash make.sh
+  ln -s $PWD/build/bin/lua-language-server $HOME/.local/bin/lua-language-server
+popd

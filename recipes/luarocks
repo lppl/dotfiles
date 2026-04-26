@@ -2,17 +2,28 @@
 
 sudo apt install -y build-essential libreadline-dev unzip
 
-rm -rf /tmp/luarocks
-mkdir -p /tmp/luarocks
-
-pushd /tmp/luarocks
 
 
-version="5.5.0"
-curl -L -R -O https://www.lua.org/ftp/lua-$version.tar.gz
-tar -zxf lua-$version.tar.gz
-cd lua-$version
-make linux test
-sudo make install
+# rm -rf /tmp/lua
+mkdir -p /tmp/lua
 
+pushd /tmp/lua
+  version="5.5.0"
+  curl -L -R -O https://www.lua.org/ftp/lua-$version.tar.gz
+  tar -zxf lua-$version.tar.gz
+  cd lua-$version
+  make linux test
+  sudo make install
 popd
+
+
+# rm -rf /tmp/luarocks
+mkdir -p /tmp/luarocks
+pushd /tmp/luarocks
+  wget https://luarocks.github.io/luarocks/releases/luarocks-3.13.0.tar.gz
+  cd luarocks-3.13.0
+  ./configure --with-lua-include=/usr/local/include/
+  make
+  sudo make install
+popd
+
