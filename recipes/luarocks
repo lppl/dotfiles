@@ -8,7 +8,7 @@ mkdir -p /tmp/luarocks
 pushd /tmp/luarocks
 
 
-version="5.4.7"
+version="5.5.0"
 curl -L -R -O https://www.lua.org/ftp/lua-$version.tar.gz
 tar -zxf lua-$version.tar.gz
 cd lua-$version

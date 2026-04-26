@@ -13,3 +13,9 @@ alias avim 'env NVIM_APPNAME=avim nvim'
 alias a 'avim'
 
 alias lg 'lazygit'
+
+
+alias "zel" 'zellij'
+alias "zla" 'zellij la'
+alias "zkaf" 'zellij ka --yes'
+alias "zdaf" 'zellij da --yes --force'

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-tag="v0.12.1"
+tag="v0.12.2"
 dir="/tmp/neovim"
 
 sudo apt-get install ninja-build gettext cmake curl build-essential ripgrep

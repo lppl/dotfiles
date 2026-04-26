@@ -3,7 +3,7 @@ end
 
 
 # node + nvm
-set --universal nvm_default_version "v22"
+set --universal nvm_default_version "v20"
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"

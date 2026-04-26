@@ -1,13 +1,26 @@
 #!/usr/bin/env fish
 
+set fd_version "10.3.0"
+set fd_current_version (fd --version)
+
 set target $HOME/utils/fd-find
 
-git clone https://github.com/sharkdp/fd $target
+if test "$fd_current_version" = "fd $fd_version"
+  echo "fd $fd_version aready installed, skipping installation"
+else
+  echo "installing fd $fd_version"
+  rm -rf "$target"
 
-pushd $target
+  git clone \
+    --depth=1 \
+    --branch="v$fd_version" \
+    https://github.com/sharkdp/fd $target
 
-cargo build
-cargo test
-cargo install --path .
+  pushd $target
 
-popd
+  cargo build
+  cargo test
+  cargo install --path .
+  popd
+end
+
