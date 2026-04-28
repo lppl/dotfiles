@@ -1,191 +1,199 @@
-local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
+local k = require("keymap")
+local normal = k.normal
+local visual = k.visual
+local leader = k.leader
+local insert = k.insert
+local terminal = k.terminal
+local cmd = k.cmd
+local multi = k.multi
+local group = k.group
 
 -- ═══════════════════════════════════════════════════════════
 -- TAB/BUFFER NAVIGATION (splitting and navigation)
 -- ═══════════════════════════════════════════════════════════
 
 -- Tab/Shift-Tab: Like browser tabs, feels natural
-map("n", "<Tab>", ":bnext<CR>", { desc = "Next buffer" })
-map("n", "<S-Tab>", ":bprevious<CR>", { desc = "Previous buffer" })
+normal { "<Tab>", ":bnext<CR>", "Next buffer" }
+normal { "<S-Tab>", ":bprevious<CR>", "Previous buffer" }
 
 -- Quick switch to last edited file (super useful!)
-map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+leader { "bb", "<cmd>e #<cr>", "Switch to Other Buffer" }
+leader { "`", "<cmd>e #<cr>", "Switch to Other Buffer" }
 
 -- ═══════════════════════════════════════════════════════════
 -- WINDOW MANAGEMENT (splitting and navigation)
 -- ═══════════════════════════════════════════════════════════
 
 -- Move between windows with Ctrl+hjkl (like tmux)
-map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+normal { "<C-h>", "<C-w>h", "Go to Left Window", remap = true }
+normal { "<C-j>", "<C-w>j", "Go to Lower Window", remap = true }
+normal { "<C-k>", "<C-w>k", "Go to Upper Window", remap = true }
+normal { "<C-l>", "<C-w>l", "Go to Right Window", remap = true }
 
 -- Resize windows with Ctrl+Shift+arrows (macOS friendly)
-map("n", "<C-S-Up>", "<cmd>resize +5<CR>", opts)
-map("n", "<C-S-Down>", "<cmd>resize -5<CR>", opts)
-map("n", "<C-S-Left>", "<cmd>vertical resize -5<CR>", opts)
-map("n", "<C-S-Right>", "<cmd>vertical resize +5<CR>", opts)
+normal { "<C-S-Up>", "<cmd>resize +5<CR>" }
+normal { "<C-S-Down>", "<cmd>resize -5<CR>" }
+normal { "<C-S-Left>", "<cmd>vertical resize -5<CR>" }
+normal { "<C-S-Right>", "<cmd>vertical resize +5<CR>" }
 
 -- Window splitting
-map("n", "<leader>ww", "<C-W>p", { desc = "Other Window", remap = true })
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
-map("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>sh", "<C-W>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right", remap = true })
-map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
-map("n", "<leader>sv", "<C-W>v", { desc = "Split Window Right", remap = true })
+leader { "ww", "<C-W>p", "Other Window", remap = true }
+leader { "wd", "<C-W>c", "Delete Window", remap = true }
+leader { "w-", "<C-W>s", "Split Window Below", remap = true }
+leader { "sh", "<C-W>s", "Split Window Below", remap = true }
+leader { "w|", "<C-W>v", "Split Window Right", remap = true }
+leader { "|", "<C-W>v", "Split Window Right", remap = true }
+leader { "sv", "<C-W>v", "Split Window Right", remap = true }
 
 -- ═══════════════════════════════════════════════════════════
 -- SMART LINE MOVEMENT (the VSCode experience)
 -- ═══════════════════════════════════════════════════════════
 
 -- Smart j/k: moves by visual lines when no count, real lines with count
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+multi { "nx", "j", "v:count == 0 ? 'gj' : 'j'", "Down", expr = true }
+multi { "nx", "<Down>", "v:count == 0 ? 'gj' : 'j'", "Down", expr = true }
+multi { "nx", "k", "v:count == 0 ? 'gk' : 'k'", "Up", expr = true }
+multi { "nx", "<Up>", "v:count == 0 ? 'gk' : 'k'", "Up", expr = true }
 
 -- Move selected lines up/down
-map("v", "J", ":move '>+1<CR>gv=gv", { desc = "Move Block Down" })
-map("v", "K", ":move '<-2<CR>gv=gv", { desc = "Move Block Up" })
+visual { "J", ":move '>+1<CR>gv=gv", "Move Block Down" }
+visual { "K", ":move '<-2<CR>gv=gv", "Move Block Up" }
 
 -- ═══════════════════════════════════════════════════════════
--- SEARCH & NAVIGATION (ergonomic improvements)
+-- SEARCH & NAVIGATION
 -- ═══════════════════════════════════════════════════════════
 
--- Select all content
-map("n", "==", "gg<S-v>G", { noremap = true, silent = true, desc = "Select all" })
-
--- Clear search highlighting
-map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
-map(
-  "n",
-  "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / Clear hlsearch / Diff Update" }
-)
+normal { "=0", "gg<S-v>G", "Select all" }
+normal { "<esc>", "<cmd>noh<cr><esc>", "Escape and Clear hlsearch" }
+leader { "ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><Cr>", "Redraw / Clear hlsearch / Diff Update" }
 
 -- ═══════════════════════════════════════════════════════════
 -- SMART TEXT EDITING
 -- ═══════════════════════════════════════════════════════════
 
--- Better indenting (stay in visual mode)
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+normal { "==", "ggVGgq", "Format file" }
+visual { "=", "gq", "Format selection" }
 
--- Better paste (doesn't replace clipboard with deleted text)
-map("v", "p", '"_dP', opts)
-
--- Copy whole file to clipboard
-map("n", "<C-c>", ":%y+<CR>", opts)
+visual { "<", "<gv", "Indent and stay in visual mode" }
+visual { ">", ">gv", "Indent and stay in visual mode" }
+visual { "p", '"_dP', "Paste witout replacing clipboRd with deleted text" }
+normal { "<C-c>", ":%y+<CR>", "Copy whole file to clipboard" }
 
 -- Smart undo break-points (create undo points at logical stops)
-map("i", ",", ",<c-g>u")
-map("i", ".", ".<c-g>u")
-map("i", ";", ";<c-g>u")
+insert { ",", ",<c-g>u" }
+insert { ".", ".<c-g>u" }
+insert { ";", ";<c-g>u" }
 
 -- Auto-close pairs (simple, no plugin needed)
-map("i", "`", "``<left>")
-map("i", '"', '""<left>')
-map("i", "(", "()<left>")
-map("i", "[", "[]<left>")
-map("i", "{", "{}<left>")
-map("i", "<", "<><left>")
+insert { "`", "``<left>" }
+insert { '"', '""<left>' }
+insert { "(", "()<left>" }
+insert { "[", "[]<left>" }
+insert { "{", "{}<left>" }
+insert { "<", "<><left>" }
 
 -- Note: Single quotes commented out to avoid conflicts in some contexts
--- map("i", "'", "''<left>")
+-- insert { "'", "''<left>")
 
 -- ═══════════════════════════════════════════════════════════
 -- FILE OPERATIONS
 -- ═══════════════════════════════════════════════════════════
 
 -- Save file (works in all modes)
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+multi { "inxs", "<C-s>", "<cmd>w<cr><esc>", "Save File" }
 
 -- Create new file
-map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+leader { "fn", "<cmd>enew<cr>", "New File" }
 
 -- Quit operations
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+leader { "qq", "<cmd>qa<cr>", "Quit All" }
 
 -- ═══════════════════════════════════════════════════════════
 -- DEVELOPMENT TOOLS
 -- ═══════════════════════════════════════════════════════════
 
 -- Commenting (add comment above/below current line)
-map("n", "<leader>co", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
-map("n", "<leader>cb", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+
+leader { "co", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", "Add Comment Above" }
+leader { "cb", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", "Add Comment Below" }
 
 -- Quickfix and location lists
-map("n", "<leader>xl", function()
-  local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
-  if not success and err then
-    vim.notify(err, vim.log.levels.ERROR)
-  end
-end, { desc = "Location List" })
 
-map("n", "<leader>xq", function()
+local function quickfix_list()
   local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
-  if not success and err then
-    vim.notify(err, vim.log.levels.ERROR)
-  end
-end, { desc = "Quickfix List" })
+  if not success and err then vim.notify(err, vim.log.levels.ERROR) end
+end
 
-map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
-map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+local function location_list()
+  local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
+  if not success and err then vim.notify(err, vim.log.levels.ERROR) end
+end
+
+leader { "xl", location_list, "Location List" }
+leader { "xq", quickfix_list, "Quickfix List" }
+
+vim.api.nvim_create_user_command("FoldMore", function() vim.wo.foldlevel = vim.wo.foldlevel + 1 end, {})
+
+vim.api.nvim_create_user_command("FoldLess", function() vim.wo.foldlevel = math.max(0, vim.wo.foldlevel - 1) end, {})
+
+normal { "[q", vim.cmd.cprev, "Previous Quickfix" }
+normal { "]q", vim.cmd.cnext, "Next Quickfix" }
 
 -- Inspection tools (useful for debugging highlights and treesitter)
-map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
+leader { "ui", vim.show_pos, "Inspect Pos" }
+leader { "uI", "<cmd>InspectTree<cr>", "Inspect Tree" }
 
 -- Keyword program (K for help on word under cursor)
-map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+leader { "K", "<cmd>norm! K<cr>", "Keywordprg" }
 
 -- ═══════════════════════════════════════════════════════════
 -- TERMINAL INTEGRATION
 -- ═══════════════════════════════════════════════════════════
 
 -- Terminal mode navigation
-map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
-map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
-map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
-map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
-map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
-map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+terminal { "<esc><esc>", "<c-\\><c-n>", "Enter Normal Mode" }
+terminal { "<C-h>", "<cmd>wincmd h<cr>", "Go to Left Window" }
+terminal { "<C-j>", "<cmd>wincmd j<cr>", "Go to Lower Window" }
+terminal { "<C-k>", "<cmd>wincmd k<cr>", "Go to Upper Window" }
+terminal { "<C-l>", "<cmd>wincmd l<cr>", "Go to Right Window" }
+terminal { "<C-/>", "<cmd>close<cr>", "Hide Terminal" }
+terminal { "<c-_>", "<cmd>close<cr>", "which_key_ignore" }
 
 -- ═══════════════════════════════════════════════════════════
 -- TAB MANAGEMENT (when you need multiple workspaces)
 -- ═══════════════════════════════════════════════════════════
 
-map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
-map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
-map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+group { "nv", "<leader><tab>", "[Tab]s" }
+leader { "<tab><tab>", "<cmd>tabnew<cr>", "New Tab" }
+leader { "<tab>p", "<cmd>tabprevious<cr>", "Previous Tab" }
+leader { "<tab>n", "<cmd>tabnext<cr>", "Next Tab" }
+leader { "<tab>f", "<cmd>tabfirst<cr>", "First Tab" }
+leader { "<tab>l", "<cmd>tablast<cr>", "Last Tab" }
+leader { "<tab>o", "<cmd>tabonly<cr>", "Close Other Tabs" }
+leader { "<tab>d", "<cmd>tabclose<cr>", "Close Tab" }
 
 -- ═══════════════════════════════════════════════════════════
 -- FOLDING NAVIGATION (for code organization)
 -- ═══════════════════════════════════════════════════════════
 
 -- Close all folds except current one (great for focus)
-map("n", "zv", "zMzvzz", { desc = "Close all folds except the current one" })
+normal { "zv", "zMzvzz", "Close all folds except the current one" }
 
 -- Smart fold navigation (closes current, opens next/previous)
-map("n", "zj", "zcjzOzz", { desc = "Close current fold when open. Always open next fold." })
-map("n", "zk", "zckzOzz", { desc = "Close current fold when open. Always open previous fold." })
+normal { "zj", "zcjzOzz", "Close current fold when open. Always open next fold." }
+normal { "zk", "zckzOzz", "Close current fold when open. Always open previous fold." }
+
+cmd { "kPlus", "FoldMore", "Fold More" }
+cmd { "kMinus", "FoldLess", "Fold Less" }
+cmd { "<leader>fj", "FoldMore", "Fold More" }
+cmd { "<leader>fk", "FoldLess", "Fold Less" }
 
 -- ═══════════════════════════════════════════════════════════
 -- UTILITY SHORTCUTS
 -- ═══════════════════════════════════════════════════════════
 
 -- Toggle line wrapping
-map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle Wrap", silent = true })
+leader { "tw", "<cmd>set wrap!<CR>", "Toggle Wrap" }
 
 -- Fix spelling (picks first suggestion)
-map("n", "z0", "1z=", { desc = "Fix word under cursor" })
+normal { "z0", "1z=", "Fix word under cursor" }

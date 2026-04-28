@@ -1,5 +1,6 @@
---- diagnostic settings
-local map = vim.keymap.set
+-- ═══════════════════════════════════════════════════════════
+-- Diagnostics settings
+-- ═══════════════════════════════════════════════════════════
 
 local palette = {
   err = "#51202A",
@@ -33,14 +34,18 @@ local minimal_icons = {
 local nerd_font_diagnostic_icons = {
   [sev.ERROR] = "󰅚 ",
   [sev.WARN] = "󰀪 ",
+
   [sev.INFO] = "󰋽 ",
   [sev.HINT] = "󰌶 ",
 }
 
-vim.diagnostic.config({
+vim.diagnostic.config {
   underline = true,
   severity_sort = true,
   update_in_insert = false, -- less flicker
+  signs = {
+    text = vim.g.have_nerd_font and nerd_font_diagnostic_icons or minimal_icons,
+  },
   float = {
     border = "rounded",
     source = true,
@@ -54,9 +59,6 @@ vim.diagnostic.config({
       return diagnostic_message[diagnostic.severity]
     end,
   },
-  signs = {
-    text = vim.g.have_nerd_font and nerd_font_diagnostic_icons or minimal_icons,
-  },
   virtual_text = {
     spacing = 4,
     source = "if_many",
@@ -68,20 +70,44 @@ vim.diagnostic.config({
     [sev.INFO] = "DiagnosticInfoLine",
     [sev.HINT] = "DiagnosticHintLine",
   },
-})
+  jump = { float = true },
+}
 
--- diagnostic keymaps
-local diagnostic_goto = function(next, severity)
+-- ═══════════════════════════════════════════════════════════
+-- Diagnostics helpers
+-- ═══════════════════════════════════════════════════════════
+
+local NEXT = 1
+local PREV = -1
+
+local diagnostic_goto = function(count, severity)
   severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    vim.diagnostic.jump({ count = next and 1 or -1, float = true, severity = severity })
-  end
+  return function() vim.diagnostic.jump { count = count, float = true, severity = severity } end
 end
 
-map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+local function toggle_virtual_lines()
+  local new_value = not vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config { virtual_lines = new_value }
+end
+
+local function toggle_virtual_text()
+  local new_value = not vim.diagnostic.config().virtual_text
+  vim.diagnostic.config { virtual_text = new_value }
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- Diagnostics Keymaps
+-- ═══════════════════════════════════════════════════════════
+
+local normal, leader = require("keymap").normal, require("keymap").leader
+
+normal { "]d", diagnostic_goto(NEXT), "Next Diagnostic" }
+normal { "[d", diagnostic_goto(PREV), "Prev Diagnostic" }
+normal { "]e", diagnostic_goto(NEXT, sev.ERROR), "Next Error" }
+normal { "[e", diagnostic_goto(PREV, sev.ERROR), "Prev Error" }
+normal { "]w", diagnostic_goto(NEXT, sev.WARN), "Next Warning" }
+normal { "[w", diagnostic_goto(PREV, sev.WARN), "Prev Warning" }
+
+leader { "df", vim.diagnostic.open_float, "Line Diagnostics" }
+leader { "dl", toggle_virtual_lines, "Toggle diagnostic virtual_lines" }
+leader { "dt", toggle_virtual_text, "Toggle diagnostic virtual text" }

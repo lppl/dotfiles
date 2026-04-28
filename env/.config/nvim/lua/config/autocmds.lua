@@ -1,23 +1,17 @@
-local function augroup(name)
-  return vim.api.nvim_create_augroup("user_" .. name, { clear = true })
-end
+local function augroup(name) return vim.api.nvim_create_augroup("user_" .. name, { clear = true }) end
 
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   callback = function()
-    if vim.o.buftype ~= "nofile" then
-      vim.cmd("checktime")
-    end
+    if vim.o.buftype ~= "nofile" then vim.cmd("checktime") end
   end,
 })
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
-  callback = function()
-    (vim.hl or vim.highlight).on_yank()
-  end,
+  callback = function() (vim.hl or vim.highlight).on_yank() end,
 })
 
 -- resize splits if window got resized
@@ -30,14 +24,11 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
-
 -- make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("man_unlisted"),
   pattern = { "man" },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-  end,
+  callback = function(event) vim.bo[event.buf].buflisted = false end,
 })
 
 -- close some filetypes with <q>
@@ -63,14 +54,11 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.schedule(function()
-      vim.keymap.set("n", "q", function()
+      local function close()
         vim.cmd("close")
         pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
-      end, {
-        buffer = event.buf,
-        silent = true,
-        desc = "Quit buffer",
-      })
+      end
+      vim.keymap.set("n", "q", close, { buffer = event.buf, silent = true, desc = "Quit buffer" })
     end)
   end,
 })
@@ -80,8 +68,9 @@ vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
-    vim.opt_local.wrap = true
     vim.opt_local.spell = true
+    vim.opt_local.wrap = true
+    vim.opt_local.textwidth = 80
   end,
 })
 
@@ -89,20 +78,18 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("json_conceal"),
   pattern = { "json", "jsonc", "json5" },
-  callback = function()
-    vim.opt_local.conceallevel = 0
-  end,
+  callback = function() vim.opt_local.conceallevel = 0 end,
 })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),
   callback = function(event)
-    if event.match:match("^%w%w+:[\/][\/]") then
-      return
-    end
-    local file = vim.uv.fs_realpath(event.match) or event.match
-    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+    -- if event.match:match("^%w%w+:[\/][\/]") then
+    --   return
+    -- end
+    -- local file = vim.uv.fs_realpath(event.match) or event.match
+    -- vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
 
@@ -110,35 +97,26 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup("env_filetype"),
   pattern = { "*.env", ".env.*" },
-  callback = function()
-    vim.opt_local.filetype = "sh"
-  end,
+  callback = function() vim.opt_local.filetype = "sh" end,
 })
 
 -- Set filetype for .toml files
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup("toml_filetype"),
   pattern = { "*.tomg-config*" },
-  callback = function()
-    vim.opt_local.filetype = "toml"
-  end,
+  callback = function() vim.opt_local.filetype = "toml" end,
 })
 
 -- Set filetype for .ejs files
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup("ejs_filetype"),
   pattern = { "*.ejs", "*.ejs.t" },
-  callback = function()
-    vim.opt_local.filetype = "embedded_template"
-  end,
+  callback = function() vim.opt_local.filetype = "embedded_template" end,
 })
 
 -- Set filetype for .code-snippets files
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup("code_snippets_filetype"),
   pattern = { "*.code-snippets" },
-  callback = function()
-    vim.opt_local.filetype = "json"
-  end,
+  callback = function() vim.opt_local.filetype = "json" end,
 })
-

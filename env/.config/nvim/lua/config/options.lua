@@ -49,7 +49,7 @@ opt.undolevels = 10000
 opt.undodir = vim.fn.expand("~/.vim/undodir") -- Undo directory
 opt.updatetime = 300 -- Faster completion
 opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
-opt.ttimeoutlen = 0 -- Key code timeout
+opt.ttimeoutlen = 100 -- Key code timeout
 opt.autoread = true -- Auto reload files changed outside vim
 opt.autowrite = true -- Auto save
 
@@ -62,14 +62,16 @@ opt.iskeyword:append("-") -- Treat dash as part of word
 opt.path:append("**") -- include subdirectories in search
 opt.selection = "exclusive" -- Selection behavior
 opt.mouse = "a" -- Enable mouse support
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+vim.schedule(function() opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" end) -- Sync with system clipboard,https://github.com/nvim-lua/kickstart.nvim/blob/4b065ad2f71935b8b053d26a65735f40bdc85969/init.lua#L113
 opt.modifiable = true -- Allow buffer modifications
 opt.encoding = "UTF-8" -- Set encoding
 
 -- Folding settings
 opt.smoothscroll = true
+opt.foldmethod = "expr"
 vim.wo.foldmethod = "expr"
-opt.foldlevel = 99 -- Start with all folds open
+opt.foldlevel = 3
+opt.foldenable = true
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -82,7 +84,7 @@ opt.splitkeep = "screen"
 -- Command-line completion
 opt.wildmenu = true
 opt.wildmode = "longest:full,full"
-opt.wildignore:append({ "*.o", "*.obj", "*.pyc", "*.class", "*.jar" })
+opt.wildignore:append { "*.o", "*.obj", "*.pyc", "*.class", "*.jar" }
 
 -- Better diff options
 opt.diffopt:append("linematch:60")
@@ -93,9 +95,7 @@ opt.maxmempattern = 20000
 
 -- Create undo directory if it doesn't exist
 local undodir = vim.fn.expand("~/.vim/undodir")
-if vim.fn.isdirectory(undodir) == 0 then
-  vim.fn.mkdir(undodir, "p")
-end
+if vim.fn.isdirectory(undodir) == 0 then vim.fn.mkdir(undodir, "p") end
 vim.g.autoformat = true
 vim.g.trouble_lualine = true
 -- opt.fillchars = {
@@ -113,9 +113,9 @@ opt.linebreak = true -- Wrap lines at convenient points
 opt.list = true -- Show some invisible characters (tabs...
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
-opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.shortmess:append { W = true, I = true, c = true, C = true }
 vim.g.markdown_recommended_style = 0
-vim.filetype.add({
+vim.filetype.add {
   extension = {
     env = "dotenv",
   },
@@ -127,4 +127,4 @@ vim.filetype.add({
     ["[jt]sconfig.*.json"] = "jsonc",
     ["%.env%.[%w_.-]+"] = "dotenv",
   },
-})
+}
