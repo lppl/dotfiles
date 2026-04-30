@@ -1,0 +1,127 @@
+#!/usr/bin/env fish
+# gnome_shortcuts.fish
+#
+# MODE 1 — dump:  fish gnome_shortcuts.fish dump [output_file]
+# MODE 2 — apply: fish gnome_shortcuts.fish apply <config_file>
+#
+# Config format:
+#   namespace org.gnome.desktop.wm.keybindings
+#   key '<Alt>Space' activate-window-menu
+#   key '<Super>Page_Up' '<Super><Alt>Left' switch-to-workspace-left
+#
+# Last token on a key line = gsettings key name.
+# All preceding tokens     = the shortcuts (become a GVariant string array).
+
+# ─── DUMP ────────────────────────────────────────────────────────────────────
+
+set outfile $argv[1]
+
+set schemas \
+  "org.gnome.desktop.wm.keybindings"  \
+  "org.gnome.shell.keybindings" \
+  "org.gnome.mutter.keybindings" \
+  "org.gnome.mutter.wayland.keybindings" \
+  "org.gnome.settings-daemon.plugins.media-keys" \
+  "org.gnome.shell.extensions.dash-to-dock"
+
+set lines
+set -a lines "
+#!/usr/bin/env fish
+
+set _ns ''
+
+function namespace
+  set _ns \$argv[1]
+end
+
+function gmap
+  set _name \$argv[1]
+  set _keys (string join '\\',\\'' \$argv[2..])
+  gsettings set \"\$_ns\" \"\$_name\" \"['\$_keys']\"
+end
+
+function gset
+  set _name \$argv[1]
+  set _value (string join '\\',\\'' \$argv[2..])
+  # gsettings set \"\$_ns\" \"\$_name\" \$_value
+end
+"
+
+for schema in $schemas
+  if not gsettings list-keys $schema >/dev/null 2>&1
+    continue
+  end
+
+  set keys (gsettings list-keys $schema 2>/dev/null)
+  test (count $keys) -eq 0; and continue
+
+  set max_size 1
+  set max_string_size 1
+  set max_number_size 1
+  set max_bool_size 1
+
+  set lines_keymap
+  set lines_other
+
+  for key in $keys
+    set raw (gsettings get $schema $key 2>/dev/null)
+    test -z "$raw"; and continue
+
+    set shortcuts (string match -ra "'[^']+'" -- "$raw")
+    test (count $shortcuts) -eq 0; and continue
+
+    if string match -qr "^\s*(\@as\s*)?\[\s*\]\s*\$|^\[\s*''\s*\]\s*\$" -- "$raw"
+      set max_size (math max $max_size, (string length $key))
+    else if string match -qr "^\[" -- "$raw"
+      set max_size (math max $max_size, (string length $key))
+    else if string match -qr "^'" -- "$raw"
+    else if string match -qr "^-?[0-9]" -- "$raw"
+    else if string match -qr "^(true|false)\$" -- "$raw"
+    end
+  end
+
+  for key in $keys
+    set raw (gsettings get $schema $key 2>/dev/null)
+    test -z "$raw"; and continue
+
+    set type "unknown"
+    if string match -qr "^\s*(\@as\s*)?\[\s*\]\s*\$|^\[\s*''\s*\]\s*\$" -- "$raw"
+      set -a lines_keymap "gmap "(string pad --right -w $max_size $key)" ''"
+    else if string match -qr "^\[" -- "$raw"
+      set shortcuts (string match -ra "'[^']+'" -- "$raw")
+      set -a lines_keymap "gmap "(string pad --right -w $max_size $key)" $shortcuts"
+    else if string match -qr "^'" -- "$raw"
+      set -a lines_other "gset "(string pad --right -w $max_string_size $key)" $raw"
+    else if string match -qr "^-?[0-9]" -- "$raw"
+      set -a lines_other "gset "(string pad --right -w $max_number_size $key)" $raw"
+    else if string match -qr "^(true|false)\$" -- "$raw"
+      set -a lines_other "gset "(string pad --right -w $max_bool_size $key)" $raw"
+    end
+  end
+
+  if test (count $lines_keymap) -gt 0
+    set header ( echo $schema \
+                    | string replace -ra '^org\.gnome\.' '' \
+                    | string replace -ra '\.' ' ' \
+                    | string upper)
+    set -a lines " " "
+# =====================================================================
+# $header
+# =====================================================================
+
+namespace $schema
+" " "
+    set -a lines "# keymap"
+    for line in (printf "%s\n" $lines_keymap | sort)
+      set -a lines "$line"
+    end
+    set -a lines "# other settings"
+    # for l in (printf "%s\n" $lines_other | sort)
+    #   set -a lines "$l"
+    # end
+    # set -a lines " "
+  end
+end
+
+printf '%s\n' $lines
+exit
