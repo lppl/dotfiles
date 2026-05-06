@@ -68,6 +68,16 @@ M.cmd = function(parameters)
   M.map(parameters)
 end
 
+---Registers a key mapping with `<leader>` prepended to the key sequence
+---@param parameters MapParams
+M.cmd_leader = function(parameters)
+  vim.validate {
+    cmd = { parameters[2], "string" },
+  }
+  parameters[2] = "<CMD>" .. parameters[2] .. "<CR>"
+  M.map(parameters)
+end
+
 ---Registers a visual key mapping
 ---@param parameters MapParams
 M.visual = function(parameters)
@@ -129,5 +139,20 @@ end
 
 M.normal = M.map
 M.leader = M.lead
+
+
+
+M.option = function(parameters)
+  local opts = { }
+  for k, v in pairs(parameters) do
+    if not RESERVED[k] then opts[k] = v end
+  end
+  opts.name = parameters[3]
+  Snacks.toggle.option(parameters[2], opts):map(parameters[1])
+end
+
+M.toggle = function(parameters)
+  parameters[2]:map(parameters[1])
+end
 
 return M
