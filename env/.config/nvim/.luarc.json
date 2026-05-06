@@ -6,8 +6,12 @@
     "/usr/local/lib/nvim"
   ],
   "diagnostic.globals": [
-    "vim"
+    "vim", "Snacks"
   ],
   "runtime.version": "Lua 5.5",
-  "hint.enable": false
+  "hint.enable": false,
+    "diagnostics.globals": [
+        "vim",
+        "Snacks"
+    ]
 }

@@ -3,8 +3,11 @@ local normal = k.normal
 local visual = k.visual
 local leader = k.leader
 local insert = k.insert
+local option = k.option
+local toggle = k.toggle
 local terminal = k.terminal
 local cmd = k.cmd
+local cmd_leader = k.cmd_leader
 local multi = k.multi
 local group = k.group
 
@@ -197,3 +200,44 @@ leader { "tw", "<cmd>set wrap!<CR>", "Toggle Wrap" }
 
 -- Fix spelling (picks first suggestion)
 normal { "z0", "1z=", "Fix word under cursor" }
+
+
+
+-- ═══════════════════════════════════════════════════════════
+-- CODE NAVIGATION
+-- ═══════════════════════════════════════════════════════════
+
+local flash = require("flash")
+multi { "nxo", "<CR>", flash.jump, "Flash Jump" }
+multi { "nxo", "gp", flash.treesitter, "Flash Treesitter" }
+multi { "xo", "gs", flash.treesitter_search, "Flash Treesitter Search"  }
+multi { "c",   "<C-CR>", flash.toggle, "Flash Toggle" }
+
+cmd_leader { "xx", "Trouble diagnostics toggle", "Diagnostics (Trouble)", }
+cmd_leader { "xX", "Trouble diagnostics toggle filter.buf=0", "Buffer Diagnostics (Trouble)", }
+cmd_leader { "cs", "Trouble symbols toggle focus=false", "Symbols (Trouble)", }
+cmd_leader { "cl", "Trouble lsp toggle focus=false win.position=right", "LSP Definitions / references / ... (Trouble)", }
+cmd_leader { "xQ", "Trouble qflist toggle", "Quickfix List (Trouble)", }
+cmd_leader { "xL", "Trouble loclist toggle", "Location List (Trouble)", }
+
+-- ═══════════════════════════════════════════════════════════
+-- Toggles
+-- ═══════════════════════════════════════════════════════════
+option { "<leader>us", "spell", "Spelling" }
+option { "<leader>uw", "wrap", "Wrap"}
+option { "<leader>ul", "relativenumber", "Relative Number"}
+
+option { "<leader>uc", "conceallevel", off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }
+option { "<leader>ub", "background", "Dark Background", off = "light", on = "dark" }
+
+local toggles = Snacks.toggle
+toggle { "<leader>ub", toggles.diagnostics }
+
+Snacks.toggle.diagnostics():map("<leader>ud")
+Snacks.toggle.line_number():map("<leader>ul")
+Snacks.toggle.treesitter():map("<leader>uT")
+Snacks.toggle.inlay_hints():map("<leader>uh")
+Snacks.toggle.indent():map("<leader>ug")
+Snacks.toggle.dim():map("<leader>uD")
+
+
