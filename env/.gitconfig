@@ -7,7 +7,7 @@ defaultBranch = main
 [core]
 excludesfile = ~/.gitignore_global
 editor = nvim
-pager = diff-so-fancy | less --tabs=4 -RF
+pager = delta
 
 [alias]
 con = checkout -b
@@ -48,8 +48,14 @@ smudge = git-lfs smudge %f
 required = true
 
 [interactive]
-diffFilter = diff-so-fancy --patch
+diffFilter = delta --color-only
 
 [delta]
-    navigate = true  # use n and N to move between diff sections
-    dark = true      # or light = true, or omit for auto-detection
+navigate = true
+dark = true
+syntax-theme = "Coldark-Dark"
+
+
+
+[merge]
+conflictStyle = zdiff3

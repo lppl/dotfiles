@@ -21,6 +21,7 @@ popd
 mkdir -p /tmp/luarocks
 pushd /tmp/luarocks
   wget https://luarocks.github.io/luarocks/releases/luarocks-3.13.0.tar.gz
+  tar -zxf luarocks-3.13.0.tar.gz
   cd luarocks-3.13.0
   ./configure --with-lua-include=/usr/local/include/
   make

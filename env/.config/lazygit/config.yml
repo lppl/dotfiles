@@ -10,6 +10,24 @@
 #   sidePanelWidth: 0.3
 
 git:
-    paging:
-        colorArg: always
-        pager: delta --dark --paging=never --side-by-side
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
+
+  commitPrefix:
+    - pattern: "^\\w+\\/(\\w+-\\w+).*"
+      replace: '[$1] '
+
+    # The final fallthrough regex that copies over the whole branch name
+    - pattern: ".*"
+      replace : 'Update $0'
+gui:
+  sidePanelWidth: 0.2
+  nerdFontsVersion: 3
+  authorColors:
+    'Lukasz Pietrek': 'red'
+    '*': '#0000ff'
+  branchColorPatterns:
+    '^docs/': '#11aaff' 
+    'ISSUE-\d+': '#ff5733' 
+

@@ -4,14 +4,18 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 
 config.disable_default_key_bindings = true
-config.color_scheme = "Tokyo Night"
+-- config.color_scheme = "Tokyo Night"
+config.color_scheme = 'carbonfox'
 config.font = wezterm.font_with_fallback {
   { family = "RecMonoCasual Nerd Font Mono", weight = "Regular" },
   { family = "0xProto Nerd Font Propo", weight = "Regular" },
 }
+config.harfbuzz_features = { "zero" }
 config.line_height = 1
 config.font_size = 12
 config.cell_width = 0.9
+config.hide_tab_bar_if_only_one_tab = true
+config.enable_kitty_graphics = true
 
 local function makeKeyForMod(mod)
   return function(key_fn)
@@ -29,6 +33,7 @@ local alt = makeKeyForMod("ALT")
 local alt_ctrl = makeKeyForMod("ALT|CTRL")
 local super = makeKeyForMod("SUPER")
 local shift = makeKeyForMod("SHIFT")
+local none = makeKeyForMod("NONE")
 
 local keys = {
   alt { "-", act.SplitVertical { domain = "CurrentPaneDomain" } },
@@ -39,8 +44,8 @@ local keys = {
   alt { "k", act.ActivatePaneDirection("Up") },
   alt { "j", act.ActivatePaneDirection("Down") },
 
-  ctrl { "+", act.IncreaseFontSize },
-  ctrl { "-", act.DecreaseFontSize },
+  none { "KeypadMultiply", act.IncreaseFontSize },
+  none { "KeypadDivide", act.DecreaseFontSize },
   ctrl { "0", act.ResetFontSize },
 
   ctrl { "1", act.ActivateTab(0) },
@@ -54,6 +59,7 @@ local keys = {
 
   ctrl { "L", act.ShowDebugOverlay },
 
+  none { "F11", act.ToggleFullScreen },
   ctrl { 'M', act.Hide },
   alt_ctrl { "P", act.ActivateCommandPalette },
   alt_ctrl { "R", act.ReloadConfiguration },
