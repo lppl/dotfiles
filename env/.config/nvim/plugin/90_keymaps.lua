@@ -253,7 +253,7 @@ leader { "b",       picker.buffers,         "Buffers" }
 leader { "/",       picker.grep,            "Grep" }
 leader { ":",       picker.command_history, "Command History" }
 leader { "n",       picker.notifications,   "Notification History" }
--- leader { "e",       snack.explorer,         "File Explorer" }
+leader { "e",       snack.explorer.open,    "File Explorer" }
 
 -- find
 leader { "fb", picker.buffers,   "Buffers" }
@@ -264,6 +264,7 @@ leader { "fp", picker.projects,  "Projects" }
 leader { "fr", picker.recent,    "Recent" }
 
 -- git
+leader { "gg", snack.lazygit.open,  "Lazygit" }
 leader { "gb", picker.git_branches, "Git Branches" }
 leader { "gl", picker.git_log,      "Git Log" }
 leader { "gL", picker.git_log_line, "Git Log Line" }
@@ -302,23 +303,22 @@ leader { "su", picker.undo,               "Undo History" }
 leader { "uC", picker.colorschemes,       "Colorschemes" }
 
 -- LSP
-leader { "gd", picker.lsp_definitions,       "Goto Definition" }
-leader { "gD", picker.lsp_declarations,      "Goto Declaration" }
-leader { "gr", picker.lsp_references,        "References" }
-leader { "gI", picker.lsp_implementations,   "Goto Implementation" }
-leader { "gy", picker.lsp_type_definitions,  "Goto T[y]pe Definition" }
+normal { "gd", picker.lsp_definitions,       "Goto Definition" }
+normal { "gD", picker.lsp_declarations,      "Goto Declaration" }
+normal { "gr", picker.lsp_references,        "References" }
+normal { "gI", picker.lsp_implementations,   "Goto Implementation" }
+normal { "gy", picker.lsp_type_definitions,  "Goto T[y]pe Definition" }
 leader { "ss", picker.lsp_symbols,           "LSP Symbols" }
 leader { "sS", picker.lsp_workspace_symbols, "LSP Workspace Symbols" }
 
     -- Other
-leader { ".",     snack.scratch.open,          "Toggle Scratch Buffer" }
-leader { "S",     snack.scratch.select,        "Select Scratch Buffer" }
--- leader { "gg", snack.lazygit,               "Lazygit" }
-leader { "z",     snack.zen.zen,                   "Toggle Zen Mode" }
-leader { "Z",     snack.zen.zoom,              "Toggle Zoom" }
-leader { "n",     snack.notifier.show_history, "Notification History" }
-leader { "un",    snack.notifier.hide,         "Dismiss All Notifications" }
-leader { "t", snack.terminal.toggle,              "Toggle Terminal" }
+leader { ".",  snack.scratch.open,          "Toggle Scratch Buffer" }
+leader { "S",  snack.scratch.select,        "Select Scratch Buffer" }
+leader { "z",  snack.zen.zen,               "Toggle Zen Mode" }
+leader { "Z",  snack.zen.zoom,              "Toggle Zoom" }
+leader { "n",  snack.notifier.show_history, "Notification History" }
+leader { "un", snack.notifier.hide,         "Dismiss All Notifications" }
+leader { "t",  snack.terminal.toggle,       "Toggle Terminal" }
 
 -- normal { "]]",      snack.words.jump(vim.v.count1), "Next Reference",           mode = { "n", "t" } }
 -- normal { "[[",      snack.words.jump(-vim.v.count1) }
