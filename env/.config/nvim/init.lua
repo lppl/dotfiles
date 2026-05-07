@@ -5,7 +5,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Text view 
-opt.number = true -- Line numbers
+opt.number = false -- Line numbers
 opt.relativenumber = true -- Relative line numbers
 opt.cursorline = true -- Highlight current line
 opt.wrap = false -- Don't wrap lines

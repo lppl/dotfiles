@@ -208,7 +208,7 @@ normal { "z0", "1z=", "Fix word under cursor" }
 -- ═══════════════════════════════════════════════════════════
 
 local flash = require("flash")
-multi { "nxo", "<CR>", flash.jump, "Flash Jump" }
+multi { "nxo", "<C-CR>", flash.jump, "Flash Jump" }
 multi { "nxo", "gp", flash.treesitter, "Flash Treesitter" }
 multi { "xo", "gs", flash.treesitter_search, "Flash Treesitter Search"  }
 multi { "c",   "<C-CR>", flash.toggle, "Flash Toggle" }
@@ -231,13 +231,94 @@ option { "<leader>uc", "conceallevel", off = 0, on = vim.o.conceallevel > 0 and 
 option { "<leader>ub", "background", "Dark Background", off = "light", on = "dark" }
 
 local toggles = Snacks.toggle
-toggle { "<leader>ub", toggles.diagnostics }
-
-Snacks.toggle.diagnostics():map("<leader>ud")
-Snacks.toggle.line_number():map("<leader>ul")
-Snacks.toggle.treesitter():map("<leader>uT")
-Snacks.toggle.inlay_hints():map("<leader>uh")
-Snacks.toggle.indent():map("<leader>ug")
-Snacks.toggle.dim():map("<leader>uD")
+toggle { "<leader>ud", toggles.diagnostics() }
+toggle { "<leader>un", toggles.line_number() }
+toggle { "<leader>ut", toggles.treesitter() }
+toggle { "<leader>uh", toggles.inlay_hints() }
+toggle { "<leader>ui", toggles.indent() }
+toggle { "<leader>ud", toggles.dim() }
 
 
+-- ═══════════════════════════════════════════════════════════
+-- File pickers
+-- ═══════════════════════════════════════════════════════════
+
+local snack  = Snacks
+local picker  = Snacks.picker
+
+local function pick_config () picker.files({ cwd = vim.fn.stdpath("config") }) end
+
+leader { "<space>", picker.smart,           "Smart Find Files" }
+leader { "b",       picker.buffers,         "Buffers" }
+leader { "/",       picker.grep,            "Grep" }
+leader { ":",       picker.command_history, "Command History" }
+leader { "n",       picker.notifications,   "Notification History" }
+-- leader { "e",       snack.explorer,         "File Explorer" }
+
+-- find
+leader { "fb", picker.buffers,   "Buffers" }
+leader { "fc", pick_config,      "Find Config File" }
+leader { "ff", picker.files,     "Find Files" }
+leader { "fg", picker.git_files, "Find Git Files" }
+leader { "fp", picker.projects,  "Projects" }
+leader { "fr", picker.recent,    "Recent" }
+
+-- git
+leader { "gb", picker.git_branches, "Git Branches" }
+leader { "gl", picker.git_log,      "Git Log" }
+leader { "gL", picker.git_log_line, "Git Log Line" }
+leader { "gs", picker.git_status,   "Git Status" }
+leader { "gS", picker.git_stash,    "Git Stash" }
+leader { "gd", picker.git_diff,     "Git Diff (Hunks)" }
+leader { "gf", picker.git_log_file, "Git Log File" }
+
+-- Grep
+leader { "sb", picker.lines,        "Buffer Lines" }
+leader { "sB", picker.grep_buffers, "Grep Open Buffers" }
+leader { "sg", picker.grep,         "Grep" }
+leader { "sw", picker.grep_word,    "Visual selection or word", mode = "nx" }
+
+-- search
+leader { 's"', picker.registers,          "Registers" }
+leader { 's/', picker.search_history,     "Search History" }
+leader { "sa", picker.autocmds,           "Autocmds" }
+leader { "sb", picker.lines,              "Buffer Lines" }
+leader { "sc", picker.command_history,    "Command History" }
+leader { "sC", picker.commands,           "Commands" }
+leader { "sd", picker.diagnostics,        "Diagnostics" }
+leader { "sD", picker.diagnostics_buffer, "Buffer Diagnostics" }
+leader { "sh", picker.help,               "Help Pages" }
+leader { "sH", picker.highlights,         "Highlights" }
+leader { "si", picker.icons,              "Icons" }
+leader { "sj", picker.jumps,              "Jumps" }
+leader { "sk", picker.keymaps,            "Keymaps" }
+leader { "sl", picker.loclist,            "Location List" }
+leader { "sm", picker.marks,              "Marks" }
+leader { "sM", picker.man,                "Man Pages" }
+leader { "sp", picker.lazy,               "Search for Plugin Spec" }
+leader { "sq", picker.qflist,             "Quickfix List" }
+leader { "sR", picker.resume,             "Resume" }
+leader { "su", picker.undo,               "Undo History" }
+leader { "uC", picker.colorschemes,       "Colorschemes" }
+
+-- LSP
+leader { "gd", picker.lsp_definitions,       "Goto Definition" }
+leader { "gD", picker.lsp_declarations,      "Goto Declaration" }
+leader { "gr", picker.lsp_references,        "References" }
+leader { "gI", picker.lsp_implementations,   "Goto Implementation" }
+leader { "gy", picker.lsp_type_definitions,  "Goto T[y]pe Definition" }
+leader { "ss", picker.lsp_symbols,           "LSP Symbols" }
+leader { "sS", picker.lsp_workspace_symbols, "LSP Workspace Symbols" }
+
+    -- Other
+leader { ".",     snack.scratch.open,          "Toggle Scratch Buffer" }
+leader { "S",     snack.scratch.select,        "Select Scratch Buffer" }
+-- leader { "gg", snack.lazygit,               "Lazygit" }
+leader { "z",     snack.zen.zen,                   "Toggle Zen Mode" }
+leader { "Z",     snack.zen.zoom,              "Toggle Zoom" }
+leader { "n",     snack.notifier.show_history, "Notification History" }
+leader { "un",    snack.notifier.hide,         "Dismiss All Notifications" }
+leader { "t", snack.terminal.toggle,              "Toggle Terminal" }
+
+-- normal { "]]",      snack.words.jump(vim.v.count1), "Next Reference",           mode = { "n", "t" } }
+-- normal { "[[",      snack.words.jump(-vim.v.count1) }

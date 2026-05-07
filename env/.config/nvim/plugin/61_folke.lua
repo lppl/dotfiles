@@ -19,6 +19,7 @@ vim.pack.add{
 require('snacks').setup {
   bigfile = { enabled = true },
   dashboard = { enabled = false },
+  debug = { enabled = true },
   explorer = { enabled = true },
   indent = { enabled = true },
   input = { enabled = false  },
@@ -26,23 +27,21 @@ require('snacks').setup {
   picker = { enabled = true },
   quickfile = { enabled = true },
   scope = { enabled = true },
+  scratch = { enabled = true },
   scroll = { enabled = false },
   statuscolumn = { enabled = true },
   words = { enabled = true },
 }
 
-_G.dd = function(...)
-  Snacks.debug.inspect(...)
-end
-_G.bt = function()
-  Snacks.debug.backtrace()
-end
+vim.pack.add{
+  { src = 'https://github.com/folke/noice.nvim',
+    version = "7bfd942445fb63089b59f97ca487d605e715f155" },
 
-if vim.fn.has("nvim-0.11") == 1 then
-  vim._print = function(_, ...)
-   dd(...)
-  end
-else
-  vim.print = _G.dd
-end
+  { src = 'https://github.com/MunifTanjim/nui.nvim',
+    version = "de740991c12411b663994b2860f1a4fd0937c130" },
 
+  { src = 'https://github.com/rcarriga/nvim-notify',
+    version = "397c7c1184745fca649e5104de659e6392ef5a4d" },
+}
+
+require("noice").setup()
