@@ -1,16 +1,14 @@
 vim.pack.add {
-  { src = "https://github.com/nvim-tree/nvim-web-devicons",
-    version = "4fc505ac7bd7692824a142e96e5f529c133862f8"},
-  { src = "https://github.com/nvim-lualine/lualine.nvim",
-    version = "131a558e13f9f28b15cd235557150ccb23f89286"},
+  { src = "https://github.com/nvim-tree/nvim-web-devicons", version = "4fc505ac7bd7692824a142e96e5f529c133862f8" },
+  { src = "https://github.com/nvim-lualine/lualine.nvim", version = "131a558e13f9f28b15cd235557150ccb23f89286" },
 }
 
-require('lualine').setup {
+require("lualine").setup {
   options = {
     icons_enabled = true,
-    theme = 'codedark',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    theme = "codedark",
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -25,37 +23,44 @@ require('lualine').setup {
       winbar = 1000,
       refresh_time = 16, -- ~60fps
       events = {
-        'WinEnter',
-        'BufEnter',
-        'BufWritePost',
-        'SessionLoadPost',
-        'FileChangedShellPost',
-        'VimResized',
-        'Filetype',
-        'CursorMoved',
-        'CursorMovedI',
-        'ModeChanged',
+        "WinEnter",
+        "BufEnter",
+        "BufWritePost",
+        "SessionLoadPost",
+        "FileChangedShellPost",
+        "VimResized",
+        "Filetype",
+        "CursorMoved",
+        "CursorMovedI",
+        "ModeChanged",
       },
-    }
+    },
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = { "mode" },
+    lualine_b = { "branch", "diff", "diagnostics" },
+    lualine_c = { "filename" },
+    lualine_x = { "encoding", "fileformat", "filetype" },
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {},
   },
-  tabline = {},
+  tabline = {
+    lualine_a = { "mode" },
+    lualine_b = { "branch", "diff", "diagnostics" },
+    lualine_c = { "filename" },
+    lualine_x = { "encoding", "fileformat", "filetype" },
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
+  },
   winbar = {},
   inactive_winbar = {},
-  extensions = {}
+  extensions = {},
 }

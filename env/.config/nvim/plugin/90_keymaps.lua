@@ -265,13 +265,18 @@ leader { "fr", picker.recent,    "Recent" }
 
 -- git
 leader { "gg", snack.lazygit.open,  "Lazygit" }
-leader { "gb", picker.git_branches, "Git Branches" }
-leader { "gl", picker.git_log,      "Git Log" }
-leader { "gL", picker.git_log_line, "Git Log Line" }
-leader { "gs", picker.git_status,   "Git Status" }
-leader { "gS", picker.git_stash,    "Git Stash" }
-leader { "gd", picker.git_diff,     "Git Diff (Hunks)" }
-leader { "gf", picker.git_log_file, "Git Log File" }
+leader { "gib", picker.git_branches, "Git Branches" }
+leader { "gil", picker.git_log,      "Git Log" }
+leader { "giL", picker.git_log_line, "Git Log Line" }
+leader { "gis", picker.git_status,   "Git Status" }
+leader { "giS", picker.git_stash,    "Git Stash" }
+leader { "gid", picker.git_diff,     "Git Diff (Hunks)" }
+leader { "gif", picker.git_log_file, "Git Log File" }
+
+leader { "gio", "<cmd>DiffviewOpen<cr>", "Git open diffview" }
+leader { "gic", "<cmd>DiffviewClose<cr>", "Git close diffview" }
+leader { "gih", "<cmd>DiffviewFileHistory %<cr>", "Git current file history" }
+leader { "giH", "<cmd>DiffviewFileHistory<cr>", "Git file history" }
 
 -- Grep
 leader { "sb", picker.lines,        "Buffer Lines" }
@@ -303,11 +308,11 @@ leader { "su", picker.undo,               "Undo History" }
 leader { "uC", picker.colorschemes,       "Colorschemes" }
 
 -- LSP
-normal { "gd", picker.lsp_definitions,       "Goto Definition" }
-normal { "gD", picker.lsp_declarations,      "Goto Declaration" }
-normal { "gr", picker.lsp_references,        "References" }
-normal { "gI", picker.lsp_implementations,   "Goto Implementation" }
-normal { "gy", picker.lsp_type_definitions,  "Goto T[y]pe Definition" }
+leader { "ld", picker.lsp_definitions,       "Goto Definition" }
+leader { "lf", picker.lsp_declarations,      "Goto Declaration" }
+leader { "lr", picker.lsp_references,        "References" }
+leader { "li", picker.lsp_implementations,   "Goto Implementation" }
+leader { " lt", picker.lsp_type_definitions,  "Goto T[y]pe Definition" }
 leader { "ss", picker.lsp_symbols,           "LSP Symbols" }
 leader { "sS", picker.lsp_workspace_symbols, "LSP Workspace Symbols" }
 

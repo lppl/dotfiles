@@ -10,6 +10,11 @@
       "src": "https://github.com/lucasadelino/conifer.nvim",
       "version": "'83104ae71cba003b76b0cea45cbb19bc9c62693a'"
     },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim",
+      "version": "'4516612fe98ff56ae0415a259ff6361a89419b0a'"
+    },
     "flash.nvim": {
       "rev": "ec0bf2842189f65f60fd40bf3557cac1029cc932",
       "src": "https://github.com/folke/flash.nvim",

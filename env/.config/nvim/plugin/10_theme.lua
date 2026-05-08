@@ -19,4 +19,12 @@ require('nightfox').setup {}
 vim.cmd("colorscheme nightfox")
 
 
+local add = '#332255'
+local delete = '#440033'
+local change = '#220022'
+local text = '#332255'
 
+vim.api.nvim_set_hl(0, 'DiffAdd', { bg = add })
+vim.api.nvim_set_hl(0, 'DiffDelete', { bg = delete })
+vim.api.nvim_set_hl(0, 'DiffChange', { bg = change })
+vim.api.nvim_set_hl(0, 'DiffText', { bg = text })
