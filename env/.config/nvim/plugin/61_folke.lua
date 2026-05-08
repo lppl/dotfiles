@@ -15,16 +15,33 @@ vim.pack.add{
     version = "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e" },
 }
 
+local info = require("display").get_terminal_info()
+local is_portrait = info.orientation == "portrait"
+local picker_layout = {}
+local explorer_layout = {}
+print(info.orientation)
+if is_portrait then
+  explorer_layout = { preset = "ivy", preview = true, layout = { position = "top", height = 30 } }
+  picker_layout = { preset = "ivy", preview = true, layout = { position = "bottom"}, height = 60}
+end
 
 require('snacks').setup {
   bigfile = { enabled = true },
   dashboard = { enabled = false },
   debug = { enabled = true },
   explorer = { enabled = true },
+  image = { enabled = true },
   indent = { enabled = true },
   input = { enabled = false  },
   notifier = { enabled = true, timeout = 3000 },
-  picker = { enabled = true },
+  picker = {
+    enabled = true,
+    layout = picker_layout,
+    sources = {
+      explorer = { layout = explorer_layout },
+      lazygit = { fullscreen = true },
+    },
+  },
   quickfile = { enabled = true },
   scope = { enabled = true },
   scratch = { enabled = true },

@@ -264,7 +264,7 @@ leader { "fp", picker.projects,  "Projects" }
 leader { "fr", picker.recent,    "Recent" }
 
 -- git
-leader { "gg", snack.lazygit.open,  "Lazygit" }
+leader { "gg",  snack.lazygit.open,  "Lazygit" }
 leader { "gib", picker.git_branches, "Git Branches" }
 leader { "gil", picker.git_log,      "Git Log" }
 leader { "giL", picker.git_log_line, "Git Log Line" }
