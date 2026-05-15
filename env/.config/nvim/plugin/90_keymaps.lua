@@ -312,7 +312,7 @@ leader { "ld", picker.lsp_definitions,       "Goto Definition" }
 leader { "lf", picker.lsp_declarations,      "Goto Declaration" }
 leader { "lr", picker.lsp_references,        "References" }
 leader { "li", picker.lsp_implementations,   "Goto Implementation" }
-leader { " lt", picker.lsp_type_definitions,  "Goto T[y]pe Definition" }
+leader { "lt", picker.lsp_type_definitions,  "Goto T[y]pe Definition" }
 leader { "ss", picker.lsp_symbols,           "LSP Symbols" }
 leader { "sS", picker.lsp_workspace_symbols, "LSP Workspace Symbols" }
 
@@ -325,5 +325,42 @@ leader { "n",  snack.notifier.show_history, "Notification History" }
 leader { "un", snack.notifier.hide,         "Dismiss All Notifications" }
 leader { "t",  snack.terminal.toggle,       "Toggle Terminal" }
 
--- normal { "]]",      snack.words.jump(vim.v.count1), "Next Reference",           mode = { "n", "t" } }
--- normal { "[[",      snack.words.jump(-vim.v.count1) }
+
+local function cc_chat(a, b)
+  return function() require("codecompanion").chat(a, b) end
+end
+
+local function cc_cli(a, b)
+  return function() require("codecompanion").cli(a, b) end
+end
+
+local function cc_cmd(a, b)
+  return function() require("codecompanion").cmd(a, b) end
+end
+
+group { "nv", "<leader>ch", "Chat, Code Companion" }
+leader { "chi", cc_chat({prompt = true}), "Code companion CHAT", mode="nv" }
+leader { "chf", cc_chat({focus = true}), "Code companion CHAT", mode="nv" }
+leader { "cha", cc_chat("#{this}", {focus = false}), "Code companion CHAT ", mode="nv" }
+leader { "chd", cc_chat("#{diagnostics} Fix diagnostics. Explain if not possible.", { focus = true, submit = true }), "Code companion CHAT ", mode="nv" }
+leader { "cht", cc_chat("#{terminal} Sharing the output from the terminal. Can you fix it?", { focus = false, submit = true }), "Code companion CHAT ", mode="nv" }
+
+group { "nv", "<leader>cl", "CLI, Code Companion" }
+leader { "cli", cc_cli({prompt = true}), "Code companion CLI", mode="nv" }
+leader { "clf", cc_cli({focus = true}), "CC: Focus CLI", mode="nv" }
+leader { "clat", cc_cli("#{this}", {focus = false}), "CC: CLI add this ", mode="nv" }
+leader { "clad", cc_cli("#{diagnostics}", {focus = false}), "CC: CLI add dignostics ", mode="nv" }
+leader { "clt", cc_cli("#{terminal} Sharing the output from the terminal. Can you fix it?", { focus = false, submit = true }), "CC: CLI share and fix terminal", mode="nv" }
+leader { "cld", cc_cli("#{diagnostics} Fix diagnostics. Explain if not possible.", { focus = true, submit = true }), "CC: CLI Explain diagnostics", mode="nv" }
+
+group { "nv", "<leader>cm", "CMD, Code Companion" }
+leader { "cmi", cc_cmd({prompt = true}), "Code companion CMD", mode="nv" }
+leader { "cmf", cc_cmd({focus = true}), "CC: Focus CMD", mode="nv" }
+leader { "cmat", cc_cmd("#{this}", {focus = false}), "CC: CMD add this ", mode="nv" }
+leader { "cmad", cc_cmd("#{diagnostics}", {focus = false}), "CC: CMD add dignostics ", mode="nv" }
+leader { "cmt", cc_cmd("#{terminal} Sharing the output from the terminal. Can you fix it?", { focus = false, submit = true }), "CC: CMD share and fix terminal", mode="nv" }
+leader { "cmd", cc_cmd("#{diagnostics} Fix diagnostics. Explain if not possible.", { focus = true, submit = true }), "CC: CMD Explain diagnostics", mode="nv" }
+
+-- vim.keymap.set({ "n", "v" }, "<LocalLeader>cp", function()
+--   return require("codecompanion").cli({ prompt = true })
+-- end, { desc = "Prompt the CLI agent" })
