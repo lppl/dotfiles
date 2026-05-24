@@ -1,5 +1,10 @@
 {
   "plugins": {
+    "codecompanion.nvim": {
+      "rev": "680c445eb357c72129d175ea5d481aa9e92ae6a5",
+      "src": "https://github.com/olimorris/codecompanion.nvim",
+      "version": "'680c445eb357c72129d175ea5d481aa9e92ae6a5'"
+    },
     "conform.nvim": {
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim",
@@ -9,6 +14,11 @@
       "rev": "83104ae71cba003b76b0cea45cbb19bc9c62693a",
       "src": "https://github.com/lucasadelino/conifer.nvim",
       "version": "'83104ae71cba003b76b0cea45cbb19bc9c62693a'"
+    },
+    "copilot.vim": {
+      "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
+      "src": "https://github.com/github/copilot.vim.git",
+      "version": "'a12fd5672110c8aa7e3c8419e28c96943ca179be'"
     },
     "diffview.nvim": {
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
@@ -114,6 +124,16 @@
       "rev": "4fc505ac7bd7692824a142e96e5f529c133862f8",
       "src": "https://github.com/nvim-tree/nvim-web-devicons",
       "version": "'4fc505ac7bd7692824a142e96e5f529c133862f8'"
+    },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim",
+      "version": "'74b06c6c75e4eeb3108ec01852001636d85a932b'"
+    },
+    "render-markdown.nvim": {
+      "rev": "629eb9533ec989d9d5c6cab8f3ad5372422c24e0",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim",
+      "version": "'629eb9533ec989d9d5c6cab8f3ad5372422c24e0'"
     },
     "snacks.nvim": {
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
