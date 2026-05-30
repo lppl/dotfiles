@@ -1,5 +1,6 @@
 local last_script = nil
 local term_bufs = {} -- script_path -> bufnr, persists across runs
+local script_order = {} -- insertion-ordered list of script paths for cycling
 local term_win_id = nil
 
 local function run_in_terminal(script)
@@ -9,11 +10,13 @@ local function run_in_terminal(script)
   if term_win_id and vim.api.nvim_win_is_valid(term_win_id) then
     vim.api.nvim_set_current_win(term_win_id)
   else
-    vim.cmd("topleft vsplit")
+    vim.cmd("vsplit")
     term_win_id = vim.api.nvim_get_current_win()
   end
 
-  -- Wipe previous run buffer for this script only
+  -- Register script in cycle order on first run
+  if not term_bufs[script] then script_order[#script_order + 1] = script end
+
   local old_buf = term_bufs[script]
   if old_buf and vim.api.nvim_buf_is_valid(old_buf) then pcall(vim.api.nvim_buf_delete, old_buf, { force = true }) end
 
@@ -47,6 +50,41 @@ local function pick_script()
   })
 end
 
+local function cycle_scripts()
+  -- Collect only still-valid buffers in run order
+  local valid = {}
+  for _, script in ipairs(script_order) do
+    local bufnr = term_bufs[script]
+    if bufnr and vim.api.nvim_buf_is_valid(bufnr) then valid[#valid + 1] = { script = script, bufnr = bufnr } end
+  end
+
+  if #valid == 0 then
+    vim.notify("No script buffers to cycle through", vim.log.levels.WARN)
+    return
+  end
+
+  local orig_win = vim.api.nvim_get_current_win()
+
+  if not (term_win_id and vim.api.nvim_win_is_valid(term_win_id)) then
+    vim.cmd("vsplit")
+    term_win_id = vim.api.nvim_get_current_win()
+    vim.api.nvim_set_current_win(orig_win)
+  end
+
+  local cur_buf = vim.api.nvim_win_get_buf(term_win_id)
+  local next_entry = valid[1]
+  for i, entry in ipairs(valid) do
+    if entry.bufnr == cur_buf then
+      next_entry = valid[(i % #valid) + 1]
+      break
+    end
+  end
+
+  vim.api.nvim_win_set_buf(term_win_id, next_entry.bufnr)
+  last_script = next_entry.script
+  vim.notify(vim.fn.fnamemodify(next_entry.script, ":t"), vim.log.levels.INFO)
+end
+
 local function rerun()
   if last_script then
     run_in_terminal(last_script)
@@ -57,3 +95,4 @@ end
 
 vim.keymap.set("n", "<F10>", pick_script, { desc = "Pick script to run" })
 vim.keymap.set("n", "<F9>", rerun, { desc = "Rerun last script" })
+vim.keymap.set("n", "<F12>", cycle_scripts, { desc = "Cycle script output buffers" })
