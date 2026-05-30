@@ -18,13 +18,19 @@ local function run_in_terminal(script)
   if not term_bufs[script] then script_order[#script_order + 1] = script end
 
   local old_buf = term_bufs[script]
-  if old_buf and vim.api.nvim_buf_is_valid(old_buf) then pcall(vim.api.nvim_buf_delete, old_buf, { force = true }) end
 
   local shell = script:match("%.fish$") and "fish" or "bash"
   vim.cmd("terminal " .. shell .. " " .. vim.fn.shellescape(script))
   term_bufs[script] = vim.api.nvim_get_current_buf()
 
-  vim.api.nvim_set_current_win(orig_win)
+  -- Delete old buffer after the new terminal is running to avoid TermClose side-effects
+  if old_buf and vim.api.nvim_buf_is_valid(old_buf) and old_buf ~= term_bufs[script] then
+    pcall(vim.api.nvim_buf_delete, old_buf, { force = true })
+  end
+
+  if vim.api.nvim_win_is_valid(orig_win) then
+    vim.api.nvim_set_current_win(orig_win)
+  end
 end
 
 local function pick_script()
@@ -45,7 +51,9 @@ local function pick_script()
     format = "text",
     confirm = function(picker, item)
       picker:close()
-      if item then run_in_terminal(item.file) end
+      if item then
+        vim.schedule(function() run_in_terminal(item.file) end)
+      end
     end,
   })
 end
