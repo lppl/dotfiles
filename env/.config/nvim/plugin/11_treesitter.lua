@@ -29,6 +29,7 @@ local languages = {
   "vimdoc",
   "rust",
   "gdscript",
+  "odin",
 }
 
 require("nvim-treesitter").setup {
@@ -92,22 +93,22 @@ local select_textobject = require("nvim-treesitter-textobjects.select").select_t
 local move = require("nvim-treesitter-textobjects.move")
 local many = require("nvim-treesitter-textobjects.repeatable_move")
 
-map_query { "xo", "af", select_textobject, "@function.outer" }
-map_query { "xo", "if", select_textobject, "@function.inner" }
-map_query { "xo", "ac", select_textobject, "@class.outer" }
-map_query { "xo", "ic", select_textobject, "@class.inner" }
-map_query { "xo", "aa", select_textobject, "@parameter.outer" }
-map_query { "xo", "ia", select_textobject, "@parameter.inner" }
-map_query { "xo", "ad", select_textobject, "@comment.outer" }
-map_query { "xo", "as", select_textobject, "@statement.outer" }
-map_query { "xo", "al", select_textobject, "@loop.outer" }
-map_query { "xo", "il", select_textobject, "@loop.inner" }
-map_query { "xo", "ai", select_textobject, "@conditional.outer" }
-map_query { "xo", "ii", select_textobject, "@conditional.inner" }
-map_query { "xo", "a=", select_textobject, "@assignment.rhs" }
-map_query { "xo", "i=", select_textobject, "@assignment.lhs" }
-map_query { "xo", "am", select_textobject, "@call.outer" }
-map_query { "xo", "im", select_textobject, "@call.inner" }
+map_query { "nxo", "af", select_textobject, "@function.outer" }
+map_query { "nxo", "if", select_textobject, "@function.inner" }
+map_query { "nxo", "ac", select_textobject, "@class.outer" }
+map_query { "nxo", "ic", select_textobject, "@class.inner" }
+map_query { "nxo", "aa", select_textobject, "@parameter.outer" }
+map_query { "nxo", "ia", select_textobject, "@parameter.inner" }
+map_query { "nxo", "ad", select_textobject, "@comment.outer" }
+map_query { "nxo", "as", select_textobject, "@statement.outer" }
+map_query { "nxo", "al", select_textobject, "@loop.outer" }
+map_query { "nxo", "il", select_textobject, "@loop.inner" }
+map_query { "nxo", "ai", select_textobject, "@conditional.outer" }
+map_query { "nxo", "ii", select_textobject, "@conditional.inner" }
+map_query { "nxo", "a=", select_textobject, "@assignment.rhs" }
+map_query { "nxo", "i=", select_textobject, "@assignment.lhs" }
+map_query { "nxo", "am", select_textobject, "@call.outer" }
+map_query { "nxo", "im", select_textobject, "@call.inner" }
 
 map_query { "nxo", "]f", move.goto_next_start, "@function.outer" }
 map_query { "nxo", "[f", move.goto_previous_start, "@function.outer" }
