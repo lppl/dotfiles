@@ -28,9 +28,7 @@ local function run_in_terminal(script)
     pcall(vim.api.nvim_buf_delete, old_buf, { force = true })
   end
 
-  if vim.api.nvim_win_is_valid(orig_win) then
-    vim.api.nvim_set_current_win(orig_win)
-  end
+  if vim.api.nvim_win_is_valid(orig_win) then vim.api.nvim_set_current_win(orig_win) end
 end
 
 local function pick_script()
@@ -51,9 +49,7 @@ local function pick_script()
     format = "text",
     confirm = function(picker, item)
       picker:close()
-      if item then
-        vim.schedule(function() run_in_terminal(item.file) end)
-      end
+      if item then vim.schedule(function() run_in_terminal(item.file) end) end
     end,
   })
 end

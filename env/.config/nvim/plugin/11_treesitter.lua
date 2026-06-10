@@ -1,11 +1,15 @@
 vim.pack.add {
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter",
+  {
+    src = "https://github.com/nvim-treesitter/nvim-treesitter",
     -- Last commit before nvim-treesitter have been archived
     -- @TODO check sometimes for alternatives
-    version = "4916d6592ede8c07973490d9322f187e07dfefac" },
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+    version = "4916d6592ede8c07973490d9322f187e07dfefac",
+  },
+  {
+    src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
     -- Look up
-    version = "851e865342e5a4cb1ae23d31caf6e991e1c99f1e" },
+    version = "851e865342e5a4cb1ae23d31caf6e991e1c99f1e",
+  },
 }
 
 -- ═══════════════════════════════════════════════════════════
@@ -33,17 +37,17 @@ local languages = {
 }
 
 require("nvim-treesitter").setup {
-  ensure_installed      = languages,
-  auto_install          = true,
-  highlight             = { enable = true },
-  indent                = { enable = true, disable = { "python" } },
+  ensure_installed = languages,
+  auto_install = true,
+  highlight = { enable = true },
+  indent = { enable = true, disable = { "python" } },
   incremental_selection = {
-    enable  = true,
+    enable = true,
     keymaps = {
-      init_selection    = "<C-Space>",
-      node_incremental  = "<c-space>",
+      init_selection = "<C-Space>",
+      node_incremental = "<c-space>",
       scope_incremental = "<c-s>",
-      node_decremental  = "<a-space>",
+      node_decremental = "<a-space>",
     },
   },
 }
@@ -68,7 +72,7 @@ require("nvim-treesitter-textobjects").setup {
     lookahead = true,
     selection_modes = {
       ["@parameter.outer"] = "v", -- charwise
-      ["@function.outer"] = "V",  -- linewise
+      ["@function.outer"] = "V", -- linewise
       ["@class.outer"] = "<c-v>", -- blockwise
     },
     include_surrounding_whitespace = false,
@@ -118,10 +122,25 @@ map_query { "nxo", "[F", move.goto_previous_end, "@function.outer" }
 map_query { "nxo", "]]", move.goto_next_start, "@class.outer" }
 map_query { "nxo", "[[", move.goto_previous_start, "@class.outer" }
 map_query { "nxo", "]o", move.goto_next_start, { "@loop.inner ", "@loop.outer" } }
-map_query { "nxo", "[o", move.goto_previous_start, { "@loop.inner ", "@loop.outer" } }
+map_query {
+  "nxo",
+  "[o",
+  move.goto_previous_start,
+  { "@loop.inner ", "@loop.outer" },
+}
 
-multi { "nxo", ";", many.repeat_last_move_next, "Repeat last move next (with ts)" }
-multi { "nxo", ",", many.repeat_last_move_previous, "Repeat last move previous (with ts)" }
+multi {
+  "nxo",
+  ";",
+  many.repeat_last_move_next,
+  "Repeat last move next (with ts)",
+}
+multi {
+  "nxo",
+  ",",
+  many.repeat_last_move_previous,
+  "Repeat last move previous (with ts)",
+}
 multi { "nxo", "f", many.builtin_f_expr, "Repeat last f (with ts)", expr = true }
 multi { "nxo", "F", many.builtin_F_expr, "Repeat last F (with ts)", expr = true }
 multi { "nxo", "t", many.builtin_t_expr, "Repeat last t (with ts)", expr = true }

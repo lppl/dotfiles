@@ -1,5 +1,4 @@
 vim.pack.add {
---
   {
     src = "https://github.com/nvim-lua/plenary.nvim",
     version = "74b06c6c75e4eeb3108ec01852001636d85a932b",
@@ -13,7 +12,6 @@ vim.pack.add {
     version = "a12fd5672110c8aa7e3c8419e28c96943ca179be",
   },
 }
-
 
 -- local model = "anthropic.claude-haiku-4-5-20251001-v1:0"
 local model = "anthropic.claude-haiku-4-5-20251001-v1:0-with-thinking"
