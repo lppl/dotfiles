@@ -4,7 +4,7 @@ local opt = vim.opt
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Text view 
+-- Text view
 opt.number = false -- Line numbers
 opt.relativenumber = false -- Relative line numbers
 opt.cursorline = true -- Highlight current line
@@ -75,7 +75,7 @@ opt.encoding = "UTF-8" -- Set encoding
 opt.smoothscroll = true
 opt.foldmethod = "expr"
 vim.wo.foldmethod = "expr"
-opt.foldlevel = 3
+opt.foldlevel = 5
 opt.foldenable = true
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
