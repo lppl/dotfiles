@@ -17,8 +17,6 @@ git:
   commitPrefix:
     - pattern: "^\\w+\\/(\\w+-\\w+).*"
       replace: '[$1] '
-
-    # The final fallthrough regex that copies over the whole branch name
     - pattern: ".*"
       replace : 'Update $0'
 gui:
