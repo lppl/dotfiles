@@ -7,6 +7,7 @@ vim.pack.add {
 
 local function augroup(name) return vim.api.nvim_create_augroup("user_" .. name, { clear = true }) end
 local completion = vim.g.completion_mode or "native" -- 'blink' or 'native'
+local code_action_hint = require("code_action_hint")
 local leader = require("keymap").leader
 local normal = require("keymap").normal
 
@@ -28,7 +29,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.document_color.enable(true, { bufnr = buf }, { style = "virtual" })
     end
 
+    if client:supports_method("textDocument/codeAction") then code_action_hint.setup_buffer(buf) end
+
     leader { "la", vim.lsp.buf.code_action, "Code Actions", buffer = buf }
+    normal { "<A-CR>", code_action_hint.code_action, "Quick Fix", buffer = buf, mode = "nv" }
     normal { "gr", vim.lsp.buf.rename, "Code Rename", buffer = buf }
     leader { "cf", vim.lsp.buf.format, "Code Format", buffer = buf, mode = "nv" }
 
