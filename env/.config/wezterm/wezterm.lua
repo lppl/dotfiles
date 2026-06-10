@@ -29,6 +29,7 @@ end
 
 local key = makeKeyForMod("NONE")
 local ctrl = makeKeyForMod("CTRL")
+local ctrl_shift = makeKeyForMod("CTRL|SHIFT")
 local alt = makeKeyForMod("ALT")
 local alt_ctrl = makeKeyForMod("ALT|CTRL")
 local super = makeKeyForMod("SUPER")
@@ -40,25 +41,21 @@ local keys = {
   alt_ctrl({ "n", act.SplitVertical({ domain = "CurrentPaneDomain" }) }),
   alt_ctrl({ "N", act.SplitHorizontal({ domain = "CurrentPaneDomain" }) }),
 
-  alt({ "h", act.ActivatePaneDirection("Left") }),
-  alt({ "l", act.ActivatePaneDirection("Right") }),
-  alt({ "k", act.ActivatePaneDirection("Up") }),
-  alt({ "j", act.ActivatePaneDirection("Down") }),
+  alt_ctrl({ "h", act.ActivatePaneDirection("Left") }),
+  alt_ctrl({ "l", act.ActivatePaneDirection("Right") }),
+  alt_ctrl({ "k", act.ActivatePaneDirection("Up") }),
+  alt_ctrl({ "j", act.ActivatePaneDirection("Down") }),
 
   alt_ctrl({ "KeypadMultiply", act.IncreaseFontSize }),
   alt_ctrl({ "KeypadDivide", act.DecreaseFontSize }),
   alt_ctrl({ "0", act.ResetFontSize }),
 
-  alt_ctrl({ "1", act.ActivateTab(0) }),
-  alt_ctrl({ "2", act.ActivateTab(1) }),
-  alt_ctrl({ "3", act.ActivateTab(2) }),
-
-  ctrl({ "F", act.Search("CurrentSelectionOrEmptyString") }),
+  alt_ctrl({ "F", act.Search("CurrentSelectionOrEmptyString") }),
 
   ctrl({ "C", act.CopyTo("Clipboard") }),
   ctrl({ "V", act.PasteFrom("Clipboard") }),
 
-  ctrl({ "L", act.ShowDebugOverlay }),
+  alt_ctrl({ "L", act.ShowDebugOverlay }),
 
   none({ "F11", act.ToggleFullScreen }),
   ctrl({ "M", act.Hide }),
@@ -69,10 +66,15 @@ local keys = {
 
   ctrl({ "X", act.ActivateCopyMode }),
 
-  alt_ctrl({ "W", act.CloseCurrentTab({ confirm = true }) }),
   alt_ctrl({ "t", act.SpawnTab("CurrentPaneDomain") }),
+  alt_ctrl({ "W", act.CloseCurrentTab({ confirm = true }) }),
+  alt_ctrl({ "1", act.ActivateTab(0) }),
+  alt_ctrl({ "2", act.ActivateTab(1) }),
+  alt_ctrl({ "3", act.ActivateTab(2) }),
   ctrl({ "PageUp", act.ActivateTabRelative(-1) }),
-  ctrl({ "PageUp", act.MoveTabRelative(-1) }),
+  ctrl({ "PageDown", act.ActivateTabRelative(1) }),
+  ctrl_shift({ "PageUp", act.MoveTabRelative(-1) }),
+  ctrl_shift({ "PageDown", act.MoveTabRelative(1) }),
 
   -- ctrl { 'k', act.ClearScrollback 'ScrollbackOnly' },
   -- super { 'k', act.ClearScrollback 'ScrollbackOnly' },
@@ -81,8 +83,7 @@ local keys = {
   -- super { 'm', act.Hide },
   alt_ctrl({ "p", act.ActivateCommandPalette }),
   alt_ctrl({ "r", act.ReloadConfiguration }),
-  super({ "r", act.ReloadConfiguration }),
-  alt({ "Z", act.TogglePaneZoomState }),
+  alt_ctrl({ "z", act.TogglePaneZoomState }),
   ctrl({ "phys:Space", act.QuickSelect }),
   -- key { 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
   -- ctrl { 'PageUp', act.ActivateTabRelative(-1) },
