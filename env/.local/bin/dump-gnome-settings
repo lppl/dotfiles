@@ -25,8 +25,7 @@ set schemas \
   "org.gnome.shell.extensions.dash-to-dock"
 
 set lines
-set -a lines "
-#!/usr/bin/env fish
+set -a lines "#!/usr/bin/env fish
 
 set _ns ''
 

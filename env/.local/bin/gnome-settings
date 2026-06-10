@@ -1,27 +1,35 @@
 #!/usr/bin/env fish
+
 set _ns ''
+
 function namespace
   set _ns $argv[1]
 end
+
 function gmap
   set _name $argv[1]
   set _keys (string join '\',\'' $argv[2..])
   gsettings set "$_ns" "$_name" "['$_keys']"
 end
+
 function gset
   set _name $argv[1]
   set _value (string join '\',\'' $argv[2..])
   # gsettings set "$_ns" "$_name" $_value
 end
+
  
+
 # =====================================================================
 # DESKTOP WM KEYBINDINGS
 # =====================================================================
+
 namespace org.gnome.desktop.wm.keybindings
+
  
 # keymap
-gmap activate-window-menu         ''
-gmap always-on-top                ''
+gmap activate-window-menu         '<Super>F1'
+gmap always-on-top                '<Super>t'
 gmap begin-move                   ''
 gmap begin-resize                 ''
 gmap close                        ''
@@ -49,10 +57,10 @@ gmap move-to-side-e               ''
 gmap move-to-side-n               ''
 gmap move-to-side-s               ''
 gmap move-to-side-w               ''
+gmap move-to-workspace-1          '<Super><Alt>KP_1'
 gmap move-to-workspace-10         ''
 gmap move-to-workspace-11         ''
 gmap move-to-workspace-12         ''
-gmap move-to-workspace-1          '<Super><Alt>KP_1'
 gmap move-to-workspace-2          '<Super><Alt>KP_2'
 gmap move-to-workspace-3          '<Super><Alt>KP_3'
 gmap move-to-workspace-4          '<Super><Alt>KP_4'
@@ -72,18 +80,18 @@ gmap raise                        ''
 gmap raise-or-lower               ''
 gmap set-spew-mark                ''
 gmap show-desktop                 '<Super>d'
-gmap switch-applications-backward '<Shift><Super>Tab'
 gmap switch-applications          '<Super>Tab'
+gmap switch-applications-backward '<Shift><Super>Tab'
 gmap switch-group                 ''
 gmap switch-group-backward        ''
 gmap switch-input-source          ''
 gmap switch-input-source-backward ''
 gmap switch-panels                ''
 gmap switch-panels-backward       ''
+gmap switch-to-workspace-1        '<Super>KP_1'
 gmap switch-to-workspace-10       ''
 gmap switch-to-workspace-11       ''
 gmap switch-to-workspace-12       ''
-gmap switch-to-workspace-1        '<Super>KP_1'
 gmap switch-to-workspace-2        '<Super>KP_2'
 gmap switch-to-workspace-3        '<Super>KP_3'
 gmap switch-to-workspace-4        '<Super>KP_4'
@@ -100,73 +108,88 @@ gmap switch-to-workspace-up       ''
 gmap switch-windows               '<Alt>Tab'
 gmap switch-windows-backward      '<Shift><Alt>Tab'
 gmap toggle-above                 '<Super>a'
-gmap toggle-fullscreen            '<Super>F11'
-gmap toggle-maximized             ''
+gmap toggle-fullscreen            '<Super>F11' '<Super>f'
+gmap toggle-maximized             '<Super>m'
 gmap toggle-on-all-workspaces     ''
 gmap unmaximize                   '<Super>F9'
 # other settings
  
+
 # =====================================================================
 # SHELL KEYBINDINGS
 # =====================================================================
+
 namespace org.gnome.shell.keybindings
+
  
 # keymap
-gmap focus-active-notification '<Super>n'
-gmap open-new-window-application-1 ''
-gmap open-new-window-application-2 ''
-gmap open-new-window-application-3 ''
-gmap open-new-window-application-4 ''
-gmap open-new-window-application-5 ''
-gmap open-new-window-application-6 ''
-gmap open-new-window-application-7 ''
-gmap open-new-window-application-8 ''
-gmap open-new-window-application-9 ''
-gmap screenshot               '<Ctrl>Print'
-gmap screenshot-window        'Print'
-gmap shift-overview-down      ''
-gmap shift-overview-up        '<Super>p'
-gmap show-screen-recording-ui '<Alt>Print'
-gmap show-screenshot-ui       '<Super>Print'
-gmap switch-to-application-1  ''
-gmap switch-to-application-2  ''
-gmap switch-to-application-3  ''
-gmap switch-to-application-4  ''
-gmap switch-to-application-5  ''
-gmap switch-to-application-6  ''
-gmap switch-to-application-7  ''
-gmap switch-to-application-8  ''
-gmap switch-to-application-9  ''
-gmap toggle-application-view  ''
-gmap toggle-message-tray      ''
-gmap toggle-overview          ''
-gmap toggle-quick-settings    ''
+gmap focus-active-notification       '<Super>n'
+gmap open-new-window-application-1   ''
+gmap open-new-window-application-2   ''
+gmap open-new-window-application-3   ''
+gmap open-new-window-application-4   ''
+gmap open-new-window-application-5   ''
+gmap open-new-window-application-6   ''
+gmap open-new-window-application-7   ''
+gmap open-new-window-application-8   ''
+gmap open-new-window-application-9   ''
+gmap screen-brightness-cycle-monitor '<Shift>XF86MonBrightnessCycle'
+gmap screen-brightness-cycle         'XF86MonBrightnessCycle'
+gmap screen-brightness-down-monitor  '<Shift>XF86MonBrightnessDown'
+gmap screen-brightness-down          'XF86MonBrightnessDown'
+gmap screen-brightness-up-monitor    '<Shift>XF86MonBrightnessUp'
+gmap screen-brightness-up            'XF86MonBrightnessUp'
+gmap screenshot                      '<Ctrl>Print'
+gmap screenshot-window               'Print'
+gmap shift-overview-down             ''
+gmap shift-overview-up               '<Super>p'
+gmap show-screen-recording-ui        '<Alt>Print'
+gmap show-screenshot-ui              '<Super>Print'
+gmap switch-to-application-1         ''
+gmap switch-to-application-2         ''
+gmap switch-to-application-3         ''
+gmap switch-to-application-4         ''
+gmap switch-to-application-5         ''
+gmap switch-to-application-6         ''
+gmap switch-to-application-7         ''
+gmap switch-to-application-8         ''
+gmap switch-to-application-9         ''
+gmap toggle-application-view         ''
+gmap toggle-message-tray             ''
+gmap toggle-overview                 ''
+gmap toggle-quick-settings           ''
 # other settings
  
+
 # =====================================================================
 # MUTTER KEYBINDINGS
 # =====================================================================
+
 namespace org.gnome.mutter.keybindings
+
  
 # keymap
-# gmap cancel-input-capture '<Super><Shift>Escape'
-# gmap rotate-monitor       '<Super><Alt>r' 'XF86RotateWindows'
-# gmap switch-monitor       'XF86Display'
-# gmap toggle-tiled-left    ''
-# gmap toggle-tiled-right   ''
+gmap cancel-input-capture '<Super><Shift>Escape'
+gmap rotate-monitor       'XF86RotateWindows'
+gmap switch-monitor       '<Super>p' 'XF86Display'
+gmap toggle-tiled-left    ''
+gmap toggle-tiled-right   ''
 # other settings
  
+
 # =====================================================================
 # MUTTER WAYLAND KEYBINDINGS
 # =====================================================================
+
 namespace org.gnome.mutter.wayland.keybindings
+
  
 # keymap
 gmap restore-shortcuts    '<Super>Escape'
+gmap switch-to-session-1  '<Super><Alt>F1'
 gmap switch-to-session-10 '<Super><Alt>F10'
 gmap switch-to-session-11 '<Super><Alt>F11'
 gmap switch-to-session-12 '<Super><Alt>F12'
-gmap switch-to-session-1  '<Super><Alt>F1'
 gmap switch-to-session-2  '<Super><Alt>F2'
 gmap switch-to-session-3  '<Super><Alt>F3'
 gmap switch-to-session-4  '<Super><Alt>F4'
@@ -177,37 +200,40 @@ gmap switch-to-session-8  '<Super><Alt>F8'
 gmap switch-to-session-9  '<Super><Alt>F9'
 # other settings
  
+
 # =====================================================================
 # SETTINGS-DAEMON PLUGINS MEDIA-KEYS
 # =====================================================================
+
 namespace org.gnome.settings-daemon.plugins.media-keys
+
  
 # keymap
-# gmap battery-status                    ''
-# gmap battery-status-static             'XF86Battery'
-# gmap calculator                        ''
-# gmap calculator-static                 'XF86Calculator'
-# gmap control-center                    ''
-# gmap control-center-static             'XF86Tools'
-# gmap custom-keybindings                ''
-# gmap decrease-text-size                ''
-# gmap eject                             ''
-# gmap eject-static                      'XF86Eject'
-# gmap email                             ''
-# gmap email-static                      'XF86Mail'
-# gmap help                              ''
-# gmap hibernate                         ''
-# gmap hibernate-static                  'XF86Suspend' 'XF86Hibernate'
-# gmap home                              ''
-# gmap home-static                       'XF86Explorer'
-# gmap increase-text-size                ''
-# gmap keyboard-brightness-down          ''
-# gmap keyboard-brightness-down-static   'XF86KbdBrightnessDown'
-# gmap keyboard-brightness-toggle        ''
-# gmap keyboard-brightness-toggle-static 'XF86KbdLightOnOff'
-# gmap keyboard-brightness-up            ''
-# gmap keyboard-brightness-up-static     'XF86KbdBrightnessUp'
-gmap logout                            ''
+gmap battery-status                    ''
+gmap battery-status-static             'XF86Battery'
+gmap calculator                        ''
+gmap calculator-static                 'XF86Calculator'
+gmap control-center                    ''
+gmap control-center-static             'XF86Tools'
+gmap custom-keybindings                ''
+gmap decrease-text-size                ''
+gmap eject                             ''
+gmap eject-static                      'XF86Eject'
+gmap email                             ''
+gmap email-static                      'XF86Mail'
+gmap help                              ', '
+gmap hibernate                         ''
+gmap hibernate-static                  'XF86Suspend' 'XF86Hibernate'
+gmap home                              ''
+gmap home-static                       'XF86Explorer'
+gmap increase-text-size                ''
+gmap keyboard-brightness-down          ''
+gmap keyboard-brightness-down-static   'XF86KbdBrightnessDown'
+gmap keyboard-brightness-toggle        ''
+gmap keyboard-brightness-toggle-static 'XF86KbdLightOnOff'
+gmap keyboard-brightness-up            ''
+gmap keyboard-brightness-up-static     'XF86KbdBrightnessUp'
+gmap logout                            '<Super><Alt>Delete'
 gmap magnifier                         '<Super><Alt>equal'
 gmap magnifier-zoom-in                 '<Super><Alt>plus'
 gmap magnifier-zoom-out                '<Super><Alt>minus'
@@ -234,34 +260,30 @@ gmap power                             ''
 gmap power-static                      'XF86PowerOff'
 gmap previous                          ''
 gmap previous-static                   'XF86AudioPrev' '<Ctrl>XF86AudioPrev'
+gmap reboot                            ''
 gmap rfkill                            ''
 gmap rfkill-bluetooth                  ''
 gmap rfkill-bluetooth-static           'XF86Bluetooth'
 gmap rfkill-static                     'XF86WLAN' 'XF86UWB' 'XF86RFKill'
 gmap rotate-video-lock                 ''
 gmap rotate-video-lock-static          '<Super>o' 'XF86RotationLockToggle'
-# gmap screen-brightness-cycle           ''
-# gmap screen-brightness-cycle-static    'XF86MonBrightnessCycle'
-# gmap screen-brightness-down            ''
-# gmap screen-brightness-down-static     'XF86MonBrightnessDown'
-# gmap screen-brightness-up              ''
-# gmap screen-brightness-up-static       'XF86MonBrightnessUp'
 gmap screenreader                      ''
+gmap screensaver                       '<Super><Alt>Backspace'
 gmap screensaver-static                'XF86ScreenSaver'
-gmap screensaver                       '<Super>l'
 gmap search                            '<Super>f'
 gmap search-static                     'XF86Search'
+gmap shutdown                          ''
 gmap stop                              ''
 gmap stop-static                       'XF86AudioStop'
 gmap suspend                           ''
 gmap suspend-static                    'XF86Sleep'
-gmap terminal                          '<Primary><Alt>t'
+gmap terminal                          ''
 gmap toggle-contrast                   ''
 gmap touchpad-off                      ''
 gmap touchpad-off-static               'XF86TouchpadOff'
 gmap touchpad-on                       ''
 gmap touchpad-on-static                'XF86TouchpadOn'
-gmap touchpad-toggle                   ''
+gmap touchpad-toggle                   '<Super><Alt>F12'
 gmap touchpad-toggle-static            'XF86TouchpadToggle' '<Ctrl><Super>XF86TouchpadToggle'
 gmap volume-down                       ''
 gmap volume-down-precise               ''
@@ -283,10 +305,13 @@ gmap www                               '<Super>w'
 gmap www-static                        'XF86WWW'
 # other settings
  
+
 # =====================================================================
 # SHELL EXTENSIONS DASH-TO-DOCK
 # =====================================================================
+
 namespace org.gnome.shell.extensions.dash-to-dock
+
  
 # keymap
 gmap app-ctrl-hotkey-1 ''
@@ -320,3 +345,4 @@ gmap app-shift-hotkey-7 ''
 gmap app-shift-hotkey-8 ''
 gmap app-shift-hotkey-9 ''
 gmap shortcut ''
+# other settings
