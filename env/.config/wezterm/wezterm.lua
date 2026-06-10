@@ -57,7 +57,7 @@ local keys = {
 
   alt_ctrl({ "L", act.ShowDebugOverlay }),
 
-  none({ "F11", act.ToggleFullScreen }),
+  -- none({ "F11", act.ToggleFullScreen }),
   ctrl({ "M", act.Hide }),
   alt_ctrl({ "R", act.ReloadConfiguration }),
   alt_ctrl({ "T", act.SpawnTab("CurrentPaneDomain") }),
