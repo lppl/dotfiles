@@ -28,10 +28,10 @@ leader { "`", "<cmd>e #<cr>", "Switch to Other Buffer" }
 -- ═══════════════════════════════════════════════════════════
 
 -- Move between windows with Ctrl+hjkl (like tmux)
-normal { "<C-h>", "<C-w>h", "Go to Left Window", remap = true }
-normal { "<C-j>", "<C-w>j", "Go to Lower Window", remap = true }
-normal { "<C-k>", "<C-w>k", "Go to Upper Window", remap = true }
-normal { "<C-l>", "<C-w>l", "Go to Right Window", remap = true }
+cmd { "<C-h>", "TmuxNavigateLeft", "Go to Left Window", remap = true }
+cmd { "<C-j>", "TmuxNavigateDown", "Go to Lower Window", remap = true }
+cmd { "<C-k>", "TmuxNavigateUp", "Go to Upper Window", remap = true }
+cmd { "<C-l>", "TmuxNavigateRight", "Go to Right Window", remap = true }
 
 -- Resize windows with Ctrl+Shift+arrows (macOS friendly)
 normal { "<C-S-Up>", "<cmd>resize +5<CR>" }
