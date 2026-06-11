@@ -30,6 +30,11 @@
       "src": "https://github.com/folke/flash.nvim",
       "version": "'stable'"
     },
+    "gitsigns.nvim": {
+      "rev": "25050e4ed39e628282831d4cbecb1850454ce915",
+      "src": "https://github.com/lewis6991/gitsigns.nvim",
+      "version": "'25050e4ed39e628282831d4cbecb1850454ce915'"
+    },
     "gruvbox": {
       "rev": "697c00291db857ca0af00ec154e5bd514a79191f",
       "src": "https://github.com/morhetz/gruvbox",
