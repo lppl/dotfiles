@@ -16,7 +16,7 @@ local group = k.group
 -- ═══════════════════════════════════════════════════════════
 
 -- Tab/Shift-Tab: Like browser tabs, feels natural
-normal { "<T  ab>", ":bnext<CR>", "Next buffer" }
+normal { "<Tab>", ":bnext<CR>", "Next buffer" }
 normal { "<S-Tab>", ":bprevious<CR>", "Previous buffer" }
 
 -- Quick switch to last edited file (super useful!)
@@ -109,7 +109,7 @@ multi { "inxs", "<C-s>", "<cmd>w<cr><esc>", "Save File" }
 leader { "fn", "<cmd>enew<cr>", "New File" }
 
 -- Quit operations
-leader { "qq", "<cmd>qa<cr>", "Quit All" }
+leader { "qq", "<cmd>SessionQuit<cr>", "Quit All" }
 
 -- ═══════════════════════════════════════════════════════════
 -- DEVELOPMENT TOOLS
