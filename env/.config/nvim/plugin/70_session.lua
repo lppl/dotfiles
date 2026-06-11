@@ -44,6 +44,8 @@ local function save_session()
   if not ok then
     vim.notify("Session save failed: " .. tostring(err), vim.log.levels.ERROR)
     return false
+  else
+    vim.notify("Session saved: " .. vim.fn.fnameescape(active_session))
   end
 
   return true
