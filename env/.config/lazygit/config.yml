@@ -17,6 +17,8 @@ git:
   commitPrefix:
     - pattern: "^\\w+\\/(\\w+-\\w+).*"
       replace: '[$1] '
+    - pattern: "^(\\w+\\d+)__(.*)"
+      replace: '[$1] $2'
     - pattern: ".*"
       replace : 'Update $0'
 gui:
