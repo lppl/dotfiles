@@ -97,6 +97,39 @@ local function rerun()
   end
 end
 
-vim.keymap.set("n", "<F10>", pick_script, { desc = "Pick script to run" })
+local function latest_valid_term_buf()
+  if last_script and term_bufs[last_script] and vim.api.nvim_buf_is_valid(term_bufs[last_script]) then
+    return term_bufs[last_script]
+  end
+
+  for i = #script_order, 1, -1 do
+    local bufnr = term_bufs[script_order[i]]
+    if bufnr and vim.api.nvim_buf_is_valid(bufnr) then return bufnr end
+  end
+end
+
+local function toggle_output()
+  if term_win_id and vim.api.nvim_win_is_valid(term_win_id) then
+    vim.api.nvim_win_close(term_win_id, true)
+    term_win_id = nil
+    return
+  end
+
+  local bufnr = latest_valid_term_buf()
+  if not bufnr then
+    vim.notify("No script output to show", vim.log.levels.WARN)
+    return
+  end
+
+  local orig_win = vim.api.nvim_get_current_win()
+  vim.cmd("vsplit")
+  term_win_id = vim.api.nvim_get_current_win()
+  vim.api.nvim_win_set_buf(term_win_id, bufnr)
+
+  if vim.api.nvim_win_is_valid(orig_win) then vim.api.nvim_set_current_win(orig_win) end
+end
+
 vim.keymap.set("n", "<F9>", rerun, { desc = "Rerun last script" })
+vim.keymap.set("n", "<F10>", pick_script, { desc = "Pick script to run" })
+vim.keymap.set("n", "<F11>", toggle_output, { desc = "Toggle output" })
 vim.keymap.set("n", "<F12>", cycle_scripts, { desc = "Cycle script output buffers" })
