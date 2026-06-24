@@ -1,24 +1,60 @@
 #!/usr/bin/env fish
 
 set _ns ''
+set _all_namespaces \
+  org.gnome.desktop.wm.keybindings \
+  org.gnome.shell.keybindings \
+  org.gnome.mutter.keybindings \
+  org.gnome.mutter.wayland.keybindings \
+  org.gnome.settings-daemon.plugins.media-keys \
+  org.gnome.shell.extensions.dash-to-dock \
+  org.gnome.shell.extensions.tiling-assistant
+set _selected_namespaces
+
+switch "$argv[1]"
+  case -a --all
+    set _selected_namespaces $_all_namespaces
+  case ''
+    if not type -q fzf
+      echo "fzf is required for interactive namespace selection" >&2
+      exit 1
+    end
+
+    set _selected_namespaces (printf '%s\n' $_all_namespaces | fzf --multi --prompt='GNOME namespaces> ')
+    set _fzf_status $status
+
+    if test $_fzf_status -ne 0
+      exit 0
+    end
+
+    if test (count $_selected_namespaces) -eq 0
+      exit 0
+    end
+  case '*'
+    echo "usage: "(status filename)" [-a|--all]" >&2
+    exit 2
+end
 
 function namespace
   set _ns $argv[1]
+  if should_apply_namespace 
+    echo Applying $_ns
+  else
+    echo Skipping $_ns
+  end
+end
+
+function should_apply_namespace
+  contains -- "$_ns" $_selected_namespaces
 end
 
 function gmap
+  should_apply_namespace; or return 0
   set _name $argv[1]
   set _keys (string join '\',\'' $argv[2..])
   gsettings set "$_ns" "$_name" "['$_keys']"
 end
 
-function gset
-  set _name $argv[1]
-  set _value (string join '\',\'' $argv[2..])
-  # gsettings set "$_ns" "$_name" $_value
-end
-
- 
 
 # =====================================================================
 # DESKTOP WM KEYBINDINGS
