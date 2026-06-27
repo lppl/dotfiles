@@ -6,7 +6,7 @@ return {
   root_markers = {
     "ols.json",
   },
-  cmd = { "ols" },
+  cmd = { vim.fn.expand("~/.local/bin/ols") },
   settings = {
     odin_command = "odin",
   },
