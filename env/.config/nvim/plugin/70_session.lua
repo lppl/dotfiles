@@ -1,14 +1,12 @@
 local group = vim.api.nvim_create_augroup("user_session", { clear = true })
 
 local session_name = ".nvim-session"
-local marker_names = { "package.json", ".git", "init.lua", ".luarc.json", ".project" }
+local marker_names = { session_name, "package.json", ".git", "init.lua", ".luarc.json", ".project" }
 
 local active_session
 local loaded_session = false
 
-local function path_join(...)
-  return table.concat(vim.tbl_map(function(part) return tostring(part) end, { ... }), "/")
-end
+local function path_join(...) return table.concat({ ... }, "/") end
 
 local function exists(path) return vim.uv.fs_stat(path) ~= nil end
 
@@ -86,16 +84,12 @@ vim.api.nvim_create_autocmd("VimEnter", {
   group = group,
   nested = true,
   callback = function()
-    local cwd = vim.uv.cwd()
-    local session_dir, session_path = find_up({ session_name }, cwd)
-    if session_path then
-      vim.cmd.cd(vim.fn.fnameescape(session_dir))
-      load_session(session_path)
-      return
+    local _, path, name = find_up(marker_names, vim.uv.cwd())
+    if name == session_name then
+      load_session(path)
+    else
+      set_active(path)
     end
-
-    local project_dir = find_up(marker_names, cwd)
-    if project_dir then set_active(session_path_for(project_dir)) end
   end,
 })
 
