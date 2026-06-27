@@ -1,5 +1,8 @@
 #!/usr/bin/env fish
 
+set -l script_dir (dirname (status --current-filename))
+source "$script_dir/colors.fish"
+
 set _ns ''
 set _all_namespaces \
   org.gnome.desktop.wm.keybindings \
@@ -38,9 +41,9 @@ end
 function namespace
   set _ns $argv[1]
   if should_apply_namespace 
-    echo Applying $_ns
+    log_info Applying $_ns
   else
-    echo Skipping $_ns
+    log_debug Skipping $_ns
   end
 end
 
@@ -64,8 +67,8 @@ namespace org.gnome.desktop.wm.keybindings
 
  
 # keymap
-gmap activate-window-menu         '<Super>F1'
-gmap always-on-top                '<Super>t'
+gmap activate-window-menu         '<Alt>F1'
+gmap always-on-top                '<Alt>t'
 gmap begin-move                   ''
 gmap begin-resize                 ''
 gmap close                        ''
@@ -85,26 +88,26 @@ gmap move-to-corner-ne            ''
 gmap move-to-corner-nw            ''
 gmap move-to-corner-se            ''
 gmap move-to-corner-sw            ''
-gmap move-to-monitor-down         '<Super><Alt>Down'
-gmap move-to-monitor-left         '<Super><Alt>Left'
-gmap move-to-monitor-right        '<Super><Alt>Right'
-gmap move-to-monitor-up           '<Super><Alt>Up'
+gmap move-to-monitor-down         '<Super><Shift>Down'
+gmap move-to-monitor-left         '<Super><Shift>Left'
+gmap move-to-monitor-right        '<Super><Shift>Right'
+gmap move-to-monitor-up           '<Super><Shift>Up'
 gmap move-to-side-e               ''
 gmap move-to-side-n               ''
 gmap move-to-side-s               ''
 gmap move-to-side-w               ''
-gmap move-to-workspace-1          '<Super><Alt>KP_1'
+gmap move-to-workspace-1          '<Shift>KP_1'
 gmap move-to-workspace-10         ''
 gmap move-to-workspace-11         ''
 gmap move-to-workspace-12         ''
-gmap move-to-workspace-2          '<Super><Alt>KP_2'
-gmap move-to-workspace-3          '<Super><Alt>KP_3'
-gmap move-to-workspace-4          '<Super><Alt>KP_4'
-gmap move-to-workspace-5          '<Super><Alt>KP_5'
-gmap move-to-workspace-6          '<Super><Alt>KP_6'
-gmap move-to-workspace-7          '<Super><Alt>KP_7'
-gmap move-to-workspace-8          '<Super><Alt>KP_8'
-gmap move-to-workspace-9          '<Super><Alt>KP_9'
+gmap move-to-workspace-2          '<Shift>KP_2'
+gmap move-to-workspace-3          '<Shift>KP_3'
+gmap move-to-workspace-4          '<Shift>KP_4'
+gmap move-to-workspace-5          '<Shift>KP_5'
+gmap move-to-workspace-6          '<Shift>KP_6'
+gmap move-to-workspace-7          '<Shift>KP_7'
+gmap move-to-workspace-8          '<Shift>KP_8'
+gmap move-to-workspace-9          '<Shift>KP_9'
 gmap move-to-workspace-down       ''
 gmap move-to-workspace-last       ''
 gmap move-to-workspace-left       ''
@@ -124,18 +127,18 @@ gmap switch-input-source          ''
 gmap switch-input-source-backward ''
 gmap switch-panels                ''
 gmap switch-panels-backward       ''
-gmap switch-to-workspace-1        '<Super>KP_1'
+gmap switch-to-workspace-1        'KP_1'
 gmap switch-to-workspace-10       ''
 gmap switch-to-workspace-11       ''
 gmap switch-to-workspace-12       ''
-gmap switch-to-workspace-2        '<Super>KP_2'
-gmap switch-to-workspace-3        '<Super>KP_3'
-gmap switch-to-workspace-4        '<Super>KP_4'
-gmap switch-to-workspace-5        '<Super>KP_5'
-gmap switch-to-workspace-6        '<Super>KP_6'
-gmap switch-to-workspace-7        '<Super>KP_7'
-gmap switch-to-workspace-8        '<Super>KP_8'
-gmap switch-to-workspace-9        '<Super>KP_9'
+gmap switch-to-workspace-2        'KP_2'
+gmap switch-to-workspace-3        'KP_3'
+gmap switch-to-workspace-4        'KP_4'
+gmap switch-to-workspace-5        'KP_5'
+gmap switch-to-workspace-6        'KP_6'
+gmap switch-to-workspace-7        'KP_7'
+gmap switch-to-workspace-8        'KP_8'
+gmap switch-to-workspace-9        'KP_9'
 gmap switch-to-workspace-down     ''
 gmap switch-to-workspace-last     ''
 gmap switch-to-workspace-left     ''
@@ -178,7 +181,7 @@ gmap screen-brightness-up            'XF86MonBrightnessUp'
 gmap screenshot                      '<Ctrl>Print'
 gmap screenshot-window               'Print'
 gmap shift-overview-down             ''
-gmap shift-overview-up               '<Super>p'
+gmap shift-overview-up               ''
 gmap show-screen-recording-ui        '<Alt>Print'
 gmap show-screenshot-ui              '<Super>Print'
 gmap switch-to-application-1         ''
@@ -207,7 +210,7 @@ namespace org.gnome.mutter.keybindings
 # keymap
 gmap cancel-input-capture '<Super><Shift>Escape'
 gmap rotate-monitor       'XF86RotateWindows'
-gmap switch-monitor       '<Super>p' 'XF86Display'
+gmap switch-monitor       '' 'XF86Display'
 gmap toggle-tiled-left    ''
 gmap toggle-tiled-right   ''
 # other settings
@@ -411,9 +414,9 @@ gmap activate-layout7                   ''
 gmap activate-layout8                   ''
 gmap activate-layout9                   ''
 gmap auto-tile                          ''
-gmap center-window                      ''
-gmap debugging-free-rects               ''
-gmap debugging-show-tiled-rects         ''
+gmap center-window                      '<Super>c'
+gmap debugging-free-rects               '<Super><Shift>d'
+gmap debugging-show-tiled-rects         '<Super><Shift>f'
 gmap favorite-layouts                   ''
 gmap restore-window                     ''
 gmap search-popup-layout                ''
@@ -437,6 +440,6 @@ gmap tile-topleft-quarter               ''
 gmap tile-topleft-quarter-ignore-ta     ''
 gmap tile-topright-quarter              ''
 gmap tile-topright-quarter-ignore-ta    ''
-gmap toggle-always-on-top               ''
-gmap toggle-tiling-popup                ''
+gmap toggle-always-on-top               '<Super>t'
+gmap toggle-tiling-popup                '<Super>p'
 # other settings
