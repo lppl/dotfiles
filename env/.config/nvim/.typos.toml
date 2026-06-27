@@ -1,0 +1,33 @@
+# https://github.com/crate-ci/typos/blob/master/docs/reference.md
+# https://github.com/sirwart/ripsecrets/blob/main/src/lib.rs
+
+[files]
+extend-exclude = []
+ignore-hidden = true
+ignore-files = true
+ignore-dot = true
+ignore-vcs = true
+ignore-global = true
+ignore-parent = true
+
+[default]
+binary = false
+check-filename = true
+check-file = true
+unicode = true
+locale = "en"
+extend-ignore-words-re = []
+extend-ignore-identifiers-re = []
+extend-ignore-re = [
+    # Ignore lines that end with `# spellchecker:disable-line`
+    '(?Rm)^.*(#|//|--)\s*spellchecker:disable-line$',
+    # Ignore the line after `# spellchecker:ignore-next-line`:
+    "(#|//|--)\\s*spellchecker:ignore-next-line\\n.*",
+    # Ignore blocks between `# spellchecker:off` and `# spellchecker:on`
+    "(?s)(#|//|--)\\s*spellchecker:off.*?\\n\\s*(#|//|--)\\s*spellchecker:on",
+    # 
+    '"<cmd>[^"]*<cr>"',
+]
+
+
+
