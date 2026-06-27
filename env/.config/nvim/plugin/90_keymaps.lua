@@ -390,3 +390,15 @@ leader {
 -- vim.keymap.set({ "n", "v" }, "<LocalLeader>cp", function()
 --   return require("codecompanion").cli({ prompt = true })
 -- end, { desc = "Prompt the CLI agent" })
+--
+--
+--
+
+-- ═══════════════════════════════════════════════════════════
+-- Script runner
+-- ═══════════════════════════════════════════════════════════
+local runner = require("script_runner")
+normal { "<F9>", runner.rerun, "Rerun last script" }
+normal { "<F10>", runner.pick_script, "Pick script to run" }
+normal { "<F11>", runner.toggle_output, "Toggle output" }
+normal { "<F12>", runner.cycle_scripts, "Cycle script output buffers" }
