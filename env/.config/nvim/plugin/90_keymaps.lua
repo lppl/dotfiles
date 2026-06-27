@@ -20,8 +20,8 @@ local utils = require("utils")
 -- Tab/Shift-Tab: Like browser tabs, feels natural
 normal { "<Tab>", ":bnext<CR>", "Next buffer" }
 normal { "<S-Tab>", ":bprevious<CR>", "Previous buffer" }
-normal { "<F4>", "<CMD>only<CR>", "Like <cmd>only, but better" }
-normal { "<S-F4>", utils.delete_non_current_buffers, "Like <cmd>only, but better" }
+normal { "<F4>", "<CMD>only<CR>", "Close non current splits" }
+normal { "<F16>", utils.delete_non_current_buffers, "Close con current buffers" }
 
 -- Quick switch to last edited file (super useful!)
 leader { "bb", "<cmd>e #<cr>", "Switch to Other Buffer" }
