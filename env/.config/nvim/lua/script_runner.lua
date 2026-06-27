@@ -22,6 +22,7 @@ local function run_in_terminal(script)
   local shell = script:match("%.fish$") and "fish" or "bash"
   vim.cmd("terminal " .. shell .. " " .. vim.fn.shellescape(script))
   term_bufs[script] = vim.api.nvim_get_current_buf()
+  vim.bo[term_bufs[script]].buflisted = false
 
   -- Delete old buffer after the new terminal is running to avoid TermClose side-effects
   if old_buf and vim.api.nvim_buf_is_valid(old_buf) and old_buf ~= term_bufs[script] then

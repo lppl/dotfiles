@@ -11,6 +11,8 @@ local cmd_leader = k.cmd_leader
 local multi = k.multi
 local group = k.group
 
+local utils = require("utils")
+
 -- ═══════════════════════════════════════════════════════════
 -- TAB/BUFFER NAVIGATION (splitting and navigation)
 -- ═══════════════════════════════════════════════════════════
@@ -18,6 +20,8 @@ local group = k.group
 -- Tab/Shift-Tab: Like browser tabs, feels natural
 normal { "<Tab>", ":bnext<CR>", "Next buffer" }
 normal { "<S-Tab>", ":bprevious<CR>", "Previous buffer" }
+normal { "<F4>", "<CMD>only<CR>", "Like <cmd>only, but better" }
+normal { "<S-F4>", utils.delete_non_current_buffers, "Like <cmd>only, but better" }
 
 -- Quick switch to last edited file (super useful!)
 leader { "bb", "<cmd>e #<cr>", "Switch to Other Buffer" }
