@@ -17,7 +17,7 @@ require("conform").setup {
   },
   formatters = {
     odinfmt = {
-      command = "odinfmt",
+      command = vim.fn.expand("$HOME/.local/bin/odinfmt"),
       args = { "-stdin" },
       stdin = true,
     },
