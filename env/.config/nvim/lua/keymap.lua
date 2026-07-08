@@ -75,7 +75,7 @@ M.cmd_leader = function(parameters)
     cmd = { parameters[2], "string" },
   }
   parameters[2] = "<CMD>" .. parameters[2] .. "<CR>"
-  M.map(parameters)
+  M.lead(parameters)
 end
 
 ---Registers a visual key mapping
@@ -140,10 +140,8 @@ end
 M.normal = M.map
 M.leader = M.lead
 
-
-
 M.option = function(parameters)
-  local opts = { }
+  local opts = {}
   for k, v in pairs(parameters) do
     if not RESERVED[k] then opts[k] = v end
   end
@@ -151,8 +149,6 @@ M.option = function(parameters)
   Snacks.toggle.option(parameters[2], opts):map(parameters[1])
 end
 
-M.toggle = function(parameters)
-  parameters[2]:map(parameters[1])
-end
+M.toggle = function(parameters) parameters[2]:map(parameters[1]) end
 
 return M

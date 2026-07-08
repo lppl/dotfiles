@@ -9,14 +9,33 @@ require("tokyonight").setup { style = "night", transparent = true }
 require("conifer").setup { transparent = true }
 require("nightfox").setup {}
 
-vim.cmd("colorscheme nightfox")
+local light = "conifer-solar"
+local dark = "conifer-lunar"
 
-local add = "#332255"
-local delete = "#440033"
-local change = "#220022"
-local text = "#332255"
+local function set_theme(background)
+  local theme = background == "light" and light or dark
+  if vim.g.colors_name == theme then return end
 
-vim.api.nvim_set_hl(0, "DiffAdd", { bg = add })
-vim.api.nvim_set_hl(0, "DiffDelete", { bg = delete })
-vim.api.nvim_set_hl(0, "DiffChange", { bg = change })
-vim.api.nvim_set_hl(0, "DiffText", { bg = text })
+  vim.cmd.colorscheme(theme)
+  if background == "dark" then
+    vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#332255" })
+    vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#440033" })
+    vim.api.nvim_set_hl(0, "DiffChange", { bg = "#220022" })
+    vim.api.nvim_set_hl(0, "DiffText", { bg = "#332255" })
+  end
+end
+
+vim.api.nvim_create_autocmd("TermResponse", {
+  desc = "Match colorscheme to terminal background",
+  callback = function(event)
+    local red, green, blue = event.data.sequence:match("\27%]11;rgb:(%x+)/(%x+)/(%x+)")
+    if not red then return end
+
+    local function channel(hex) return tonumber(hex, 16) / (16 ^ #hex - 1) end
+    local luminance = 0.299 * channel(red) + 0.587 * channel(green) + 0.114 * channel(blue)
+    set_theme(luminance > 0.5 and "light" or "dark")
+  end,
+})
+
+set_theme(vim.o.background)
+-- vim.api.nvim_ui_send("\27]11;?\27\\")
