@@ -6,7 +6,7 @@ vim.pack.add {
 require("lualine").setup {
   options = {
     icons_enabled = true,
-    theme = "codedark",
+    theme = "auto",
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = {

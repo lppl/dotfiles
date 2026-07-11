@@ -27,6 +27,8 @@ extend-ignore-re = [
     "(?s)(#|//|--)\\s*spellchecker:off.*?\\n\\s*(#|//|--)\\s*spellchecker:on",
     # 
     '"<cmd>[^"]*<cr>"',
+    # 
+    'require("noice")',
 ]
 
 

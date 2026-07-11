@@ -145,6 +145,11 @@
       "src": "https://github.com/folke/snacks.nvim",
       "version": "'ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e'"
     },
+    "styler.nvim": {
+      "rev": "d73d868541a2536a96d057c793d53c50e5f407bb",
+      "src": "https://github.com/folke/styler.nvim",
+      "version": "'d73d868541a2536a96d057c793d53c50e5f407bb'"
+    },
     "thorn.nvim": {
       "rev": "719f558623eb05d0e391401c419820ffb9042fb6",
       "src": "https://github.com/jpwol/thorn.nvim",
