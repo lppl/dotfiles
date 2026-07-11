@@ -44,6 +44,7 @@ opt.synmaxcol = 300 -- Syntax highlighting limit
 opt.ruler = false -- Disable the default ruler
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.winminwidth = 5 -- Minimum window width
+opt.winborder = "rounded"
 
 -- File handling
 opt.backup = false -- Don't create backup files

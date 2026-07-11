@@ -11,5 +11,8 @@ require("blink.cmp").setup {
   sources = {
     default = { "lsp", "path", "snippets", "buffer" },
   },
-  fuzzy = { implementation = "prefer_rust_with_warning" },
+  fuzzy = {
+    sorts = { "exact", "score", "sort_text" },
+    implementation = "prefer_rust_with_warning",
+  },
 }
