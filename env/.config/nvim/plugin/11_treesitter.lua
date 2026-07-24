@@ -35,6 +35,7 @@ local languages = {
   "gdscript",
   "odin",
   "dts",
+  "pug",
 }
 
 require("nvim-treesitter").setup {

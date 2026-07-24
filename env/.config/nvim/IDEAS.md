@@ -8,3 +8,4 @@ These are follow-up ideas for integrating `blink.cmp` with the existing Neovim p
 - [ ] TODO: Copilot: consider adding `fang2hou/blink-copilot` only if Copilot suggestions should appear inside the blink menu; disable normal Copilot suggestions to avoid duplicate UI.
 - [ ] TODO: Tmux: consider a `blink-cmp-tmux` source only if completions from tmux panes or tmux commands would be useful day to day.
 - [ ] TODO: LazyDev: consider adding `folke/lazydev.nvim` for better Lua `require(...)` and module completions when editing this Neovim config.
+- [x] TODO: LuaSnip: add `L3MON4D3/LuaSnip` and set blink's snippet preset to `luasnip` in `plugin/19_blink.lua`.

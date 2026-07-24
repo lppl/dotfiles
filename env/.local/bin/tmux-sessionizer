@@ -84,7 +84,7 @@ end
 function hydrate -a target dir
   for script in ".tmux-sessionizer" ".tms" ".tms/init"
     if test -f $dir/$script
-      tmux send-keys -t  $target "source $dir/$script" c-M
+      tmux send-keys -t "$target" "source $dir/$script" c-M
     end
   end
   tmux send-keys -t  $target "source $HOME/.tmux-sessionizer" c-M
