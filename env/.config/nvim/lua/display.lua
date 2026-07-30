@@ -6,9 +6,9 @@ M.get_terminal_info = function()
   local orientation = width > (height * 2) and "landscape" or "portrait"
   local area = width * height
   local size
-  if area < 1600*1000 then
+  if area < 1600 * 1000 then
     size = "small"
-  elseif area < 1920*1440 then
+  elseif area < 1920 * 1440 then
     size = "medium"
   else
     size = "large"
