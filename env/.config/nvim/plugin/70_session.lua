@@ -85,7 +85,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
   nested = true,
   callback = function()
     local _, path, name = find_up(marker_names, vim.uv.cwd())
-    if name == session_name then
+    if vim.fn.argc() > 0 then
+      if path then set_active(path) end
+      return
+    elseif name == session_name then
       load_session(path)
     else
       set_active(path)
