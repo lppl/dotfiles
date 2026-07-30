@@ -178,6 +178,8 @@ leader { "<tab>f", "<cmd>tabfirst<cr>", "First Tab" }
 leader { "<tab>l", "<cmd>tablast<cr>", "Last Tab" }
 leader { "<tab>o", "<cmd>tabonly<cr>", "Close Other Tabs" }
 leader { "<tab>d", "<cmd>tabclose<cr>", "Close Tab" }
+normal { "<C-PageUp>", "<cmd>tabnext<cr>", "Next Tab" }
+normal { "<C-PageDown>", "<cmd>tabprevious<cr>", "Previous Tab" }
 
 -- ═══════════════════════════════════════════════════════════
 -- FOLDING NAVIGATION (for code organization)

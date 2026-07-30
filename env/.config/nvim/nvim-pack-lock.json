@@ -160,6 +160,11 @@
       "src": "https://github.com/folke/styler.nvim",
       "version": "'d73d868541a2536a96d057c793d53c50e5f407bb'"
     },
+    "tabby.nvim": {
+      "rev": "3c130e1fcb598ce39a9c292847e32d7c3987cf11",
+      "src": "https://github.com/nanozuki/tabby.nvim",
+      "version": "'3c130e1fcb598ce39a9c292847e32d7c3987cf11'"
+    },
     "thorn.nvim": {
       "rev": "719f558623eb05d0e391401c419820ffb9042fb6",
       "src": "https://github.com/jpwol/thorn.nvim",

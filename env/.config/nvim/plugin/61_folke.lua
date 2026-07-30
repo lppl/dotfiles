@@ -86,5 +86,6 @@ require("snacks").setup {
         snacks_main = true,
       },
     },
+    lazygit = { width = 0, height = 0 },
   },
 }

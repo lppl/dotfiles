@@ -46,6 +46,9 @@ opt.virtualedit = "block" -- Allow cursor to move where there is no text in visu
 opt.winminwidth = 5 -- Minimum window width
 opt.winborder = "rounded"
 
+-- Tabs
+opt.showtabline = 2
+
 -- File handling
 opt.backup = false -- Don't create backup files
 opt.writebackup = false -- Don't create backup before writing
