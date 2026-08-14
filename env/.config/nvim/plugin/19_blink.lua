@@ -6,10 +6,26 @@ vim.pack.add {
 }
 
 require("blink.cmp").setup {
-  keymap = { preset = "default" },
+  keymap = {
+    ["<C-space>"] = { "show", "fallback" },
+
+    ["<C-n>"] = { "select_next", "fallback" },
+    ["<C-p>"] = { "select_prev", "fallback" },
+    ["<Right>"] = { "select_next", "fallback" },
+    ["<Left>"] = { "select_prev", "fallback" },
+
+    ["<Tab>"] = { "select_and_accept", "fallback" },
+    ["<Enter>"] = { "select_and_accept", "fallback" },
+    ["<C-y>"] = { "select_and_accept", "fallback" },
+    ["<Esc>"] = { "cancel", "fallback" },
+    ["<C-e>"] = { "cancel", "fallback" },
+  },
   appearance = { nerd_font_variant = "mono" },
   snippets = { preset = "luasnip" },
-  completion = { documentation = { auto_show = false } },
+  completion = {
+    documentation = { auto_show = true, auto_show_delay_ms = 500 },
+    ghost_text = { enabled = true },
+  },
   sources = {
     default = { "lsp", "path", "snippets", "buffer" },
   },
