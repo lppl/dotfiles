@@ -18,8 +18,8 @@ local utils = require("utils")
 -- ═══════════════════════════════════════════════════════════
 
 -- Tab/Shift-Tab: Like browser tabs, feels natural
-normal { "<Tab>", ":bnext<CR>", "Next buffer" }
-normal { "<S-Tab>", ":bprevious<CR>", "Previous buffer" }
+normal { "<C-Tab>", ":bnext<CR>", "Next buffer" }
+normal { "<C-S-Tab>", ":bprevious<CR>", "Previous buffer" }
 normal { "<F4>", "<CMD>only<CR>", "Close non current splits" }
 normal { "<F16>", utils.delete_non_current_buffers, "Close con current buffers" }
 
@@ -61,6 +61,9 @@ multi { "nx", "j", "v:count == 0 ? 'gj' : 'j'", "Down", expr = true }
 multi { "nx", "<Down>", "v:count == 0 ? 'gj' : 'j'", "Down", expr = true }
 multi { "nx", "k", "v:count == 0 ? 'gk' : 'k'", "Up", expr = true }
 multi { "nx", "<Up>", "v:count == 0 ? 'gk' : 'k'", "Up", expr = true }
+
+multi { "i", "<M-j>", "<Esc>:", "Command", noremap = true, silent = true }
+multi { "nv", "<M-j>", ":", "Command", noremap = true, silent = true }
 
 -- Move selected lines up/down
 visual { "J", ":move '>+1<CR>gv=gv", "Move Block Down" }
