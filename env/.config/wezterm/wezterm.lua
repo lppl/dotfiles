@@ -84,7 +84,7 @@ local keys = {
   alt_ctrl({ "p", act.ActivateCommandPalette }),
   alt_ctrl({ "r", act.ReloadConfiguration }),
   alt_ctrl({ "z", act.TogglePaneZoomState }),
-  ctrl({ "phys:Space", act.QuickSelect }),
+  alt_ctrl({ "phys:Space", act.QuickSelect }),
   -- key { 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
   -- ctrl { 'PageUp', act.ActivateTabRelative(-1) },
   -- ctrl { 'PageUp', act.MoveTabRelative(-1) },
